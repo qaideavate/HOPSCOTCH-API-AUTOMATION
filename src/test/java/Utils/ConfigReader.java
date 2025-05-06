@@ -12,7 +12,9 @@ public class ConfigReader
 
     static {
         try {
-            String path = "C:\\Users\\Jitender.Kumar\\BDD Workspace\\restassured\\BDDApiAutomation\\src\\test\\resources\\config.properties";
+        	String path =  ".//src/test/resources/config.properties";
+        	//String path = System.getProperty("user.dir") + "\\src\\test\\resources\\config.properties";
+            //String path = "C:\\Users\\Jitender.Kumar\\BDD Workspace\\restassured\\BDDApiAutomation\\src\\test\\resources\\config.properties";
             FileInputStream fis = new FileInputStream(path);
             prop = new Properties();
             prop.load(fis);

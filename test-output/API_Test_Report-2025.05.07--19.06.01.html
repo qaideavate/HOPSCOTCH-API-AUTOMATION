@@ -1,0 +1,956 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>API Automation Test Report</title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa -report standard">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">REST Assured + Cucumber Report</span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">May 7, 2025 07:06:01 pm</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="pass" test-id="1"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Login with valid email and password</p>
+            <p class="text-sm">
+              <span>7:06:01 pm</span> / <span>00:00:03:856</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Login with valid email and password</h5>
+<span class='badge badge-success'>05.07.2025 7:06:01 pm</span>
+<span class='badge badge-danger'>05.07.2025 7:06:05 pm</span>
+<span class='badge badge-default'>00:00:03:856</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:01 pm</td>
+        <td>
+          Starting Scenario: Login with valid email and password
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:01 pm</td>
+        <td>
+          Request Headers:
+<pre>Accept: */*
+Cache-Control: no-cache
+User-Agent: PostmanRuntime/7.43.4
+Connection: keep-alive
+Accept-Encoding: gzip, deflate, br
+Content-Type: application/json
+</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:01 pm</td>
+        <td>
+          Request Body:
+<pre>{password=Test@12345, email=pankaj.patidar@mindruby.com}</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:05 pm</td>
+        <td>
+          Status Code: 201
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:05 pm</td>
+        <td>
+          Response Body:
+<pre>{
+    "message": "login_success",
+    "user": 12,
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImVtYWlsIjoicGFua2FqLnBhdGlkYXJAbWluZHJ1YnkuY29tIiwibmFtZSI6IkxpdHRsZSBMZWFybmVycyBDZW50ZXIiLCJwcm92aWRlcklkIjoxMSwicHJvdmlkZXJOYW1lIjoiTGl0dGxlIExlYXJuZXJzIENlbnRlciIsInByb3ZpZGVyRW1haWwiOiJwYW5rYWoucGF0aWRhckBtaW5kcnVieS5jb20iLCJwcm92aWRlclBob25lIjoiOTg3NDU2MTIzMCIsInByb3ZpZGVySW1hZ2UiOiJodHRwczovL3MzLW1lZGlhMC5mbC55ZWxwY2RuLmNvbS9icGhvdG8vSERFLUhUT002dloxU195c0Y4d3I5Zy9sLmpwZyIsInBlcm1pc3Npb25zIjpbeyJwZXJtaXNzaW9uX2lkIjoxLCJjb2RlIjoiY2xhc3Nyb29tOnZpZXciLCJhY3Rpb24iOiJ2aWV3IiwibW9kdWxlX25hbWUiOiJjbGFzc3Jvb20ifSx7InBlcm1pc3Npb25faWQiOjIsImNvZGUiOiJjbGFzc3Jvb206YWRkIiwiYWN0aW9uIjoiYWRkIiwibW9kdWxlX25hbWUiOiJjbGFzc3Jvb20ifSx7InBlcm1pc3Npb25faWQiOjMsImNvZGUiOiJjbGFzc3Jvb206dXBkYXRlIiwiYWN0aW9uIjoidXBkYXRlIiwibW9kdWxlX25hbWUiOiJjbGFzc3Jvb20ifSx7InBlcm1pc3Npb25faWQiOjQsImNvZGUiOiJjYXBhY2l0eTp2aWV3IiwiYWN0aW9uIjoidmlldyIsIm1vZHVsZV9uYW1lIjoiY2FwYWNpdHkifSx7InBlcm1pc3Npb25faWQiOjUsImNvZGUiOiJjYXBhY2l0eTp1cGRhdGUiLCJhY3Rpb24iOiJ1cGRhdGUiLCJtb2R1bGVfbmFtZSI6ImNhcGFjaXR5In0seyJwZXJtaXNzaW9uX2lkIjo2LCJjb2RlIjoid2FpdGxpc3Q6dmlldyIsImFjdGlvbiI6InZpZXciLCJtb2R1bGVfbmFtZSI6IndhaXRsaXN0In0seyJwZXJtaXNzaW9uX2lkIjo3LCJjb2RlIjoid2FpdGxpc3Q6bm90aWZ5IiwiYWN0aW9uIjoibm90aWZ5IiwibW9kdWxlX25hbWUiOiJ3YWl0bGlzdCJ9LHsicGVybWlzc2lvbl9pZCI6OCwiY29kZSI6ImVucm9sbG1lbnQ6dmlldyIsImFjdGlvbiI6InZpZXciLCJtb2R1bGVfbmFtZSI6ImVucm9sbG1lbnQifSx7InBlcm1pc3Npb25faWQiOjksImNvZGUiOiJlbnJvbGxtZW50OnVwZGF0ZSIsImFjdGlvbiI6InVwZGF0ZSIsIm1vZHVsZV9uYW1lIjoiZW5yb2xsbWVudCJ9LHsicGVybWlzc2lvbl9pZCI6MTAsImNvZGUiOiJjaGlsZF9pbXBvcnQ6dmlldyIsImFjdGlvbiI6InZpZXciLCJtb2R1bGVfbmFtZSI6ImNoaWxkX2ltcG9ydCJ9LHsicGVybWlzc2lvbl9pZCI6MTEsImNvZGUiOiJjaGlsZF9pbXBvcnQ6aW1wb3J0IiwiYWN0aW9uIjoiaW1wb3J0IiwibW9kdWxlX25hbWUiOiJjaGlsZF9pbXBvcnQifSx7InBlcm1pc3Npb25faWQiOjEyLCJjb2RlIjoibWFuYWdlX3JvbGU6dmlldyIsImFjdGlvbiI6InZpZXciLCJtb2R1bGVfbmFtZSI6Im1hbmFnZV9yb2xlIn0seyJwZXJtaXNzaW9uX2lkIjoxMywiY29kZSI6Im1hbmFnZV9yb2xlOnVwZGF0ZSIsImFjdGlvbiI6InVwZGF0ZSIsIm1vZHVsZV9uYW1lIjoibWFuYWdlX3JvbGUifSx7InBlcm1pc3Npb25faWQiOjE0LCJjb2RlIjoibWFuYWdlX3JvbGU6YWRkIiwiYWN0aW9uIjoiYWRkIiwibW9kdWxlX25hbWUiOiJtYW5hZ2Vfcm9sZSJ9LHsicGVybWlzc2lvbl9pZCI6MTUsImNvZGUiOiJtYW5hZ2Vfcm9sZTpkZWxldGUiLCJhY3Rpb24iOiJkZWxldGUiLCJtb2R1bGVfbmFtZSI6Im1hbmFnZV9yb2xlIn0seyJwZXJtaXNzaW9uX2lkIjoxNiwiY29kZSI6Im1hbmFnZV9zdGFmZjp2aWV3IiwiYWN0aW9uIjoidmlldyIsIm1vZHVsZV9uYW1lIjoibWFuYWdlX3N0YWZmIn0seyJwZXJtaXNzaW9uX2lkIjoxNywiY29kZSI6Im1hbmFnZV9zdGFmZjphZGQiLCJhY3Rpb24iOiJhZGQiLCJtb2R1bGVfbmFtZSI6Im1hbmFnZV9zdGFmZiJ9LHsicGVybWlzc2lvbl9pZCI6MTgsImNvZGUiOiJtYW5hZ2Vfc3RhZmY6dXBkYXRlIiwiYWN0aW9uIjoidXBkYXRlIiwibW9kdWxlX25hbWUiOiJtYW5hZ2Vfc3RhZmYifSx7InBlcm1pc3Npb25faWQiOjE5LCJjb2RlIjoiYWJzZW5jZTp2aWV3IiwiYWN0aW9uIjoidmlldyIsIm1vZHVsZV9uYW1lIjoiYWJzZW5jZSJ9LHsicGVybWlzc2lvbl9pZCI6MjAsImNvZGUiOiJhYnNlbmNlOmFkZCIsImFjdGlvbiI6ImFkZCIsIm1vZHVsZV9uYW1lIjoiYWJzZW5jZSJ9LHsicGVybWlzc2lvbl9pZCI6MjEsImNvZGUiOiJhYnNlbmNlOnVwZGF0ZSIsImFjdGlvbiI6InVwZGF0ZSIsIm1vZHVsZV9uYW1lIjoiYWJzZW5jZSJ9LHsicGVybWlzc2lvbl9pZCI6MjIsImNvZGUiOiJzZXR0aW5nOnZpZXciLCJhY3Rpb24iOiJ2aWV3IiwibW9kdWxlX25hbWUiOiJzZXR0aW5nIn0seyJwZXJtaXNzaW9uX2lkIjoyMywiY29kZSI6InNldHRpbmc6dXBkYXRlIiwiYWN0aW9uIjoidXBkYXRlIiwibW9kdWxlX25hbWUiOiJzZXR0aW5nIn1dLCJ0eXBlIjoicHJvdmlkZXIiLCJpYXQiOjE3NDY2MjQ5NjUsImV4cCI6MTc0NjYzNTc2NX0.ven2algoFqicKjMSmv7gxT7Mjm9nq121akSOgVFgqlM"
+}</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:05 pm</td>
+        <td>
+          Response Headers:
+<pre>Date: Wed, 07 May 2025 13:36:05 GMT
+Server: Apache
+Content-Security-Policy: default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Origin-Agent-Cluster: ?1
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-DNS-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-XSS-Protection: 0
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 3350
+ETag: W/"d16-4ZqkbTNT0aj5EROgeiKMJVbmfJc"
+Vary: Accept-Encoding
+Keep-Alive: timeout=5
+Connection: Keep-Alive
+</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:05 pm</td>
+        <td>
+          Asserting status code. Expected: 201, Actual: 201
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:05 pm</td>
+        <td>
+          Asserting message. Expected: login_success, Actual: login_success
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:05 pm</td>
+        <td>
+          Validating access token presence and length
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>7:06:05 pm</td>
+        <td>
+          Scenario Passed: Login with valid email and password
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="2"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Login with missing required fields</p>
+            <p class="text-sm">
+              <span>7:06:05 pm</span> / <span>00:00:01:396</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Login with missing required fields</h5>
+<span class='badge badge-success'>05.07.2025 7:06:05 pm</span>
+<span class='badge badge-danger'>05.07.2025 7:06:07 pm</span>
+<span class='badge badge-default'>00:00:01:396</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=2</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:05 pm</td>
+        <td>
+          Starting Scenario: Login with missing required fields
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:05 pm</td>
+        <td>
+          Using email: EMPTY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:05 pm</td>
+        <td>
+          Using password: ******
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:05 pm</td>
+        <td>
+          Request Headers:
+<pre>Accept: */*
+Cache-Control: no-cache
+User-Agent: PostmanRuntime/7.43.4
+Connection: keep-alive
+Accept-Encoding: gzip, deflate, br
+Content-Type: application/json
+</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:05 pm</td>
+        <td>
+          Request Body:
+<pre>{password=Test@12345, email=}</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:07 pm</td>
+        <td>
+          Status Code: 422
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:07 pm</td>
+        <td>
+          Response Body:
+<pre>{
+    "errors": {
+        "email": "Please include a valid email"
+    }
+}</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:07 pm</td>
+        <td>
+          Response Headers:
+<pre>Date: Wed, 07 May 2025 13:36:07 GMT
+Server: Apache
+Content-Security-Policy: default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Origin-Agent-Cluster: ?1
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-DNS-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-XSS-Protection: 0
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 51
+ETag: W/"33-CP0eNfT5n+0IkaBEFHeezG4dEDk"
+Vary: Accept-Encoding
+Keep-Alive: timeout=5
+Connection: Keep-Alive
+</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:07 pm</td>
+        <td>
+          Asserting status code. Expected: 422, Actual: 422
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:07 pm</td>
+        <td>
+          Asserting error for field: email. Expected: Please include a valid email, Actual: Please include a valid email
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>7:06:07 pm</td>
+        <td>
+          Scenario Passed: Login with missing required fields
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="3"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Login with missing required fields</p>
+            <p class="text-sm">
+              <span>7:06:07 pm</span> / <span>00:00:01:400</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Login with missing required fields</h5>
+<span class='badge badge-success'>05.07.2025 7:06:07 pm</span>
+<span class='badge badge-danger'>05.07.2025 7:06:08 pm</span>
+<span class='badge badge-default'>00:00:01:400</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=3</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:07 pm</td>
+        <td>
+          Starting Scenario: Login with missing required fields
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:07 pm</td>
+        <td>
+          Using email: pankaj.patidar@mindruby.com
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:07 pm</td>
+        <td>
+          Using password: EMPTY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:07 pm</td>
+        <td>
+          Request Headers:
+<pre>Accept: */*
+Cache-Control: no-cache
+User-Agent: PostmanRuntime/7.43.4
+Connection: keep-alive
+Accept-Encoding: gzip, deflate, br
+Content-Type: application/json
+</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:07 pm</td>
+        <td>
+          Request Body:
+<pre>{password=, email=pankaj.patidar@mindruby.com}</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:08 pm</td>
+        <td>
+          Status Code: 422
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:08 pm</td>
+        <td>
+          Response Body:
+<pre>{
+    "errors": {
+        "password": "Password is required"
+    }
+}</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:08 pm</td>
+        <td>
+          Response Headers:
+<pre>Date: Wed, 07 May 2025 13:36:08 GMT
+Server: Apache
+Content-Security-Policy: default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Origin-Agent-Cluster: ?1
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-DNS-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-XSS-Protection: 0
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 46
+ETag: W/"2e-oD/tkgpzmQRXTO0DccliAu2BXJc"
+Vary: Accept-Encoding
+Keep-Alive: timeout=5
+Connection: Keep-Alive
+</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:08 pm</td>
+        <td>
+          Asserting status code. Expected: 422, Actual: 422
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:08 pm</td>
+        <td>
+          Asserting error for field: password. Expected: Password is required, Actual: Password is required
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>7:06:08 pm</td>
+        <td>
+          Scenario Passed: Login with missing required fields
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="4"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Login with missing required fields</p>
+            <p class="text-sm">
+              <span>7:06:08 pm</span> / <span>00:00:01:397</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Login with missing required fields</h5>
+<span class='badge badge-success'>05.07.2025 7:06:08 pm</span>
+<span class='badge badge-danger'>05.07.2025 7:06:09 pm</span>
+<span class='badge badge-default'>00:00:01:397</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=4</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:08 pm</td>
+        <td>
+          Starting Scenario: Login with missing required fields
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:08 pm</td>
+        <td>
+          Using email: EMPTY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:08 pm</td>
+        <td>
+          Using password: EMPTY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:08 pm</td>
+        <td>
+          Request Headers:
+<pre>Accept: */*
+Cache-Control: no-cache
+User-Agent: PostmanRuntime/7.43.4
+Connection: keep-alive
+Accept-Encoding: gzip, deflate, br
+Content-Type: application/json
+</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:08 pm</td>
+        <td>
+          Request Body:
+<pre>{password=, email=}</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:09 pm</td>
+        <td>
+          Status Code: 422
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:09 pm</td>
+        <td>
+          Response Body:
+<pre>{
+    "errors": {
+        "email": "Please include a valid email",
+        "password": "Password is required"
+    }
+}</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:09 pm</td>
+        <td>
+          Response Headers:
+<pre>Date: Wed, 07 May 2025 13:36:10 GMT
+Server: Apache
+Content-Security-Policy: default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Origin-Agent-Cluster: ?1
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-DNS-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-XSS-Protection: 0
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 85
+ETag: W/"55-Ey4UfigS2229NY7eS9loyG2Hbr4"
+Vary: Accept-Encoding
+Keep-Alive: timeout=5
+Connection: Keep-Alive
+</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:09 pm</td>
+        <td>
+          Asserting status code. Expected: 422, Actual: 422
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:09 pm</td>
+        <td>
+          Asserting error for field: email. Expected: Please include a valid email, Actual: Please include a valid email
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>7:06:09 pm</td>
+        <td>
+          Scenario Passed: Login with missing required fields
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+        <li class="test-item"  status="pass" test-id="5"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Login with missing required fields</p>
+            <p class="text-sm">
+              <span>7:06:09 pm</span> / <span>00:00:01:382</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Login with missing required fields</h5>
+<span class='badge badge-success'>05.07.2025 7:06:09 pm</span>
+<span class='badge badge-danger'>05.07.2025 7:06:11 pm</span>
+<span class='badge badge-default'>00:00:01:382</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=5</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:09 pm</td>
+        <td>
+          Starting Scenario: Login with missing required fields
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:09 pm</td>
+        <td>
+          Using email: EMPTY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:09 pm</td>
+        <td>
+          Using password: EMPTY
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:09 pm</td>
+        <td>
+          Request Headers:
+<pre>Accept: */*
+Cache-Control: no-cache
+User-Agent: PostmanRuntime/7.43.4
+Connection: keep-alive
+Accept-Encoding: gzip, deflate, br
+Content-Type: application/json
+</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:09 pm</td>
+        <td>
+          Request Body:
+<pre>{password=, email=}</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:11 pm</td>
+        <td>
+          Status Code: 422
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:11 pm</td>
+        <td>
+          Response Body:
+<pre>{
+    "errors": {
+        "email": "Please include a valid email",
+        "password": "Password is required"
+    }
+}</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:11 pm</td>
+        <td>
+          Response Headers:
+<pre>Date: Wed, 07 May 2025 13:36:11 GMT
+Server: Apache
+Content-Security-Policy: default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Origin-Agent-Cluster: ?1
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-DNS-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-XSS-Protection: 0
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 85
+ETag: W/"55-Ey4UfigS2229NY7eS9loyG2Hbr4"
+Vary: Accept-Encoding
+Keep-Alive: timeout=5
+Connection: Keep-Alive
+</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:11 pm</td>
+        <td>
+          Asserting status code. Expected: 422, Actual: 422
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>7:06:11 pm</td>
+        <td>
+          Asserting error for field: password. Expected: Password is required, Actual: Password is required
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>7:06:11 pm</td>
+        <td>
+          Scenario Passed: Login with missing required fields
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>May 7, 2025 07:06:01 pm</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>May 7, 2025 07:06:11 pm</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Tests Passed</p>
+<h3>5</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Tests Failed</p>
+<h3>0</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Tests</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='100%'>
+<b>5</b> tests passed
+</small>
+</div>
+<div>
+<small data-tooltip='0%'><b>0</b> tests failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Log events</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='events-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='9%'><b>5</b> events passed</small></div>
+<div>
+<small data-tooltip='0%'><b>0</b> events failed,
+<b data-tooltip='%'>49</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"Login with valid email and password":3.856,"Login with missing required fields":1.396,"Login with missing required fields":1.4,"Login with missing required fields":1.397,"Login with missing required fields":1.382
+};
+</script>
+<div class="row">
+<div class="col-lg-6 col-md-12 sysenv-container">
+<div class="card">
+<div class="card-header"><p>System/Environment</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Value</th></tr></thead>
+<tbody>
+<tr>
+<td>Project</td>
+<td>API Testing</td>
+</tr>
+<tr>
+<td>Tester</td>
+<td>Jitendra Kumar</td>
+</tr>
+<tr>
+<td>Environment</td>
+<td>Dev</td>
+</tr>
+<tr>
+<td>Tool</td>
+<td>Postman</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 5,
+failParent: 0,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 0,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 0,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+passEvents: 5,
+failEvents: 0,
+warningEvents: 0,
+skipEvents: 0,
+infoEvents: 49
+};
+</script>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@c05cd28cde1617b9d0c05a831daff6cb97fd9fd5/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>

@@ -18,7 +18,7 @@ Feature: Login
 
       Examples:
       | email                            | password   | statusCode | field    | error_message                   |
-      |                               	 | Test@12345 | 422        | email    | Email is required               |
+      |                               	 | Test@12345 | 422        | email    | Please include a valid email               |
       | pankaj.patidar@mindruby.com      |        	  | 422        | password | Password is required            |
       |                              	   |       		  | 422        | email    | Please include a valid email    |
       |                                	 |       	    | 422        | password | Password is required            |

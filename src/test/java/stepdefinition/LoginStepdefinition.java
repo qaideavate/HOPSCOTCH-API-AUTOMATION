@@ -106,14 +106,43 @@ public class LoginStepdefinition
     }
 
     // Step for handling missing fields (Scenario Outline)
-    @Then("The response error for field {string} should be {string}")
-    public void the_response_error_for_field_should_be(String field, String expectedError) 
+    @Then("The response error should be {string}")
+    public void the_response_error_should_be(String expectedError)
     {
-    	String actualErrorMessage = res.jsonPath().getString("errors." + field);
-        test.info("Asserting error for field: " + field + ". Expected: " + expectedError + ", Actual: " + actualErrorMessage);
-        Assert.assertEquals("Unexpected error for field: " + field, expectedError, actualErrorMessage);
-    }
+        String actualErrorMessage = null;
 
+        // Log full response
+        test.info("Full Response: " + res.asString());
+
+        // Check for field-level errors
+        if (res.jsonPath().get("errors") != null) 
+        {
+            Map<String, String> errors = res.jsonPath().getMap("errors");
+
+            // Combine all field errors with " | "
+            actualErrorMessage = String.join(" | ", errors.values());
+        } 
+        // Else check top-level 'error' and 'message'
+	        else if (res.jsonPath().get("error") != null && res.jsonPath().get("message") != null) 
+	        {
+	            actualErrorMessage = res.jsonPath().getString("message") + " | " + res.jsonPath().getString("error");
+	        } 
+		        else if (res.jsonPath().get("error") != null)
+		        {
+		            actualErrorMessage = res.jsonPath().getString("error");
+		        } 
+			        else if (res.jsonPath().get("message") != null) 
+			        {
+			            actualErrorMessage = res.jsonPath().getString("message");
+			        }
+        
+        String normalizedActual = actualErrorMessage.replace(" | ", ",");
+      
+        
+        test.info("Asserting error. Expected: " +expectedError + ", Actual: " + normalizedActual);
+        Assert.assertEquals("Unexpected error message", expectedError, normalizedActual);
+    }
+    
     // Step for validating the access token
     @Then("The response should contain a valid access token")
     public void the_response_should_contain_a_valid_access_token() 

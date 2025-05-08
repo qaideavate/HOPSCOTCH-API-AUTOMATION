@@ -14,11 +14,13 @@ Feature: Login
     And The user provides email "<email>" and password "<password>"
     When The user sends a POST request to the provider login endpoint
     Then The response status code should be <statusCode>
-    And The response error for field "<field>" should be "<error_message>"
+    And The response error should be "<error_message>"
 
-      Examples:
-      | email                            | password   | statusCode | field    | error_message                   |
-      |                               	 | Test@12345 | 422        | email    | Please include a valid email               |
-      | pankaj.patidar@mindruby.com      |        	  | 422        | password | Password is required            |
-      |                              	   |       		  | 422        | email    | Please include a valid email    |
-      |                                	 |       	    | 422        | password | Password is required            |
+  Examples:
+  | email                         | password   | statusCode | error_message                             				 |
+  |                               | Test@12345 | 422        | Please include a valid email                       |
+  | pankaj.patidar@mindruby.com   |            | 422        | Password is required                               |
+  |                               |            | 422        | Please include a valid email,Password is required  |
+  | pankaj@yopmail.com            | Test@12345 | 401        | provider_not_found,login                           |
+  | pankajmindruby.com            | Test@12345 | 422        | Please include a valid email                       |
+  | pankaj.patidar@mindruby.com   | Test@1234  | 401        | credentials_not_match,login                        |

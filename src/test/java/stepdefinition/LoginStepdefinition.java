@@ -17,9 +17,12 @@ public class LoginStepdefinition
     private String contentType;
     private String email;
     private String password;
+    private String endpoint;
+    private String userType;
     private String baseURL;
     private ExtentTest test;
     private Map<String, String> headers;
+    public static Map<String, String> userTokens = new HashMap<>();
   
     public LoginStepdefinition()
     {
@@ -27,6 +30,8 @@ public class LoginStepdefinition
          this.baseURL = ConfigReader.getProperty("baseURL");
          this.headers = ConfigReader.getHeadersFromConfig("header");
          this.contentType = headers.getOrDefault("Content-Type", "application/json");
+         this.headers.put("Accept-Encoding", "gzip, deflate");
+        
     }
     
     @Given("I set the header param request content type as {string}")
@@ -37,24 +42,37 @@ public class LoginStepdefinition
     }
     
     // Step for providing valid email login credentials
-    @Given("The user provides valid email login credentials")
-    public void the_user_provides_valid_email_login_credentials() 
+    @Given("The {string} provides valid email login credentials")
+    public void the_user_provides_valid_email_login_credentials(String userType)
     {
-    	test = Extent_Report_Manager.getTest();
-        email = ConfigReader.getProperty("email");
-        password = ConfigReader.getProperty("password");
-  
+    	 this.userType = userType;
+        if (userType.equalsIgnoreCase("Parent")) 
+        {
+            email = ConfigReader.getProperty("Parent_email");
+            password = ConfigReader.getProperty("Parent_password");
+        } 
+        else if (userType.equalsIgnoreCase("Provider"))
+        {
+            email = ConfigReader.getProperty("Provider_email");
+            password = ConfigReader.getProperty("Provider_password");
+        } 
+        else 
+        {
+            Assert.fail("Unsupported user type: " + userType);
+        }
+        test.info(userType + " login using email: " + email);
         Assert.assertNotNull("Email is not set in config", this.email);
         Assert.assertNotNull("Password is not set in config", this.password);
         Assert.assertNotNull("Content-Type is not set", this.contentType);
     }
     
     // Handling empty or missing email/password in login request
-    @Given("The user provides email {string} and password {string}")
-    public void the_user_provides_email_and_password(String email, String password) 
+    @Given("The {string} provides email {string} and password {string}")
+    public void the_provides_email_and_password(String userType, String email, String password)
     {
     	 this.email = (email == null || email.isEmpty()) ? "" : email;
          this.password = (password == null || password.isEmpty()) ? "" : password;
+         this.endpoint = userType.equalsIgnoreCase("Provider") ? "/auth/provider-login" : "/auth/login";
          this.contentType = headers.getOrDefault("Content-Type", "application/json");
 
         test.info("Using email: " + (this.email.isEmpty() ? "EMPTY" : this.email));
@@ -62,31 +80,39 @@ public class LoginStepdefinition
     }
 
     // Step for sending POST request to the login endpoint
-    @When("The user sends a POST request to the provider login endpoint")
-    public void the_user_sends_a_post_request_to_the_provider_login_endpoint()
-    {
+    @When("The {string} sends a POST request to the login endpoint")
+    public void the_sends_a_post_request_to_the_login_endpoint(String userType)
+    { 
         HashMap<String, String> loginPayload = new HashMap<>();
         loginPayload.put("email", this.email);
-        loginPayload.put("password",this.password);
-       
+        loginPayload.put("password", this.password);
+
         APIUtils.logRequestHeaders(test, headers);
         APIUtils.logRequestBody(test, loginPayload);
-        
+
         res = given()
-        		.baseUri(baseURL)
+                .baseUri(baseURL)
+                .headers(headers)
                 .contentType(contentType)
                 .body(loginPayload)
                 .log().all()
-            .when()
-                .post("/auth/provider-login")
-            .then()
+                .when()
+                .post(this.endpoint)
+                .then()
                 .log().all()
                 .extract().response();
 
-        
         APIUtils.logResponseToExtent(res, test);
+        
+        // Store access token if login is successful
+        if (res.getStatusCode() == 201 && res.jsonPath().get("accessToken") != null)
+        {
+            String token = res.jsonPath().getString("accessToken");
+            userTokens.put(userType.toLowerCase(), token);
+            test.info(userType + " token stored successfully.");
+        }
     }
-
+    
     // Step for checking the status code
     @Then("The response status code should be {int}")
     public void the_response_status_code_should_be(Integer expectedStatusCode) 
@@ -110,8 +136,7 @@ public class LoginStepdefinition
     public void the_response_error_should_be(String expectedError)
     {
         String actualErrorMessage = null;
-
-        // Log full response
+        
         test.info("Full Response: " + res.asString());
 
         // Check for field-level errors
@@ -151,6 +176,6 @@ public class LoginStepdefinition
          test.info("Validating access token presence and length");
          Assert.assertNotNull("Access token should not be null", token);
          Assert.assertTrue("Access token should be of reasonable length", token.length() > 100);
+         
     }
-
 }

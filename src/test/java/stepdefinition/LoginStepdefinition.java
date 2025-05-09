@@ -8,6 +8,7 @@ import com.aventstack.extentreports.ExtentTest;
 import Utils.APIUtils;
 import Utils.ConfigReader;
 import Utils.Extent_Report_Manager;
+import Utils.GlobalTokenStore;
 import io.cucumber.java.en.*;
 import io.restassured.response.Response;
 
@@ -97,7 +98,7 @@ public class LoginStepdefinition
                 .body(loginPayload)
                 .log().all()
                 .when()
-                .post(this.endpoint)
+                .post(endpoint)
                 .then()
                 .log().all()
                 .extract().response();
@@ -108,8 +109,8 @@ public class LoginStepdefinition
         if (res.getStatusCode() == 201 && res.jsonPath().get("accessToken") != null)
         {
             String token = res.jsonPath().getString("accessToken");
-            userTokens.put(userType.toLowerCase(), token);
-            test.info(userType + " token stored successfully.");
+            GlobalTokenStore.setToken(userType, token);
+            test.info(userType + " token stored globally.");
         }
     }
     

@@ -12,7 +12,7 @@ import Utils.GlobalTokenStore;
 import io.cucumber.java.en.*;
 import io.restassured.response.Response;
 
-public class LoginStepdefinition 
+public class Login_Stepdefinition 
 {
 	private Response res;
     private String contentType;
@@ -25,7 +25,7 @@ public class LoginStepdefinition
     private Map<String, String> headers;
     public static Map<String, String> userTokens = new HashMap<>();
   
-    public LoginStepdefinition()
+    public Login_Stepdefinition()
     {
     	 this.test = Extent_Report_Manager.getTest();
          this.baseURL = ConfigReader.getProperty("baseURL");

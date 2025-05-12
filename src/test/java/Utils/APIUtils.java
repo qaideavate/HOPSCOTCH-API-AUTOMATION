@@ -1,4 +1,5 @@
 package Utils;
+import java.util.List;
 import java.util.Map;
 
 import com.aventstack.extentreports.ExtentTest;
@@ -7,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.restassured.response.Response;
 import io.restassured.http.Header;
+import io.restassured.path.json.JsonPath;
 
 public class APIUtils 
 {
@@ -55,10 +57,14 @@ public class APIUtils
     public static String mapToJson(Map<String, Object> map)
     {
         ObjectMapper mapper = new ObjectMapper();
-        try {
+        try 
+        {
             return mapper.writeValueAsString(map);
-        } catch (JsonProcessingException e) {
+        } 
+        catch (JsonProcessingException e) 
+        {
             throw new RuntimeException("Failed to convert map to JSON", e);
         }
+      
     }
 }

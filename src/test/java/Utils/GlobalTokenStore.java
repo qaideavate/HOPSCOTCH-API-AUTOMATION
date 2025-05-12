@@ -7,7 +7,7 @@ import io.restassured.response.Response;
 
 public class GlobalTokenStore
 {
-    private static final Map<String, String> userTokens = new HashMap<>();
+    public static final Map<String, String> userTokens = new HashMap<>();
     private static String userId;
     
     public static String getToken(String userType) 
@@ -55,11 +55,12 @@ public class GlobalTokenStore
 	            System.out.println("User ID: " + userId);
 	
 	            if (res.getStatusCode() == 201 && res.getContentType().contains("application/json")) 
-	            {	 return res.jsonPath().getString("accessToken");		    } 
+	            {	 return res.jsonPath().getString("accessToken");		   
+	               } 
 	            else 
-	            {	throw new RuntimeException("❌ Failed to generate token. Status Code: " + res.getStatusCode() + ", Response: " + res.asString());		 }
+	            {	throw new RuntimeException("❌ Failed to generate token. Status Code: " + res.getStatusCode() + ", Response: " + res.asString());	
+	              }
      }
-
-		public static String getUserId() 
+	public static String getUserId() 
 		{	return userId; 				}
 }

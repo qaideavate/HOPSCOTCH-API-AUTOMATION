@@ -2,11 +2,14 @@ package Utils;
 import java.util.Map;
 
 import com.aventstack.extentreports.ExtentTest;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import io.restassured.response.Response;
 import io.restassured.http.Header;
 
-public class APIUtils {
-
+public class APIUtils 
+{
 	public static void logResponseToExtent(Response response, ExtentTest test) {
 	    test.info("Status Code: " + response.getStatusCode());
 	    test.info("Response Body:\n<pre>" + response.getBody().asPrettyString() + "</pre>");
@@ -44,4 +47,18 @@ public class APIUtils {
         test.info("Request Body:\n<pre>" + requestBody + "</pre>");
     }
 
+    public static void logRequestBody(ExtentTest test, String requestBody)
+    {
+        test.info("Request Body:\n<pre>" + requestBody + "</pre>");
+    }
+
+    public static String mapToJson(Map<String, Object> map)
+    {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writeValueAsString(map);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Failed to convert map to JSON", e);
+        }
+    }
 }

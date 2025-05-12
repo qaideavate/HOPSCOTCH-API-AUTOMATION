@@ -40,7 +40,7 @@ public class Get_children_List_Stepdefinition
 	}
 
 	@When("I send a GET request of children-with-enrollments API with the ParentToken")
-	public void i_send_a_get_request_of_children_with_enrollments_API_with_the_parent_token() 
+	public int i_send_a_get_request_of_children_with_enrollments_API_with_the_parent_token() 
 	{
 		 this.headers = ConfigReader.getHeadersFromConfig("header");
 		 APIUtils.logRequestHeaders(test, headers);
@@ -56,6 +56,7 @@ public class Get_children_List_Stepdefinition
 		            .extract().response();
 		     	
 		 APIUtils.logResponseToExtent(res, test);
+		 return res.jsonPath().getInt("childId");
 	}
 	
 	/*

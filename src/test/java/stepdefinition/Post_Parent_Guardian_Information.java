@@ -130,7 +130,6 @@ public class Post_Parent_Guardian_Information
 
 	        String jsonBody = "{ \"parents\": [ " + APIUtils.mapToJson(parent) + " ], \"childId\": " + ChildId + " }";
 	        this.requestBody = jsonBody;
-
 	}
 
 	@Then("the field error should be {string}")
@@ -146,6 +145,5 @@ public class Post_Parent_Guardian_Information
 		 boolean actualSuccess = res.jsonPath().getBoolean("success");
 	     boolean expectedSuccess = Boolean.parseBoolean(successFlag);
 	     Assert.assertEquals(expectedSuccess, actualSuccess);
-
 	}
 }

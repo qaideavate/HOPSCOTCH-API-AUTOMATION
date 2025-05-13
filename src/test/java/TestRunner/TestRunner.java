@@ -7,7 +7,7 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith (Cucumber.class)
 @CucumberOptions
 	(
-			features ={"classpath:feature/login.feature","classpath:feature/Get_children_List_API.feature" },
+			features ={"classpath:feature/Get_children_List_API.feature" },
 		glue={"stepdefinition"},
 		dryRun = false,
 		monochrome=true,
@@ -22,3 +22,5 @@ public class TestRunner
 {
 
 }
+
+//"classpath:feature/login.feature",

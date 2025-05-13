@@ -17,10 +17,11 @@ public class Post_Child_information_Steo1_StepDefinitions
 
     private String parentToken;
 
-    @Given("I have a valid parent token")
-    public void i_have_a_valid_parent_token() {
-        parentToken = TokenManager.getParentToken();
-    }
+	/*
+	 * @Given("I have a valid parent token") public void
+	 * i_have_a_valid_parent_token() { parentToken = TokenManager.getParentToken();
+	 * }
+	 */
 
     @And("The base URL is set dynamically")
     public void the_base_url_is_set_dynamically() {
@@ -40,10 +41,11 @@ public class Post_Child_information_Steo1_StepDefinitions
         SerenityRest.post("/user/register-child").then().log().all();
     }
 
-    @Then("the response status code should be {int}")
-    public void the_response_status_code_should_be(int statusCode) {
-        SerenityRest.then().statusCode(statusCode);
-    }
+	/*
+	 * @Then("the response status code should be {int}") public void
+	 * the_response_status_code_should_be(int statusCode) {
+	 * SerenityRest.then().statusCode(statusCode); }
+	 */
 
     @And("the response message should be \"{string}\"")
     public void the_response_message_should_be(String expectedMessage) {

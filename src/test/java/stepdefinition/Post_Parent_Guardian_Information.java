@@ -26,11 +26,11 @@ public class Post_Parent_Guardian_Information
 	private Response res;
 	private ExtentTest test;
 	
-	@Given("I have a valid parent token")
-	public void i_have_a_valid_parent_token() 
-	{
-	   ParentToken = Utils.GlobalTokenStore.getToken("parent");
-	}
+	/*
+	 * @Given("I have a valid parent token") public void
+	 * i_have_a_valid_parent_token() { ParentToken =
+	 * Utils.GlobalTokenStore.getToken("parent"); }
+	 */
 
 	@Given("I have a valid child ID")
 	public void i_have_a_valid_child_id(int childid)
@@ -73,11 +73,11 @@ public class Post_Parent_Guardian_Information
                .extract().response();
 	}
 
-	@Then("the response status code should be {int}")
-	public void the_response_status_code_should_be(Integer expectedCode) 
-	{
-	    BaseMethods.validateStatusCode(res, expectedCode, test );
-	}
+	/*
+	 * @Then("the response status code should be {int}") public void
+	 * the_response_status_code_should_be(Integer expectedCode) {
+	 * BaseMethods.validateStatusCode(res, expectedCode, test ); }
+	 */
 
 	@Then("the response message should be {string}")
 	public void the_response_message_should_be(String message)

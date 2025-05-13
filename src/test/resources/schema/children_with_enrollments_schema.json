@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Model Set",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "number" },
+      "user_id": { "type": "number" },
+      "last_name": { "type": "string" },
+      "middle_name": { "type": ["string", "null"] },
+      "first_name": { "type": "string" },
+      "nickname": { "type": ["string", "null"] },
+      "birthdate": { "type": "string" },
+      "gender": { "type": "string" },
+      "street_address": { "type": ["string", "null"] },
+      "apt": { "type": ["string", "null"] },
+      "city": { "type": ["string", "null"] },
+      "zip_code": { "type": ["string", "null"] },
+      "status": { "type": "string" },
+      "created_at": { "type": "string" },
+      "modified_at": { "type": "string" },
+      "childName": { "type": "string" },
+      "child_info_id": { "type": "number" },
+      "child_info_status": { "type": "string" },
+      "enrollment_count": { "type": "number" }
+    },
+    "required": [
+      "id", "user_id", "last_name", "middle_name", "first_name", "nickname",
+      "birthdate", "gender", "street_address", "apt", "city", "zip_code",
+      "status", "created_at", "modified_at", "childName", "child_info_id",
+      "child_info_status", "enrollment_count"
+    ],
+    "title": "Model"
+  }
+}

@@ -1,6 +1,5 @@
 package stepdefinition;
-
-	import Utils.Extent_Report_Manager;
+import Utils.Extent_Report_Manager;
 	import io.cucumber.java.*;
 
 	import com.aventstack.extentreports.ExtentTest;

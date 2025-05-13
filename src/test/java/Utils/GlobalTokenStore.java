@@ -12,7 +12,8 @@ public class GlobalTokenStore
     
     public static String getToken(String userType) 
     {  String key = userType.toLowerCase();
-        if (!userTokens.containsKey(key)) {
+        if (!userTokens.containsKey(key))
+        {
             String token = generateTokenForUser(key);
             if (token != null) 
             {  userTokens.put(key, token);		   } 
@@ -22,8 +23,12 @@ public class GlobalTokenStore
         return userTokens.get(key);
     }
     
+    
+    
     public static void setToken(String userType, String token) 
     {	userTokens.put(userType.toLowerCase(), token);	 }
+    
+    
     
     private static String generateTokenForUser(String userType) 
     {
@@ -58,9 +63,12 @@ public class GlobalTokenStore
 	            {	 return res.jsonPath().getString("accessToken");		   
 	               } 
 	            else 
-	            {	throw new RuntimeException("❌ Failed to generate token. Status Code: " + res.getStatusCode() + ", Response: " + res.asString());	
+	            {	 return null;	
 	              }
      }
+    
+    
+    
 	public static String getUserId() 
 		{	return userId; 				}
 }

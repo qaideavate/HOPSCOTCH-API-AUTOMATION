@@ -8,7 +8,7 @@ Feature: Save Parent/Guardian information with child
     And I provide the parent registration "<body>" with all valid fields
     When I send a POST request to "user/register-parent"
     Then the response status code should be 200
-    And the response message should be "Parent information saved successfully."
+    Then The response message should be for parent guardian "Parent Guardian Created Successfully"
     And the returned parentId should be a 3-digit positive number
     And the success message should be true
      Examples:
@@ -41,7 +41,7 @@ Feature: Save Parent/Guardian information with child
 	  When I send a POST request to "user/register-parent"
 	  Then the response status code should be <statusCode>
 	  And the response message should be "<message>"
-	  And the field error should be "<fieldPath>"
+	  Then The field error should be for parent guardian "<fieldPath>"
 	  And the success message should be "<success>".
 
     Examples:    

@@ -47,8 +47,8 @@ public class Post_Parent_Guardian_Information
 		  this.requestBody = body.replace("{{childID}}", String.valueOf(ChildId));
 	}
 
-	@When("I send a POST request to {string}")
-	public void i_send_a_post_request_to(String endpoint) 
+	@When("I send a POST request to parent guardian endpoint {string}")
+	public void i_send_a_post_request_to_parent_guardian_endpoint(String endpoint) 
 	{
 	   this.headers = ConfigReader.getHeadersFromConfig("header"); 
 	   this.test = Extent_Report_Manager.getTest();
@@ -79,8 +79,8 @@ public class Post_Parent_Guardian_Information
 	 * BaseMethods.validateStatusCode(res, expectedCode, test ); }
 	 */
 
-	@Then("the response message should be {string}")
-	public void the_response_message_should_be(String message)
+	@Then("The response message should be for parent guardian {string}")
+	public void thenTheResponseMessageShouldBeForParentGuardian(String message)
 	{
 		Assert.assertEquals(message, res.jsonPath().getString("message"));
 	}
@@ -132,8 +132,8 @@ public class Post_Parent_Guardian_Information
 	        this.requestBody = jsonBody;
 	}
 
-	@Then("the field error should be {string}")
-	public void the_field_error_should_be(String fieldPath)
+	@Then("The field error should be for parent guardian {string}")
+	public void thenTheFieldErrorShouldBeForParentGuardian(String fieldPath)
 	{
 		 String errorPath = res.jsonPath().getString("error.field");
 	     Assert.assertEquals(fieldPath, errorPath);

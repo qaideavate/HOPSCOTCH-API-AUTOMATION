@@ -1,5 +1,7 @@
 package Utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.junit.Assert;
 import org.junit.Before;
 
@@ -14,4 +16,26 @@ public class BaseMethods
         test.info("Asserting status code. Expected: " + expectedCode + ", Actual: " + actualCode);
         Assert.assertEquals("Unexpected status code", expectedCode, actualCode);
     }
+
+    
+	public static String formatBirthdate(String dateString) 
+	{
+	    if (dateString != null && !dateString.trim().isEmpty())
+	    {
+	        try {
+	            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+	            SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yy");
+	            Date parsedDate = inputFormat.parse(dateString.trim());
+	            return outputFormat.format(parsedDate);
+	        	}
+	        catch (Exception e) 
+	        {
+	            throw new RuntimeException("Birthdate format is invalid: " + dateString, e);
+	        }
+	    } 
+	    else 
+	    {
+	        throw new IllegalArgumentException("birthdate field is missing or empty");
+	    }
+	 }
 }

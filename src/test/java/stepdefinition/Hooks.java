@@ -1,8 +1,9 @@
 package stepdefinition;
-import Utils.Extent_Report_Manager;
-	import io.cucumber.java.*;
+import io.cucumber.java.*;
 
 	import com.aventstack.extentreports.ExtentTest;
+
+import Utils.Extent_Report_Manager;
 
 	public class Hooks {
 

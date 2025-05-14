@@ -78,8 +78,8 @@ public class Get_children_List_Stepdefinition
 		 cleanedResponse.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/" + schemaFileName));
 		}
 		
-	  @Then("the response status code should be {int}") 
-	  public void the_response_status_code_should_be(Integer expectedStatusCode) 
+	  @Then("the child list response status code should be {int}") 
+	  public void the_child_list_status_code_should_be(Integer expectedStatusCode) 
 	  {
 		  test.info("Validating status code: expected " + expectedStatusCode);
 		  BaseMethods.validateStatusCode(res, expectedStatusCode, test); 

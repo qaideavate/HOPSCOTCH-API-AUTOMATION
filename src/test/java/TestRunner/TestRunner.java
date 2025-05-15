@@ -1,4 +1,4 @@
-package TestRunner;
+ 	package TestRunner;
 import org.junit.runner.RunWith;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
@@ -7,7 +7,7 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith (Cucumber.class)
 @CucumberOptions
 	(
-		features ={"classpath:feature/Post_Child_Information_Step1.feature"},
+		features ={"classpath:feature/Post_Parent_Guardian_Information.feature"},
 		glue={"stepdefinition"},
 		dryRun = false,
 		monochrome=true,
@@ -25,3 +25,5 @@ public class TestRunner
 
 //"classpath:feature/login.feature",
 //"classpath:feature/Get_children_List_API.feature"
+//"classpath:feature/Post_Child_Information_Step1.feature",
+//"classpath:feature/Post_Parent_Guardian_Information.feature"

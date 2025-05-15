@@ -1,7 +1,6 @@
 package stepdefinition;
 
 import io.cucumber.java.en.*;
-import io.cucumber.datatable.DataTable;
 import org.json.JSONObject;
 import org.junit.Assert;
 import com.aventstack.extentreports.ExtentTest;
@@ -11,147 +10,140 @@ import Utils.Extent_Report_Manager;
 import Utils.GlobalTokenStore;
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class Post_Child_Information_Step1 
-{
+public class Post_Child_Information_Step1 {
     public Response res;
-    private String parentToken ;
-    private String baseUrl ;
+    private String parentToken;
+    private String baseUrl;
     private String requestBody;
-	private ExtentTest test;
-	private String baseURL;
-	private Map<String, String> headers;
-	private String endpoint;
+    private ExtentTest test;
+    private String baseURL;
+    private Map<String, String> headers;
+    private String endpoint;
+    private Map<String, Object> childInfo;
+    private Map<String, Object> payload;
 
-	//constructor
-    public Post_Child_Information_Step1()
-    {
-    	 this.test = Extent_Report_Manager.getTest();
-         this.baseURL = ConfigReader.getProperty("baseURL");
-         this.headers = ConfigReader.getHeadersFromConfig("header");
-        // this.headers.put("Accept-Encoding", "gzip, deflate");
-         this.endpoint = ConfigReader.getProperty("ChildRegisterEndpoint");
-    }
-    
-    //action class
+    // Constructor
+    	public Post_Child_Information_Step1() 
+    	{
+        this.test = Extent_Report_Manager.getTest();
+        this.baseURL = ConfigReader.getProperty("baseURL");
+        this.headers = ConfigReader.getHeadersFromConfig("header");
+        this.endpoint = ConfigReader.getProperty("ChildRegisterEndpoint");
+    	}
+
     @Given("I have a valid parent token")
-    public void i_have_a_valid_parent_token() 
+    public Post_Child_Information_Step1  i_have_a_valid_parent_token()
     {
-    	parentToken = GlobalTokenStore.getToken("parent");
+        parentToken = GlobalTokenStore.getToken("parent");
+        return this;
     }
-
+    
     @Given("The base URL")
-    public void the_base_url() 
+    public  Post_Child_Information_Step1 the_base_url() 
     {
-    	baseUrl = ConfigReader.getProperty("baseURL");
+        baseUrl = ConfigReader.getProperty("baseURL");
+        return this;
     }
-    
-    @Given("I provide the child register with the following details:")
-    public void i_provide_the_child_register_with_the_following_details(DataTable dataTable) 
+
+    @Given("I prepare the child registration payload with valid data")
+    public Post_Child_Information_Step1 i_prepare_the_child_registration_payload_with_valid_data() 
     {
-    		List<Map<String, String>> childDetails = dataTable.asMaps(String.class, String.class);
-    	    Map<String, String> child = childDetails.get(0);
+    	childInfo = new HashMap<>();
+        childInfo.put("childId", "123");
+        childInfo.put("lastName", "AsadApi");
+        childInfo.put("middleName", "");
+        childInfo.put("firstName", "AsadApi");
+        childInfo.put("nickname", "");
+        childInfo.put("birthdate", "2012-08-15");
+        childInfo.put("gender", "Boy");
+        childInfo.put("streetAddress", "830 Southeast Ireland Street");
+        childInfo.put("city", "Oak Harbor");
+        childInfo.put("zipCode", "98277");
+        childInfo.put("apt", "");
 
-    	    JSONObject json = new JSONObject();
-    	    json.put("childId", child.get("childId")!= null ? child.get("childId") : "");
-    	    json.put("lastName", child.get("lastName"));
-    	    json.put("middleName", child.get("middleName") != null ? child.get("middleName") : "");
-    	    json.put("firstName", child.get("firstName"));
-    	    json.put("nickname", child.get("nickname")!=null?child.get("nickname") : " ");
-    	    
-    	    String birthdate = BaseMethods.formatBirthdate(child.get("birthdate"));
-    	    json.put("birthdate", birthdate);
-    	    json.put("gender", child.get("gender"));
-    	    json.put("streetAddress", child.get("streetAddress"));
-    	    json.put("city", child.get("city"));
-    	    json.put("zipCode", child.get("zipCode"));
-    	    json.put("apt", child.get("apt")!=null?child.get("apt") : " ");
-
-    	    JSONObject root = new JSONObject();
-    	    root.put("childInfo", json);
-
-    	    requestBody = root.toString(); // ✅ Ensure this is not null
+        payload = new HashMap<>();
+        payload.put("childInfo", childInfo);
+        
+        JSONObject json = new JSONObject(childInfo);
+        JSONObject root = new JSONObject();
+        root.put("childInfo", json);
+        requestBody = root.toString();
+        return this;
     }
-    
+
     @When("I send a POST request to child endpoint")
-    public void i_send_a_post_request_to()
+    public Post_Child_Information_Step1 i_send_a_post_request_to() 
     {
-    	res = given()
-    		.baseUri(baseURL)
-    		.headers(headers)
+        res = given()
+            .baseUri(baseURL)
+            .headers(headers)
             .header("Authorization", "Bearer " + parentToken)
             .body(requestBody)
             .when()
-            .post(endpoint)
-    		.then()
-            .log().all()
-            .extract().response();
+            .post(endpoint);
+       
+        GlobalTokenStore.setChildId(res.jsonPath().getString("childId"));
+        return this;
     }
-    
+
     @Then("the child registration response status code should be {int}")
-    public void the_child_registration_status_code_should_be(int expectedStatusCode)
+    public void the_child_registration_status_code_should_be(int Statuscode)
     {
-        BaseMethods.validateStatusCode(res, expectedStatusCode, test);
+        BaseMethods.validateStatusCode(res, Statuscode, test);
     }
 
     @Then("The response message should be for child {string}")
-    public void then_The_Response_Message_Should_Be_For_Child(String message) 
-    {
-        Assert.assertEquals("Expected response message to be " + message, message, res.jsonPath().getString("message"));
+    public void then_The_Response_Message_Should_Be_For_Child(String expectedMessage) 
+    {	String actualMessage = res.jsonPath().getString("message");
+        Assert.assertEquals("Expected response message to be " + expectedMessage, expectedMessage, actualMessage);
     }
-
+    
     @Then("the returned childId should be a 3-digit positive number")
-    public void then_The_Returned_ChildId_Should_Be_A_3Digit_PositiveNumber() 
+    public void then_The_Returned_ChildId_Should_Be_A_3Digit_PositiveNumber()
     {
         int childId = res.jsonPath().getInt("childId");
         Assert.assertTrue("Expected childId to be a 3-digit positive number", childId > 99 && childId < 1000);
     }
 
-    // Scenario Outline: Validate child registration request body field validations
-    @Given("I provide the child register with the following details from outline::")
-    public void i_provide_the_child_register_with_the_following_details_from_outline(DataTable dataTable)
+    @When("I update {string} with {string}")
+    public void updateField(String field, String value) 
     {
-    	List<Map<String, String>> childDetails = dataTable.asMaps(String.class, String.class);
-	    Map<String, String> child = childDetails.get(0);
+        childInfo.put(field, value);
 
-	    JSONObject json = new JSONObject();
-	    json.put("childId", child.get("childId")!= null ? child.get("childId") : "");
-	    json.put("lastName", child.get("lastName"));
-	    json.put("middleName", child.get("middleName") != null ? child.get("middleName") : "");
-	    json.put("firstName", child.get("firstName"));
-	    json.put("nickname", child.get("nickname")!=null?child.get("nickname") : " ");
-	    
-	    String birthdate = BaseMethods.formatBirthdate(child.get("birthdate"));
-	    json.put("birthdate", birthdate);
-	    json.put("gender", child.get("gender"));
-	    json.put("streetAddress", child.get("streetAddress"));
-	    json.put("city", child.get("city"));
-	    json.put("zipCode", child.get("zipCode"));
-	    json.put("apt", child.get("apt")!=null?child.get("apt") : " ");
-
-	    JSONObject root = new JSONObject();
-	    root.put("childInfo", json);
-
-	    requestBody = root.toString(); // ✅ Ensure this is not null
-	    
-	    res = given()
-	    		.baseUri(baseURL)
-	    		.headers(headers)
-	            .header("Authorization", "Bearer " + parentToken)
-	            .body(requestBody)
-	            .when()
-	            .post(endpoint)
-	    		.then()
-	            .log().all()
-	            .extract().response();
+        JSONObject json = new JSONObject(childInfo);
+        JSONObject root = new JSONObject();
+        root.put("childInfo", json);
+        requestBody = root.toString();
     }
     
-    @Then("The field error should be for child {string}")
-    public void thenTheFieldErrorShouldBeForChild(String fieldError)
+    @Then("the response message should be {string} and {string}")
+    public void verifyResponseMessage(String expectedMessage, String expectedFieldPath) 
     {
-    	 String actualErrorMessage = res.jsonPath().getString("errors[0].message");
-       Assert.assertTrue("Expected field error to be " + fieldError, actualErrorMessage.contains(fieldError));
+	    String actualMessage;
+	    if (res.getStatusCode() == 200) 
+	    {
+	    	then_The_Response_Message_Should_Be_For_Child(expectedMessage);
+
+	        // Additional validation for childId
+	        then_The_Returned_ChildId_Should_Be_A_3Digit_PositiveNumber();
+	    } 
+	    else 
+	    {
+	        actualMessage = res.jsonPath().getString("errors[0].message");
+	        String  actualFieldPath=res.jsonPath().get("errors[0].field");
+	        Assert.assertEquals("Expected error message mismatch", expectedMessage, actualMessage);
+	        Assert.assertEquals("Expected error message mismatch", expectedFieldPath, actualFieldPath);
+	        
+	    }
+	}
+    
+    @Then("the child registration response should store childId")
+    public void storeChildIdFromResponse()
+    {
+        int childId = res.jsonPath().getInt("childId");
+        GlobalTokenStore.setChildId(String.valueOf(childId));
+        System.out.println("✅ Stored childId: " + childId);
     }
 }

@@ -45,19 +45,20 @@ public class Post_Parent_Guardian_Information
     	 	@Given("I have a parent token")
     	    public String i_have_a_parent_token()
     	    {
-    	 		Post_Child_Information_Step1 TOKEN =new Post_Child_Information_Step1();
-    	 		this.parentToken= TOKEN.i_have_a_valid_parent_token();
-    	 		
-    	 		return parentToken;
+				  Post_Child_Information_Step1 TOKEN =new Post_Child_Information_Step1();
+				  this.parentToken= TOKEN.i_have_a_valid_parent_token();
+				  System.out.println(parentToken);
+				  System.out.println("Decoded JWT: " + BaseMethods.decodeJWT(parentToken));
+				  return parentToken;
     	    }
     	 	
 			@Given("I have a valid child ID")
-			public Post_Parent_Guardian_Information i_have_a_valid_child_id() 
+			public String i_have_a_valid_child_id() 
 			{ 
 				GlobalTokenStore gts = new GlobalTokenStore();
-				String childId = gts.generateChildId(); 
+				this.childId = gts.generateChildId(); 
 			    System.out.println("   childId:  " + childId);
-				return this;
+				return childId;
 			}
 			
 			@Given("I prepare the parent registration payload with valid data")
@@ -83,7 +84,7 @@ public class Post_Parent_Guardian_Information
 			    // Create list of parents
 			    List<Map<String, Object>> parents = new ArrayList<>();
 			    parents.add(parent);
-
+			   
 			    // Create the full payload
 			    Map<String, Object> requestMap = new HashMap<>();
 			    requestMap.put("parents", parents);
@@ -104,6 +105,9 @@ public class Post_Parent_Guardian_Information
 				            .body(requestBody)
 				            .when()
 				            .post(endpoint);
+				 
+				 System.out.println("Decoded JWT: " + BaseMethods.decodeJWT(parentToken));
+
 			}
 			
 			@Then("the Parent registration response status code should be {int}")
@@ -128,23 +132,24 @@ public class Post_Parent_Guardian_Information
 				 Assert.assertTrue("Expected parentId to be a " + digits + "-digit positive number, but got: " + parentId, parentId >= lowerBound && parentId <= upperBound);
 			}
 			
-			@Then("the success message should be true")
-			public void the_success_message_should_be_true() 
+			@Then("the success message should be {string}.")
+			public void the_success_message_should_be(String expectedsuccess ) 
 			{
-				boolean actualSuccess = res.jsonPath().getBoolean("success");
-			    Assert.assertTrue("Expected success to be true, but was false", actualSuccess);
+				String actualSuccess = res.jsonPath().getString("success");
+			    Assert.assertEquals("Expected success to be true, but was false",expectedsuccess , actualSuccess);
 			}
 			
-			
-			@Then("the Parent resgistration response status code should be <statuscode>")
-			public void the_parent_resgistration_response_status_code_should_be_statuscode() {
-			    // Write code here that turns the phrase above into concrete actions
-			    throw new io.cucumber.java.PendingException();
-			}
 			
 			@Then("the response message should be {string},{string} and  {string}")
-			public void the_response_message_should_be_and(String string, String string2, String string3) {
-			    // Write code here that turns the phrase above into concrete actions
-			    throw new io.cucumber.java.PendingException();
+			public void the_response_message_should_be_and(String expectedMessage, String expectedsuccess, String expectedFieldPath) 
+			{
+			   String actualmessage = res.jsonPath().getString("errors[1].message");
+			   Assert.assertEquals("Message should be: "+ actualmessage, expectedMessage, actualmessage);
+			   
+			   the_success_message_should_be(expectedsuccess);
+			   
+			   String actualFieldPath=res.jsonPath().getString("errors[0].field");
+			   Assert.assertEquals("Message should be :" +actualFieldPath, expectedFieldPath, actualFieldPath);
+			   
 			}
 }

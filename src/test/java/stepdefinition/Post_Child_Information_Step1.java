@@ -34,10 +34,11 @@ public class Post_Child_Information_Step1 {
     	}
 
     @Given("I have a valid parent token")
-    public Post_Child_Information_Step1  i_have_a_valid_parent_token()
+    public String  i_have_a_valid_parent_token()
     {
         parentToken = GlobalTokenStore.getToken("parent");
-        return this;
+        System.out.println(parentToken);
+        return parentToken;
     }
     
     @Given("The base URL")
@@ -51,7 +52,7 @@ public class Post_Child_Information_Step1 {
     public Post_Child_Information_Step1 i_prepare_the_child_registration_payload_with_valid_data() 
     {
     	childInfo = new HashMap<>();
-        childInfo.put("childId", "123");
+        childInfo.put("childId", "");
         childInfo.put("lastName", "AsadApi");
         childInfo.put("middleName", "");
         childInfo.put("firstName", "AsadApi");

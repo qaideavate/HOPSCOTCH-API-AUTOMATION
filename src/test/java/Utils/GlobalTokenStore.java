@@ -73,8 +73,8 @@ public class GlobalTokenStore
     public String generateChildId()  
      {
     	Post_Child_Information_Step1 PCIS = new Post_Child_Information_Step1();
-    	 PCIS.i_have_a_valid_parent_token().the_base_url().i_prepare_the_child_registration_payload_with_valid_data().i_send_a_post_request_to();
-    	 
+    	 PCIS.i_have_a_valid_parent_token();
+    	 PCIS.the_base_url().i_prepare_the_child_registration_payload_with_valid_data().i_send_a_post_request_to();
     	 
     	 return getChildId();
      }

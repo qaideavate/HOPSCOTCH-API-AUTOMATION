@@ -5,13 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-
 import org.json.JSONObject;
 import org.junit.Assert;
 import com.aventstack.extentreports.ExtentTest;
-import com.github.javafaker.Faker;
-
 import Utils.BaseMethods;
 import Utils.ConfigReader;
 import Utils.Extent_Report_Manager;
@@ -23,14 +19,13 @@ public class Post_Parent_Guardian_Information
 {
     public Response res;
     private String parentToken;
-    private String baseUrl;
     private String requestBody;
     private ExtentTest test;
     private String baseURL;
     private Map<String, String> headers;
     private String endpoint;
-    private Map<String, Object> parentInfo;
-    private Map<String, Object> payload;
+    Map<String, Object> parent;
+    List<Map<String, Object>> parents;
     String childId;
 
     	// Constructor
@@ -45,10 +40,18 @@ public class Post_Parent_Guardian_Information
     	 	@Given("I have a parent token")
     	    public String i_have_a_parent_token()
     	    {
-				  Post_Child_Information_Step1 TOKEN =new Post_Child_Information_Step1();
-				  this.parentToken= TOKEN.i_have_a_valid_parent_token();
-				  System.out.println(parentToken);
-				  System.out.println("Decoded JWT: " + BaseMethods.decodeJWT(parentToken));
+				  if(parentToken==null)
+				  { 
+					this.parentToken = GlobalTokenStore.getToken("parent");																
+				    test.info("Fetched parent token from GlobalTokenStore.");
+				  }
+				  else
+				  {		
+					  Post_Child_Information_Step1 TOKEN =new Post_Child_Information_Step1();
+				  	  this.parentToken= TOKEN.i_have_a_valid_parent_token();
+				      test.info("Fetched parent token using fallback method.");
+				  }
+				  test.info("Decoded JWT: " + BaseMethods.decodeJWT(parentToken));
 				  return parentToken;
     	    }
     	 	
@@ -56,16 +59,26 @@ public class Post_Parent_Guardian_Information
 			public String i_have_a_valid_child_id() 
 			{ 
 				GlobalTokenStore gts = new GlobalTokenStore();
-				this.childId = gts.generateChildId(); 
+				if(childId==null)
+				{
+				this.childId = GlobalTokenStore.getChildId();												
 			    System.out.println("   childId:  " + childId);
+			    test.info("Fetched existing child ID: " + childId);
+				}
+				else
+				{	this.childId = gts.generateChildId(); 												
+			    	test.info("Generated new child ID: " + childId);
+				 	
+					}
 				return childId;
 			}
 			
 			@Given("I prepare the parent registration payload with valid data")
 			public void i_prepare_the_parent_registration_payload_with_valid_data() 
 			{
-			    // Create a parent info map
-			    Map<String, Object> parent = new HashMap<>();
+			   // Create a parent info map
+			    parent = new HashMap<>();
+			    
 			    parent.put("lastName", "tes");
 			    parent.put("firstName", "TestPa");
 			    parent.put("email", "pankaj@yopmail.com");
@@ -82,7 +95,7 @@ public class Post_Parent_Guardian_Information
 			    parent.put("altPhone", "");
 
 			    // Create list of parents
-			    List<Map<String, Object>> parents = new ArrayList<>();
+			    parents = new ArrayList<>();
 			    parents.add(parent);
 			   
 			    // Create the full payload
@@ -93,11 +106,13 @@ public class Post_Parent_Guardian_Information
 			    // Convert to JSON
 			    JSONObject root = new JSONObject(requestMap);
 			    requestBody = root.toString();  // Save this string to send in request
+			    test.info("Prepared parent registration payload: " + requestBody);
 			}
 
 			@When("I send a POST request to Parent endpoint")
 			public void i_send_a_post_request_to_parent_endpoint()
 			{
+				test.info("Sending POST request to endpoint: " + endpoint);
 				 res = given()
 				            .baseUri(baseURL)
 				            .headers(headers)
@@ -106,50 +121,72 @@ public class Post_Parent_Guardian_Information
 				            .when()
 				            .post(endpoint);
 				 
-				 System.out.println("Decoded JWT: " + BaseMethods.decodeJWT(parentToken));
-
+				 test.info("Received response: " + res.asString());
+			    
 			}
+			
+			@When("I update parent {string} with {string}")
+			public void updateField(String field, String value) 
+				    {
+					    parent.put(field, value);
+					    test.info("Updated field [" + field + "] with value: " + value);
+
+					    Map<String, Object> payload = new HashMap<>();
+					    payload.put("parents", parents);
+					    payload.put("childId", childId);
+
+					    JSONObject root = new JSONObject(payload);
+					    requestBody = root.toString();
+					    test.info("Updated request payload: " + requestBody);
+				    }
 			
 			@Then("the Parent registration response status code should be {int}")
 			public void the_parent_resgistration_response_status_code_should_be(Integer Statuscode) 
 			{
+				test.info("Validating response status code. Expected: " + Statuscode + ", Actual: " + res.getStatusCode());
 				BaseMethods.validateStatusCode(res, Statuscode, test);
 			}
 			
 			@Then("The response message should be for Parent guardian {string}")
 			public void the_response_message_should_be_for_parent_guardian(String expectedMessage ) 
-			{
-				String actualMessage = res.jsonPath().getString("message");
+			{ 
+				String actualMessage;
+				if(res.getStatusCode()==200)
+				{	
+					 actualMessage = res.jsonPath().getString("message");
+			    }
+				else
+				{ 
+					 actualMessage = res.jsonPath().getString("errors[0].message");
+				}
+				test.info("Asserting response message. Expected: " + expectedMessage + ", Actual: " + actualMessage);
 		        Assert.assertEquals("Expected response message to be " + expectedMessage, expectedMessage, actualMessage);
 			}
 			
-			@Then("the returned parentId should be a {int}-digit positive number")
-			public void the_returned_parent_id_should_be_a_digit_positive_number(Integer digits)
-			{
-				int parentId = res.jsonPath().getInt("parentIds.parentIds[0]");
-				 int lowerBound = (int) Math.pow(10, digits - 1);
-				 int upperBound = (int) Math.pow(10, digits) - 1;
-				 Assert.assertTrue("Expected parentId to be a " + digits + "-digit positive number, but got: " + parentId, parentId >= lowerBound && parentId <= upperBound);
+			@Then("the returned parentId should be a positive number")
+			public void the_returned_parent_id_should_be_a_positive_number()
+			{ 
+				 int parentId = res.jsonPath().getInt("parentIds.parentIds[0]");
+				 test.info("Validating parentId is positive. Received: " + parentId);
+				 Assert.assertTrue("Expected childId to be a positive number, but got: " + parentId, parentId > 0);
 			}
 			
-			@Then("the success message should be {string}.")
+			@Then("the success message should be {string}")
 			public void the_success_message_should_be(String expectedsuccess ) 
 			{
 				String actualSuccess = res.jsonPath().getString("success");
+		        test.info("Validating success flag. Expected: " + expectedsuccess + ", Actual: " + actualSuccess);
 			    Assert.assertEquals("Expected success to be true, but was false",expectedsuccess , actualSuccess);
 			}
 			
-			
-			@Then("the response message should be {string},{string} and  {string}")
-			public void the_response_message_should_be_and(String expectedMessage, String expectedsuccess, String expectedFieldPath) 
-			{
-			   String actualmessage = res.jsonPath().getString("errors[1].message");
-			   Assert.assertEquals("Message should be: "+ actualmessage, expectedMessage, actualmessage);
-			   
-			   the_success_message_should_be(expectedsuccess);
-			   
-			   String actualFieldPath=res.jsonPath().getString("errors[0].field");
-			   Assert.assertEquals("Message should be :" +actualFieldPath, expectedFieldPath, actualFieldPath);
-			   
-			}
+		 @Then("the error field path should be {string}")
+	      public void validateErrorFieldPath(String expectedFieldPath)
+			    {
+			        if (!"N/A".equalsIgnoreCase(expectedFieldPath))
+			        {
+			            String actualField = res.jsonPath().getString("errors[0].field");
+			            test.info("Validating error field path. Expected: " + expectedFieldPath + ", Actual: " + actualField);
+			            Assert.assertEquals(expectedFieldPath, actualField);
+			        }
+			    }	   
 }

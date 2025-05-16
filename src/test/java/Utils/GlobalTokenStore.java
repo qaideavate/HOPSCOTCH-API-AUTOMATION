@@ -30,7 +30,7 @@ public class GlobalTokenStore
         else 
         {	throw new IllegalArgumentException("❌ Unknown user type: " + userType);   }
 
-	     Response res = given()
+	     	Response res = given()
 	                    .contentType(ContentType.JSON)
 	                    .body(payload)
 	                    .post(loginURL)
@@ -50,9 +50,9 @@ public class GlobalTokenStore
      }
    
     public static String getToken(String userType) 
-    {  String key = userType.toLowerCase();
-        if (!userTokens.containsKey(key))
-        {
+    	{  String key = userType.toLowerCase();
+    		if (!userTokens.containsKey(key))
+    		{
             String token = generateTokenForUser(key);
             if (token != null) 
             {  userTokens.put(key, token);		   } 
@@ -68,17 +68,7 @@ public class GlobalTokenStore
     
     public static String getUserId() 
     {	return userId; 				}
-    	
-    
-    public String generateChildId()  
-     {
-    	Post_Child_Information_Step1 PCIS = new Post_Child_Information_Step1();
-    	 PCIS.i_have_a_valid_parent_token();
-    	 PCIS.the_base_url().i_prepare_the_child_registration_payload_with_valid_data().i_send_a_post_request_to();
-    	 
-    	 return getChildId();
-     }
-
+	
     public static String getChildId()
     {
         return childId;
@@ -86,6 +76,15 @@ public class GlobalTokenStore
     public static void setChildId(String id)
     {
         childId = id;
+    }
+    
+    //generate the childid for individually run post api
+    public String generateChildId()  
+    {
+   	Post_Child_Information_Step1 PCIS = new Post_Child_Information_Step1();
+   	 PCIS.i_have_a_valid_parent_token();
+   	 PCIS.the_base_url().i_prepare_the_child_registration_payload_with_valid_data().i_send_a_post_request_to();
+   	 return getChildId();
     }
 	
 }

@@ -19,7 +19,6 @@ public class Login_Stepdefinition
     private String email;
     private String password;
     private String endpoint;
-    private String userType;
     private String baseURL;
     private ExtentTest test;
     private Map<String, String> headers;
@@ -32,7 +31,7 @@ public class Login_Stepdefinition
          this.headers = ConfigReader.getHeadersFromConfig("header");
          this.contentType = headers.getOrDefault("Content-Type", "application/json");
          this.headers.put("Accept-Encoding", "gzip, deflate");
-        
+         test.info("Initialized Login_Stepdefinition with baseURL: " + baseURL);
     }
     
     @Given("I set the header param request content type as {string}")
@@ -40,14 +39,14 @@ public class Login_Stepdefinition
     {
         headers.put("Content-Type", contentType);
         this.contentType = contentType;
+        test.info("Set request Content-Type to: " + contentType);
     }
     
     // Step for providing valid email login credentials
     @Given("The {string} provides valid email login credentials")
     public void the_user_provides_valid_email_login_credentials(String userType)
     {
-    	 this.userType = userType;
-        if (userType.equalsIgnoreCase("Parent")) 
+    	 if (userType.equalsIgnoreCase("Parent")) 
         {
             email = ConfigReader.getProperty("Parent_email");
             password = ConfigReader.getProperty("Parent_password");
@@ -75,7 +74,8 @@ public class Login_Stepdefinition
          this.password = (password == null || password.isEmpty()) ? "" : password;
          this.endpoint = userType.equalsIgnoreCase("Provider") ? "/auth/provider-login" : "/auth/login";
          this.contentType = headers.getOrDefault("Content-Type", "application/json");
-
+        
+         test.info("Login attempt for " + userType);
         test.info("Using email: " + (this.email.isEmpty() ? "EMPTY" : this.email));
         test.info("Using password: " + (this.password.isEmpty() ? "EMPTY" : "******"));
     }
@@ -84,13 +84,14 @@ public class Login_Stepdefinition
     @When("The {string} sends a POST request to the login endpoint")
     public void the_sends_a_post_request_to_the_login_endpoint(String userType)
     { 
+    	test.info("Preparing login request for: " + userType);
         HashMap<String, String> loginPayload = new HashMap<>();
         loginPayload.put("email", this.email);
         loginPayload.put("password", this.password);
 
         APIUtils.logRequestHeaders(test, headers);
         APIUtils.logRequestBody(test, loginPayload);
-
+        test.info("Sending POST request to: " + endpoint);
         res = given()
                 .baseUri(baseURL)
                 .headers(headers)
@@ -102,7 +103,8 @@ public class Login_Stepdefinition
                 .then()
                 .log().all()
                 .extract().response();
-
+        
+        test.info("POST request completed. Status Code: " + res.getStatusCode());
         APIUtils.logResponseToExtent(res, test);
         
         // Store access token if login is successful
@@ -110,7 +112,7 @@ public class Login_Stepdefinition
         {
             String token = res.jsonPath().getString("accessToken");
             GlobalTokenStore.setToken(userType, token);
-            test.info(userType + " token stored globally.");
+            test.info(userType + " token retrieved and stored successfully.");
         }
     }
     
@@ -119,7 +121,7 @@ public class Login_Stepdefinition
     public void the_response_status_code_should_be(Integer expectedStatusCode) 
     {
     	int actualCode = res.getStatusCode();
-        test.info("Asserting status code. Expected: " + expectedStatusCode + ", Actual: " + actualCode);
+    	  test.info("Validating response status code: Expected = " + expectedStatusCode + ", Actual = " + actualCode);
         Assert.assertEquals("Unexpected status code", expectedStatusCode.intValue(), actualCode);
     }
 
@@ -128,7 +130,7 @@ public class Login_Stepdefinition
     public void the_response_message_should_be(String expectedMessage) 
     {
     	  String actualMessage = res.jsonPath().getString("message");
-          test.info("Asserting message. Expected: " + expectedMessage + ", Actual: " + actualMessage);
+    	  test.info("Validating response message: Expected = " + expectedMessage + ", Actual = " + actualMessage);
           Assert.assertEquals("Unexpected response message", expectedMessage, actualMessage);
     }
 
@@ -137,8 +139,7 @@ public class Login_Stepdefinition
     public void the_response_error_should_be(String expectedError)
     {
         String actualErrorMessage = null;
-        
-        test.info("Full Response: " + res.asString());
+        test.info("Full Response Body: " + res.asString());
 
         // Check for field-level errors
         if (res.jsonPath().get("errors") != null) 
@@ -165,7 +166,7 @@ public class Login_Stepdefinition
         String normalizedActual = actualErrorMessage.replace(" | ", ",");
       
         
-        test.info("Asserting error. Expected: " +expectedError + ", Actual: " + normalizedActual);
+        test.info("Validating error message: Expected = " + expectedError + ", Actual = " + normalizedActual);
         Assert.assertEquals("Unexpected error message", expectedError, normalizedActual);
     }
     
@@ -174,9 +175,9 @@ public class Login_Stepdefinition
     public void the_response_should_contain_a_valid_access_token() 
     {
     	 String token = res.jsonPath().getString("accessToken");
-         test.info("Validating access token presence and length");
+    	 test.info("Checking for presence and length of access token...");
          Assert.assertNotNull("Access token should not be null", token);
-         Assert.assertTrue("Access token should be of reasonable length", token.length() > 100);
-         
+         Assert.assertTrue("Access token should be of reasonable length", token.length() > 100); 
+         test.info("Access token validation passed. Token length: " + token.length());
     }
 }

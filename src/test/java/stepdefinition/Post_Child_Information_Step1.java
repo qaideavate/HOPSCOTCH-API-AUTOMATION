@@ -4,6 +4,8 @@ import io.cucumber.java.en.*;
 import org.json.JSONObject;
 import org.junit.Assert;
 import com.aventstack.extentreports.ExtentTest;
+
+import Utils.APIUtils;
 import Utils.BaseMethods;
 import Utils.ConfigReader;
 import Utils.Extent_Report_Manager;
@@ -81,6 +83,8 @@ public class Post_Child_Information_Step1
 	    @When("I send a POST request to child endpoint")
 	    public Post_Child_Information_Step1 i_send_a_post_request_to() 
 	    {
+	    	APIUtils.logRequestHeaders(test, headers);
+	        APIUtils.logRequestBody(test, requestBody);
 	    	test.info("Sending POST request to: " + endpoint);
 	        res = given()
 	            .baseUri(baseURL)
@@ -91,6 +95,7 @@ public class Post_Child_Information_Step1
 	            .post(endpoint);
 	       
 	       test.info("Response Received: " + res.getBody().asString());
+	       APIUtils.logResponseToExtent(res, test);
 	       GlobalTokenStore.setChildId(res.jsonPath().getString("childId"));
 	       return this;
 	    }

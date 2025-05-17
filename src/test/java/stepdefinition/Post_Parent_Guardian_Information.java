@@ -8,6 +8,8 @@ import java.util.Map;
 import org.json.JSONObject;
 import org.junit.Assert;
 import com.aventstack.extentreports.ExtentTest;
+
+import Utils.APIUtils;
 import Utils.BaseMethods;
 import Utils.ConfigReader;
 import Utils.Extent_Report_Manager;
@@ -112,6 +114,8 @@ public class Post_Parent_Guardian_Information
 			@When("I send a POST request to Parent endpoint")
 			public void i_send_a_post_request_to_parent_endpoint()
 			{
+				APIUtils.logRequestHeaders(test, headers);
+		        APIUtils.logRequestBody(test, requestBody);
 				test.info("Sending POST request to endpoint: " + endpoint);
 				 res = given()
 				            .baseUri(baseURL)
@@ -122,6 +126,7 @@ public class Post_Parent_Guardian_Information
 				            .post(endpoint);
 				 
 				 test.info("Received response: " + res.asString());
+				 APIUtils.logResponseToExtent(res, test);
 			    
 			}
 			

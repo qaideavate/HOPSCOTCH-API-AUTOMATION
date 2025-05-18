@@ -1,16 +1,7 @@
 package Utils;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
 import java.util.Map;
-import java.util.zip.GZIPInputStream;
-
 import com.aventstack.extentreports.ExtentTest;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.response.Response;
-import io.cucumber.core.internal.com.fasterxml.jackson.core.type.TypeReference;
 import io.restassured.http.Header;
 
 public class APIUtils 
@@ -53,8 +44,6 @@ public class APIUtils
     {
         test.info("Request Body:\n<pre>" + requestBody + "</pre>");
     }
-
-    
     
     public static void logRequestBody(ExtentTest test, String requestBody)
     {
@@ -62,20 +51,6 @@ public class APIUtils
     }
   
     
-    public static String mapToJson(Map<String, Object> map)
-    {
-        ObjectMapper mapper = new ObjectMapper();
-        try 
-        {
-            return mapper.writeValueAsString(map);
-        } 
-        catch (JsonProcessingException e) 
-        {
-            throw new RuntimeException("Failed to convert map to JSON", e);
-        }
-      
-    }
-
     public static String getJsonBodyIfValid(Response res) 
     {
         String contentType = res.getHeader("Content-Type");
@@ -92,30 +67,4 @@ public class APIUtils
             throw new RuntimeException("Response is not valid JSON:\n" + rawBody);
         }
     }
-	
-    public static Object parseJson(Response res) 
-    {
-        String validJson = getJsonBodyIfValid(res);
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            // If the JSON starts with '{', it is an object (Map)
-            if (validJson.startsWith("{")) 
-            {
-                return mapper.readValue(validJson, Map.class); // Use Map.class for parsing the JSON into a Map
-            } 
-            // If the JSON starts with '[', it is an array (List of Map)
-            else if (validJson.startsWith("["))
-            {
-                return mapper.readValue(validJson, List.class); // Use List.class for parsing into a List
-            }
-            else 
-            {
-                throw new RuntimeException("Invalid JSON format");
-            }
-        } catch (IOException e) 
-        {
-            throw new RuntimeException("JSON parsing failed", e);
-        }
-    }
-	
 }

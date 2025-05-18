@@ -1,12 +1,7 @@
 package stepdefinition;
 
 import org.junit.Assert;
-import io.cucumber.java.Before;
-import io.restassured.RestAssured;
 import io.restassured.builder.ResponseBuilder;
-import io.restassured.config.DecoderConfig;
-import io.restassured.config.RestAssuredConfig;
-import io.restassured.parsing.Parser;
 import Utils.APIUtils;
 import Utils.BaseMethods;
 import Utils.ConfigReader;
@@ -17,7 +12,6 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.*;
 import com.aventstack.extentreports.ExtentTest;
-import java.io.StringReader;
 import java.util.List;
 import java.util.Map;
 import io.cucumber.datatable.*;

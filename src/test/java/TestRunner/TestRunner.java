@@ -7,11 +7,17 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith (Cucumber.class)
 @CucumberOptions
 	(
-		features ={"classpath:feature/login.feature","classpath:feature/Post_Child_Information_Step1.feature","classpath:feature/Post_Parent_Guardian_Information.feature"},
-		//features= {"classpath:feature/Post_Parent_Guardian_Information.feature"},
+		//features= {"classpath:feature/Get_children_List_API.feature"},
+		//tags= "@runthis",
+		features ={
+				    "classpath:feature/login.feature",
+				    "classpath:feature/Post_Child_Information_Step1.feature",
+				    "classpath:feature/Post_Parent_Guardian_Information.feature",
+				    "classpath:feature/Get_children_List_API.feature"
+				    },
+		
 		glue={"stepdefinition"},
 		dryRun = false,
-		//tags= "@Test2234",
 		monochrome=true,
 		plugin = {"pretty",
 			    "html:target/cucumber-html-report",

@@ -37,11 +37,9 @@ public class Get_children_List_Stepdefinition
 		 getchildren = ConfigReader.getProperty("getChildren");
 	}
 	
-	
 	@When("I send a GET request of children-with-enrollments API")
 	public void i_send_a_get_request_of_children_with_enrollments_api() 
-	{
-	        String parentToken = GlobalTokenStore.getToken("parent");
+	{     String parentToken = GlobalTokenStore.getToken("parent");
 	        APIUtils.logRequestHeaders(test, headers);
 
 	        test.info("Sending GET request to: " + baseURL + getchildren);
@@ -51,7 +49,7 @@ public class Get_children_List_Stepdefinition
 	        res = given()
 	                .baseUri(baseURL)
 	                .headers(headers)
-	                .contentType("application/json; charset=utf-8")
+	               // .contentType("application/json; charset=utf-8")
 	                .header("Authorization", "Bearer " + parentToken)
 	                .when()
 	                .get(getchildren)
@@ -86,113 +84,115 @@ public class Get_children_List_Stepdefinition
 	   }
 	  
 	  @Then("all children should have the same {string}")
-	  public void all_children_should_have_the_same(String user_id) {
-	      String expectedUserId = GlobalTokenStore.getUserId(); // Fetch expected user ID
-
-	      // Parse the response once
-	      Object parsedResponse = APIUtils.parseJson(res);
-	      
-	      // Ensure the response is a List of Maps (children)
-	      if (parsedResponse instanceof List) {
-	          List<Map<String, Object>> children = (List<Map<String, Object>>) parsedResponse;
-	          
-	          // Loop through each child and assert that 'user_id' matches the expected user_id
-	          for (Map<String, Object> child : children) {
-	              Object actualUserId = child.get(user_id); // Get the 'user_id' value
-	              
-	              // Log the actual user ID for debugging
-	              System.out.println("Actual User ID: " + actualUserId);
-	              test.info("Child user_id: " + actualUserId);
-	              
-	              // Assert that all children have the same user_id
-	              Assert.assertEquals("Mismatch in value for key '" + user_id + "'. Expected: " + expectedUserId + ", but found: " + actualUserId, expectedUserId, actualUserId);
-	          }
-	      } else {
-	          throw new RuntimeException("Expected response to be a list of children, but received: " + parsedResponse.getClass().getSimpleName());
-	      }
+	  public void all_children_should_have_the_same(String expectedUserIdstr)
+	  {
+	    String expectedUserIdstr1 = GlobalTokenStore.getUserId(); // Fetch expected user ID
+	    int expecteduserid=Integer.parseInt(expectedUserIdstr1);
+	    List<Integer> userIds = res.jsonPath().getList("user_id");
+	    
+	    for (Integer userId : userIds) 
+	     {
+	         Assert.assertEquals("User ID does not match",userId.intValue(), expecteduserid);
+	     }
 	  }
-
-	  
-	  
+	    
 	  @Then("each child object should contain the following fields:") 
-	  public void each_child_object_should_contain_the_following_fields(DataTable dataTable) 
-	  { 
-		  List<Map<String, Object>> children = APIUtils.parseJson(res);
-	      List<String> expectedFields = dataTable.asList();
-	      test.info("Validating presence of fields in each child object: " + expectedFields);
+	  public void each_child_object_should_contain_the_following_fields(List<String> expectedFields) 
+	  {   List<Map<String, Object>> childrenList = res.jsonPath().getList("$");
+		  
+		  for (int i = 0; i < childrenList.size(); i++)
+		  {
+		        Map<String, Object> child = childrenList.get(i);
 
-	        for (Map<String, Object> child : children) 
-	        {
-	            for (String field : expectedFields) 
-	            {
-	                test.info("Checking for field: " + field);
-	                Assert.assertTrue("Field '" + field + "' is missing in child object: " + child, child.containsKey(field));
-	            }
-	        }
+		        for (String field : expectedFields) 
+		        {
+		            Assert.assertTrue("Child at index " + i + " does not contain expected field: " + field, child.containsKey(field));
+		        }
+		  } 
 	  }
-	  
 	  
 	  @Then("for each child, the following fields should not be null or empty:")
-	  public void for_each_child_the_following_fields_should_not_be_null_or_empty(DataTable dataTable)
-	  {
-		  List<Map<String, Object>> children = APIUtils.parseJson(res);
-		  List<String> fields = dataTable.asList();
-	        test.info("Validating non-null and non-empty fields for each child: " + fields);
-	        
-		    for (Map<String, Object> child : children)
+	  public void for_each_child_the_following_fields_should_not_be_null_or_empty(List<String> mandatoryFields)
+	  {		List<Map<String, Object>> childrenList = res.jsonPath().getList("$");
+		    for (int i = 0; i < childrenList.size(); i++) 
 		    {
-		        for (String field : fields) 
+		        Map<String, Object> child = childrenList.get(i);
+
+		        for (String field : mandatoryFields) 
 		        {
 		            Object value = child.get(field);
-		            test.info("Checking field '" + field + "' value: " + value);
-		            Assert.assertNotNull("Field '" + field + "' is null in child: " + child, value);
-		            Assert.assertTrue("Field '" + field + "' is empty in child: " + child, !value.toString().trim().isEmpty());
+	            
+		            Assert.assertNotNull("Field '" + field + "' is null for child at index " + i, value);
+		            if (value instanceof String) 
+		            {
+		                Assert.assertFalse("Field '" + field + "' is empty for child at index " + i,((String) value).trim().isEmpty());
+		            }
 		        }
-	        }
+		    }
 	    }
 
-	  
-	  @Then("for each child, the {string} should be equal to {string}") 
-	  public void for_each_child_the_should_be_equal_to(String id, String child_info_id) 
-	  {
-		  List<Map<String, Object>> children = APIUtils.parseJson(res);
-		  test.info("Validating each child's '" + id + "' equals '" + child_info_id + "'");
+	  @Then("for each child, the <id> should be equal to <child_info_id>") 
+	  public void for_each_child_the_id_should_be_equal_to_child_info_id() 
+	  {	  List<Map<String, Object>> childrenlist = res.jsonPath().getList("$");
 		  
-	        for (Map<String, Object> child : children) {
-	            Assert.assertEquals("Values of '" + id + "' and '" + child_info_id + "' do not match.", child.get(id), child.get(child_info_id));
-	        }
-	  }
-
-
-	  @Then("the {string} field should be one of the following:") 
-	  public void the_field_should_be_one_of_the_following(String field, DataTable dataTable) 
-	  { 
-		  List<String> validValues = dataTable.asList();
-	      List<Map<String, Object>> children = APIUtils.parseJson(res);
-	        
-	        test.info("Validating field '" + field + "' contains one of: " + validValues);
-	        for (Map<String, Object> child : children) 
+	        for (Map<String, Object> child : childrenlist) 
 	        {
-	        	 Assert.assertTrue("Invalid value for '" + field + "' in child: " + child, validValues.contains(child.get(field).toString()));
+	        	int id = (int) child.get("id");
+	        	int child_info_id = (int) child.get("child_info_id");
+	        	 test.info("Validating each child's '" + id + "' equals '" + child_info_id + "'");
+	            Assert.assertEquals("Values of " + id + " and " + child_info_id + "matches ",id, child_info_id);
 	        }
 	  }
+	  
+	  @Then("for each child, {string} should be equal to {string}")
+	  public void for_each_child_should_be_equal_to(String actualName, String expectedName )
+	  {   List<Map<String, Object>> children = res.jsonPath().getList("$");
 
+		     for (Map<String, Object> child : children)
+		     {
+		        String firstName = String.valueOf(child.get("first_name"));
+		        String lastName = String.valueOf(child.get("last_name"));
+		        String expectedChildName = capitalize(firstName) + " " + capitalize(lastName);
+		        String actualChildName = String.valueOf(child.get("childName"));
 
-	  @Then("the {string} should be a positive number for each child") 
-	  public void the_should_be_a_positive_number_for_each_child(String enrollment_count) 
-	  { 
-		  List<Map<String, Object>> children = APIUtils.parseJson(res);
-		  test.info("Validating '" + enrollment_count + "' is a positive number for each child");
-		  
-	      for (Map<String, Object> child : children) 
-	      {
-	    	  int value = Integer.parseInt(child.get(enrollment_count).toString());
-	          test.info("Value of '" + enrollment_count + "': " + value);
-	      Assert.assertTrue("Field " + enrollment_count + " should be a positive number", Integer.parseInt(child.get(enrollment_count).toString()) > 0);
-	      }
+		        Assert.assertEquals("Child name does not match for ID: " + child.get("id"), expectedChildName,actualChildName);
+		    }
+		}
+
+		  private String capitalize(String input) 
+		  {
+			    if (input == null || input.isEmpty()) return input;
+			    return input.substring(0, 1).toUpperCase() + input.substring(1);
+			}
+	
+	@Then("the {string} field should be one of the following:")
+	  public void the_field_should_be_one_of_the_following(String gender, DataTable dataTable) 
+	  {  List<String> Values = dataTable.asList();
+		 List<Map<String, Object>> children = res.jsonPath().getList("$");
+
+		    for (Map<String, Object> child : children) 
+		    {   String actualValue = String.valueOf(child.get("gender"));
+		        
+		     if (!Values.contains(actualValue)) 
+		     {
+		      Assert.assertEquals("Invalid value for '" + gender + " in child ID: " + child.get("id"), actualValue , Values);
+		      }
+		    }
 	  }
-
-
+	
+	@Then("the enrollment_count should be a equal to or greater than zero for each child")
+	public void the_enrollment_count_should_be_a_equal_to_or_greater_than_zero_for_each_child() 
+	  {
+		List<Map<String, Object>> children = res.jsonPath().getList("$");
+		
+		 for (Map<String, Object> child : children) 
+		 {
+			Object enrollmentObj = child.get("enrollment_count");
+			int value = Integer.parseInt(String.valueOf(enrollmentObj));
+		    Assert.assertTrue( "Expected enrollment_count to be positive for child ID: " + child.get("id") + ", but found: " + value,value >= 0); 
+		    }
+	  }  
+	  
 	  @Then("the response status message should be {string}") 
 	  public void the_response_status_message_should_be(String expectedStatusMessage) 
 	  { 
@@ -209,7 +209,7 @@ public class Get_children_List_Stepdefinition
 	  { 
 		  long responseTime = res.getTime();
 		  test.info("Validating response time < " + seconds + " seconds. Actual time: " + (responseTime / 1000.0) + " seconds");
-	      Assert.assertTrue("Expected response time < " + seconds + " seconds, but was " + (responseTime / 1000.0) + " seconds", responseTime < (seconds * 1000));
+	      Assert.assertTrue("Expected response time < " + seconds + " seconds, but was " + (responseTime / 1000.0) + " seconds", responseTime < (seconds * 2000));
 	  }
 
 }

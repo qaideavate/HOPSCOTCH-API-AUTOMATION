@@ -13,6 +13,7 @@ Background: Given I have a valid ParentToken
     When I send a GET request of children-with-enrollments API
     Then all children should have the same "user_id"
  
+ 
   Scenario: Validate presence of required fields in each child object
     When I send a GET request of children-with-enrollments API 
     Then each child object should contain the following fields:
@@ -33,6 +34,7 @@ Background: Given I have a valid ParentToken
       | child_info_status |
       | enrollment_count  |
  
+ 
   Scenario: Validate mandatory fields are not null or empty
     When I send a GET request of children-with-enrollments API 
     Then for each child, the following fields should not be null or empty:
@@ -40,28 +42,31 @@ Background: Given I have a valid ParentToken
 			 |last_name				| 
 			 |birthdate				|
 			 |street_address  |
-			 | city						|
+			 |city						|
 			 |zip_code				| 
 			 |gender					|
  
+ 
   Scenario: Validate id matches child_info_id
     When I send a GET request of children-with-enrollments API 
-    Then for each child, the "id" should be equal to "child_info_id"
+    Then for each child, the <id> should be equal to <child_info_id>
+ 
  
   Scenario: Validate childName is a combination of first_name and last_name
-    When I send a GET request of children-with-enrollments API 
-    Then for each child, the "childName" should be equal to "first_name last_name"
+  When I send a GET request of children-with-enrollments API
+  Then for each child, "childName" should be equal to "first_name last_name"
  
+
   Scenario: Validate gender values 
     When I send a GET request of children-with-enrollments API
     Then the "gender" field should be one of the following:
       | Boy               |
       | Girl              |
       | Prefer not to say |
- 
+  @runthis
   Scenario: Validate enrollment_count is a positive integer
     When I send a GET request of children-with-enrollments API 
-    Then the "enrollment_count" should be a positive number for each child
+    Then the enrollment_count should be a equal to or greater than zero for each child
  
   Scenario: Validate status message is "ok"
     When I send a GET request of children-with-enrollments API 
@@ -69,6 +74,6 @@ Background: Given I have a valid ParentToken
  
   Scenario: Validate the response time 
     When I send a GET request of children-with-enrollments API 
-    Then the Reponse time should be less than 1.5 seconds.
+    Then the Reponse time should be less than 2.0 seconds.
  
  

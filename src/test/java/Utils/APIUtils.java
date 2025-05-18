@@ -49,8 +49,6 @@ public class APIUtils
 	}
     
 	
-	
-	
     public static void logRequestBody(ExtentTest test, Map<String, String> requestBody)
     {
         test.info("Request Body:\n<pre>" + requestBody + "</pre>");
@@ -62,11 +60,7 @@ public class APIUtils
     {
         test.info("Request Body:\n<pre>" + requestBody + "</pre>");
     }
-
-    
-
-    
-    
+  
     
     public static String mapToJson(Map<String, Object> map)
     {

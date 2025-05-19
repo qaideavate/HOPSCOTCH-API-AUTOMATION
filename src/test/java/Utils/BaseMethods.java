@@ -4,8 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.Date;
 import org.junit.Assert;
-import org.junit.Before;
-
 import com.aventstack.extentreports.ExtentTest;
 import io.restassured.response.Response;
 

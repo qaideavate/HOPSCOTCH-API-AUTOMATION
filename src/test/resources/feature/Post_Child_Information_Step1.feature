@@ -3,7 +3,7 @@ Feature: Register Child API Test
   Background:
     Given I have a valid parent token
     And The base URL 
-	 @runthis
+	 
    Scenario: Validate Child Registration with valid data
     Given I prepare the child registration payload with valid data
     When  I send a POST request to child endpoint

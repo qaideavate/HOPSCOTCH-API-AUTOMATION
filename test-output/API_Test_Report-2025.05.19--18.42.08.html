@@ -1,0 +1,2216 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>API Automation Test Report</title>
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png">
+<link href="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ce8b10435bcbae260c334c0d0c6b61d2c19b6168/spark/css/spark-style.css" rel="stylesheet" />
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@7cc78ce/spark/js/jsontree.js"></script>
+<style type="text/css"></style></head><body class="spa -report standard">
+  <div class="app">
+    <div class="layout">
+<div class="header navbar">
+<div class="vheader">
+<div class="nav-logo">
+<a href="#">
+<div class="logo" style="background-image: url('https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@b00a2d0486596e73dd7326beacf352c639623a0e/commons/img/logo.png')"></div>
+</a>
+</div>
+<ul class="nav-left">
+<li class="search-box">
+<a class="search-toggle" href="#">
+<i class="search-icon fa fa-search"></i>
+<i class="search-icon-close fa fa-close"></i>
+</a>
+</li>
+<li class="search-input"><input id="search-tests" class="form-control" type="text" placeholder="Search..."></li>
+</ul>
+<ul class="nav-right">
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">REST Assured + Cucumber Report</span></a>
+</li>
+<li class="m-r-10">
+<a href="#"><span class="badge badge-primary">May 19, 2025 06:42:08 pm</span></a>
+</li>
+</ul>
+</div>
+</div><div class="side-nav">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="nav-item dropdown" onclick="toggleView('test-view')">
+<a id="nav-test" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-list"></i></span>
+</a>
+</li>
+<li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+<a id="nav-dashboard" class="dropdown-toggle" href="#">
+<span class="ico"><i class="fa fa-bar-chart"></i></span>
+</a>
+</li>
+</ul>
+</div>
+</div>      <div class="vcontainer">
+        <div class="main-content">
+<div class="test-wrapper row view test-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+<ul class="tools pull-left">
+<li><a href="#"><span class="font-size-14">Tests</span></a></li>
+</ul>
+<ul class="tools text-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exclamation-circle"></i></a>
+<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+<a class="dropdown-item" status="pass" href="#"><span>Pass</span><span class="status success"></span></a>
+<div class="dropdown-divider"></div>
+<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+</ul>
+</li>
+</ul>
+</div>    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        <li class="test-item"  status="pass" test-id="1"
+          author=""
+          tag=""
+          device="">
+          <div class="test-detail">
+            <p class="name">Validate response schema</p>
+            <p class="text-sm">
+              <span>6:42:08 pm</span> / <span>00:00:06:318</span>
+              <span class="badge pass-bg log float-right">Pass</span>
+            </p>
+          </div>
+          <div class="test-contents d-none">
+<div class="detail-head">
+<div class="p-v-10">
+<div class="info">
+<h5 class="test-status text-pass">Validate response schema</h5>
+<span class='badge badge-success'>05.19.2025 6:42:08 pm</span>
+<span class='badge badge-danger'>05.19.2025 6:42:15 pm</span>
+<span class='badge badge-default'>00:00:06:318</span>
+&middot; <span class='uri-anchor badge badge-default'>#test-id=1</span>
+<span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
+<span title='Collapse all nodes' class='badge badge-default pointer float-right ct ml-1'><i class="fa fa-compress"></i></span>
+<span title='Expand all nodes' class='badge badge-default pointer float-right et'><i class="fa fa-expand"></i></span>
+</div>
+</div>
+</div><div class="detail-body mt-4">
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:42:08 pm</td>
+        <td>
+          Starting Scenario: Validate response schema
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:42:12 pm</td>
+        <td>
+          Request Headers:
+<pre>Cache-Control: no-cache
+Accept: */*
+User-Agent: PostmanRuntime/7.43.4
+Connection: keep-alive
+Accept-Encoding: gzip, deflate
+Content-Type: application/json
+</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:42:12 pm</td>
+        <td>
+          Sending GET request to: https://dev-api.hopscotchconnect.com/api/user/enrollments
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:42:12 pm</td>
+        <td>
+          Using Authorization token for parent.
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:42:14 pm</td>
+        <td>
+          Status Code: 200
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:42:14 pm</td>
+        <td>
+          Response Body:
+<pre>[
+    {
+        "id": 328,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 1,
+        "classroom_id": 51,
+        "child_id": 409,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-09",
+        "enroll_end_date": null,
+        "tuition": "300.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-09 04:18:11",
+        "modified_at": "2025-05-09 04:18:11",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "JohnTF",
+        "last_name": "Miller",
+        "middle_name": "Claire",
+        "birthdate": "2024-02-22",
+        "p_name": "Nurture with Care Kids Academy",
+        "cs_name": "Bear",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 327,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 9,
+        "classroom_id": 64,
+        "child_id": 440,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-09",
+        "enroll_end_date": null,
+        "tuition": "100.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-09 04:16:07",
+        "modified_at": "2025-05-09 04:16:07",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "JohnKG",
+        "last_name": "Miller",
+        "middle_name": "Claire",
+        "birthdate": "2024-07-12",
+        "p_name": "Pulkit Academy",
+        "cs_name": "Pankaj's ",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 326,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 9,
+        "classroom_id": 64,
+        "child_id": 437,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-09",
+        "enroll_end_date": null,
+        "tuition": "100.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-09 03:54:36",
+        "modified_at": "2025-05-09 03:54:36",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "JohnML",
+        "last_name": "Miller",
+        "middle_name": "Claire",
+        "birthdate": "2024-05-20",
+        "p_name": "Pulkit Academy",
+        "cs_name": "Pankaj's ",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 325,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 9,
+        "classroom_id": 64,
+        "child_id": 400,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-09",
+        "enroll_end_date": null,
+        "tuition": "100.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-09 03:35:33",
+        "modified_at": "2025-05-09 03:35:33",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "JohnMX",
+        "last_name": "Miller",
+        "middle_name": "Claire",
+        "birthdate": "2024-12-05",
+        "p_name": "Pulkit Academy",
+        "cs_name": "Pankaj's ",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 324,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 1,
+        "classroom_id": 53,
+        "child_id": 386,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-09",
+        "enroll_end_date": null,
+        "tuition": "500.00",
+        "payment_status": "N/A",
+        "enrollment_status": "Wait Listed",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-09 03:31:51",
+        "modified_at": "2025-05-09 03:31:51",
+        "tuition_cadence": "biweekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "JohnQB",
+        "last_name": "Miller",
+        "middle_name": "Claire",
+        "birthdate": "2024-10-21",
+        "p_name": "Nurture with Care Kids Academy",
+        "cs_name": "Baby",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 323,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 1,
+        "classroom_id": 53,
+        "child_id": 300,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-09",
+        "enroll_end_date": null,
+        "tuition": "500.00",
+        "payment_status": "N/A",
+        "enrollment_status": "Wait Listed",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-09 03:31:15",
+        "modified_at": "2025-05-09 03:31:15",
+        "tuition_cadence": "biweekly",
+        "isSubsidyEligible": 1,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "jay",
+        "last_name": "sharama",
+        "middle_name": "",
+        "birthdate": "2025-02-02",
+        "p_name": "Nurture with Care Kids Academy",
+        "cs_name": "Baby",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 322,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 1,
+        "classroom_id": 51,
+        "child_id": 433,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-09",
+        "enroll_end_date": null,
+        "tuition": "300.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-09 03:22:59",
+        "modified_at": "2025-05-09 03:22:59",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "JohnVZ",
+        "last_name": "Miller",
+        "middle_name": "Claire",
+        "birthdate": "2024-01-30",
+        "p_name": "Nurture with Care Kids Academy",
+        "cs_name": "Bear",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 321,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 9,
+        "classroom_id": 64,
+        "child_id": 417,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-09",
+        "enroll_end_date": null,
+        "tuition": "100.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-09 01:10:19",
+        "modified_at": "2025-05-09 01:10:19",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "JohnGR",
+        "last_name": "Miller",
+        "middle_name": "Claire",
+        "birthdate": "2024-09-26",
+        "p_name": "Pulkit Academy",
+        "cs_name": "Pankaj's ",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 320,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 9,
+        "classroom_id": 64,
+        "child_id": 400,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-12",
+        "enroll_end_date": "2025-05-12",
+        "tuition": "40.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-08 23:41:20",
+        "modified_at": "2025-05-08 23:41:20",
+        "tuition_cadence": null,
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 6,
+        "is_import_external": 0,
+        "first_name": "JohnMX",
+        "last_name": "Miller",
+        "middle_name": "Claire",
+        "birthdate": "2024-12-05",
+        "p_name": "Pulkit Academy",
+        "cs_name": "Pankaj's ",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Drop In"
+    },
+    {
+        "id": 319,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 73,
+        "child_id": 318,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-12",
+        "enroll_end_date": "2025-05-12",
+        "tuition": "30.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-08 23:38:38",
+        "modified_at": "2025-05-08 23:38:38",
+        "tuition_cadence": null,
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 6,
+        "is_import_external": 0,
+        "first_name": "Joy",
+        "last_name": "max",
+        "middle_name": "",
+        "birthdate": "2023-01-16",
+        "p_name": "Little Learners Center",
+        "cs_name": "NEW BIG CLASS",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Drop In"
+    },
+    {
+        "id": 318,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 9,
+        "classroom_id": 56,
+        "child_id": 391,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-11-12",
+        "enroll_end_date": null,
+        "tuition": "300.00",
+        "payment_status": "N/A",
+        "enrollment_status": "Wait Listed",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-08 23:37:49",
+        "modified_at": "2025-05-08 23:37:49",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 1,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "JohnZE",
+        "last_name": "Miller",
+        "middle_name": "Claire",
+        "birthdate": "2024-07-23",
+        "p_name": "Pulkit Academy",
+        "cs_name": "tod",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 317,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 67,
+        "child_id": 388,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-11-12",
+        "enroll_end_date": null,
+        "tuition": "100.00",
+        "payment_status": "N/A",
+        "enrollment_status": "Wait Listed",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-08 23:26:41",
+        "modified_at": "2025-05-08 23:26:41",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 1,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "JohnQK",
+        "last_name": "Miller",
+        "middle_name": "Claire",
+        "birthdate": "2024-04-20",
+        "p_name": "Little Learners Center",
+        "cs_name": "Test class for QA",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 316,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 68,
+        "child_id": 396,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-28",
+        "enroll_end_date": null,
+        "tuition": "400.00",
+        "payment_status": "paid",
+        "enrollment_status": "approved",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-08 23:25:25",
+        "modified_at": "2025-05-09 06:15:04",
+        "tuition_cadence": "semi-monthly",
+        "isSubsidyEligible": 1,
+        "schedule_type_id": 4,
+        "is_import_external": 0,
+        "first_name": "JohnSB",
+        "last_name": "Miller",
+        "middle_name": "Claire",
+        "birthdate": "2024-03-21",
+        "p_name": "Little Learners Center",
+        "cs_name": "5555",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Part Time (MWF)"
+    },
+    {
+        "id": 315,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 67,
+        "child_id": 303,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-28",
+        "enroll_end_date": null,
+        "tuition": "22.00",
+        "payment_status": "N/A",
+        "enrollment_status": "Wait Listed",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-08 23:24:15",
+        "modified_at": "2025-05-08 23:24:15",
+        "tuition_cadence": "monthly",
+        "isSubsidyEligible": 1,
+        "schedule_type_id": 4,
+        "is_import_external": 0,
+        "first_name": "Shubham",
+        "last_name": "patidar",
+        "middle_name": "",
+        "birthdate": "2022-12-31",
+        "p_name": "Little Learners Center",
+        "cs_name": "Test class for QA",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Part Time (MWF)"
+    },
+    {
+        "id": 314,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 68,
+        "child_id": 389,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-28",
+        "enroll_end_date": null,
+        "tuition": "400.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-08 23:21:42",
+        "modified_at": "2025-05-08 23:21:42",
+        "tuition_cadence": "semi-monthly",
+        "isSubsidyEligible": 1,
+        "schedule_type_id": 4,
+        "is_import_external": 0,
+        "first_name": "JohnNA",
+        "last_name": "Miller",
+        "middle_name": "Claire",
+        "birthdate": "2024-05-25",
+        "p_name": "Little Learners Center",
+        "cs_name": "5555",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Part Time (MWF)"
+    },
+    {
+        "id": 313,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 73,
+        "child_id": 397,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-12",
+        "enroll_end_date": "2025-05-12",
+        "tuition": "30.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-08 23:19:15",
+        "modified_at": "2025-05-08 23:19:15",
+        "tuition_cadence": null,
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 6,
+        "is_import_external": 0,
+        "first_name": "JohnWW",
+        "last_name": "Miller",
+        "middle_name": "Claire",
+        "birthdate": "2024-02-19",
+        "p_name": "Little Learners Center",
+        "cs_name": "NEW BIG CLASS",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Drop In"
+    },
+    {
+        "id": 312,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 71,
+        "child_id": 311,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-12",
+        "enroll_end_date": "2025-05-12",
+        "tuition": "60.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-08 23:18:31",
+        "modified_at": "2025-05-08 23:18:31",
+        "tuition_cadence": null,
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 6,
+        "is_import_external": 0,
+        "first_name": "ASDFG",
+        "last_name": "FGHJ",
+        "middle_name": "",
+        "birthdate": "2025-01-19",
+        "p_name": "Little Learners Center",
+        "cs_name": "333",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Drop In"
+    },
+    {
+        "id": 311,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 73,
+        "child_id": 395,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-12",
+        "enroll_end_date": "2025-05-12",
+        "tuition": "30.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-08 23:17:17",
+        "modified_at": "2025-05-08 23:17:17",
+        "tuition_cadence": null,
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 6,
+        "is_import_external": 0,
+        "first_name": "JohnXW",
+        "last_name": "Miller",
+        "middle_name": "Claire",
+        "birthdate": "2024-01-03",
+        "p_name": "Little Learners Center",
+        "cs_name": "NEW BIG CLASS",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Drop In"
+    },
+    {
+        "id": 310,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 73,
+        "child_id": 394,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-12",
+        "enroll_end_date": "2025-05-12",
+        "tuition": "30.00",
+        "payment_status": "pending",
+        "enrollment_status": "approved",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-08 23:09:15",
+        "modified_at": "2025-05-09 06:20:03",
+        "tuition_cadence": null,
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 6,
+        "is_import_external": 0,
+        "first_name": "JohnWJ",
+        "last_name": "Miller",
+        "middle_name": "Claire",
+        "birthdate": "2024-06-05",
+        "p_name": "Little Learners Center",
+        "cs_name": "NEW BIG CLASS",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Drop In"
+    },
+    {
+        "id": 309,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 9,
+        "classroom_id": 64,
+        "child_id": 386,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-15",
+        "enroll_end_date": null,
+        "tuition": "100.00",
+        "payment_status": "paid",
+        "enrollment_status": "approved",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-08 23:08:46",
+        "modified_at": "2025-05-12 05:18:53",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 1,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "JohnQB",
+        "last_name": "Miller",
+        "middle_name": "Claire",
+        "birthdate": "2024-10-21",
+        "p_name": "Pulkit Academy",
+        "cs_name": "Pankaj's ",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 308,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 1,
+        "classroom_id": 55,
+        "child_id": 268,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-09",
+        "enroll_end_date": "2025-05-09",
+        "tuition": "22.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-08 20:15:06",
+        "modified_at": "2025-05-08 20:15:06",
+        "tuition_cadence": null,
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 6,
+        "is_import_external": 0,
+        "first_name": "Yogesh",
+        "last_name": "joshi",
+        "middle_name": "kumar",
+        "birthdate": "2024-01-24",
+        "p_name": "Nurture with Care Kids Academy",
+        "cs_name": "students2",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Drop In"
+    },
+    {
+        "id": 304,
+        "transaction_id": "cs_test_a14Gx2o3D3Vt1NXSyMaQFnqDDTKlTxwf2ANAAfFegOZipWXSpzmMCvEFqx",
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 73,
+        "child_id": 347,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-06",
+        "enroll_end_date": "2025-05-06",
+        "tuition": "30.00",
+        "payment_status": "paid",
+        "enrollment_status": "approved",
+        "status": "Active",
+        "payment_receipt": "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xUTQ0MHdIWG5VWFhVT2FxKLOj6MAGMgYbOzZOW8w6LBYc0lraHgDAy3_W29qWGWr5F4easjkpMqXLoyySd-Ej7dgsjT_dQncyvEIL",
+        "created_at": "2025-05-06 06:26:38",
+        "modified_at": "2025-05-06 06:42:12",
+        "tuition_cadence": null,
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 6,
+        "is_import_external": 0,
+        "first_name": "NewH",
+        "last_name": "NewH",
+        "middle_name": "",
+        "birthdate": "2023-05-11",
+        "p_name": "Little Learners Center",
+        "cs_name": "NEW BIG CLASS",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Drop In"
+    },
+    {
+        "id": 303,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 73,
+        "child_id": 268,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-06",
+        "enroll_end_date": "2025-05-06",
+        "tuition": "30.00",
+        "payment_status": "pending",
+        "enrollment_status": "approved",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-06 06:22:00",
+        "modified_at": "2025-05-06 23:27:30",
+        "tuition_cadence": null,
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 6,
+        "is_import_external": 0,
+        "first_name": "Yogesh",
+        "last_name": "joshi",
+        "middle_name": "kumar",
+        "birthdate": "2024-01-24",
+        "p_name": "Little Learners Center",
+        "cs_name": "NEW BIG CLASS",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Drop In"
+    },
+    {
+        "id": 302,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 73,
+        "child_id": 303,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-06",
+        "enroll_end_date": "2025-05-06",
+        "tuition": "30.00",
+        "payment_status": "pending",
+        "enrollment_status": "approved",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-06 06:21:22",
+        "modified_at": "2025-05-06 23:27:40",
+        "tuition_cadence": null,
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 6,
+        "is_import_external": 0,
+        "first_name": "Shubham",
+        "last_name": "patidar",
+        "middle_name": "",
+        "birthdate": "2022-12-31",
+        "p_name": "Little Learners Center",
+        "cs_name": "NEW BIG CLASS",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Drop In"
+    },
+    {
+        "id": 301,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 1,
+        "classroom_id": 53,
+        "child_id": 302,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-06",
+        "enroll_end_date": null,
+        "tuition": "500.00",
+        "payment_status": "N/A",
+        "enrollment_status": "Wait Listed",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-06 05:52:16",
+        "modified_at": "2025-05-06 05:52:16",
+        "tuition_cadence": "biweekly",
+        "isSubsidyEligible": 1,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "nile",
+        "last_name": "singh",
+        "middle_name": "",
+        "birthdate": "2025-01-30",
+        "p_name": "Nurture with Care Kids Academy",
+        "cs_name": "Baby",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 300,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 73,
+        "child_id": 304,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-06",
+        "enroll_end_date": "2025-05-06",
+        "tuition": "30.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-05 04:22:27",
+        "modified_at": "2025-05-05 04:22:27",
+        "tuition_cadence": null,
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 6,
+        "is_import_external": 0,
+        "first_name": "ABC",
+        "last_name": "DEF",
+        "middle_name": "",
+        "birthdate": "2023-01-29",
+        "p_name": "Little Learners Center",
+        "cs_name": "NEW BIG CLASS",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Drop In"
+    },
+    {
+        "id": 299,
+        "transaction_id": "cs_test_a17sUNAC1QqianPMrOUUkzhJnfswV1GIthyaCU87ma0pRgOt8V0y22EgXb",
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 73,
+        "child_id": 345,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-05",
+        "enroll_end_date": "2025-05-05",
+        "tuition": "30.00",
+        "payment_status": "paid",
+        "enrollment_status": "approved",
+        "status": "Active",
+        "payment_receipt": "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xUTQ0MHdIWG5VWFhVT2FxKLP868AGMgZFAEBV2Q06LBblTx6Mr87DUr3rttfAgnpMmFztiT3Yj-Pk_iI2PucnwMcm-0Lqu2qO7QFK",
+        "created_at": "2025-05-05 00:46:30",
+        "modified_at": "2025-05-06 23:31:15",
+        "tuition_cadence": null,
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 6,
+        "is_import_external": 0,
+        "first_name": "AKChild",
+        "last_name": "Child",
+        "middle_name": "",
+        "birthdate": "2022-03-18",
+        "p_name": "Little Learners Center",
+        "cs_name": "NEW BIG CLASS",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Drop In"
+    },
+    {
+        "id": 298,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 9,
+        "classroom_id": 75,
+        "child_id": 268,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-05-05",
+        "enroll_end_date": "2025-05-05",
+        "tuition": "12.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-05-05 00:43:14",
+        "modified_at": "2025-05-05 00:43:14",
+        "tuition_cadence": null,
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 6,
+        "is_import_external": 0,
+        "first_name": "Yogesh",
+        "last_name": "joshi",
+        "middle_name": "kumar",
+        "birthdate": "2024-01-24",
+        "p_name": "Pulkit Academy",
+        "cs_name": "head",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Drop In"
+    },
+    {
+        "id": 278,
+        "transaction_id": "cs_test_a14NZNMTbDTb92SPTL7QyVGfAEVokKos9186MaL4YCiLlhbR2X3L8Wyrs9",
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 66,
+        "child_id": 268,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-28",
+        "enroll_end_date": "2025-04-28",
+        "tuition": "150.00",
+        "payment_status": "paid",
+        "enrollment_status": "approved",
+        "status": "Active",
+        "payment_receipt": "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xUTQ0MHdIWG5VWFhVT2FxKMj2u8AGMgaPEJ-GsxA6LBaCP4x4s-s0jA-fX1etT2AFt6hEaStRaNYqRtU-61n6yOV95aPe9zxGqSnz",
+        "created_at": "2025-04-27 20:46:50",
+        "modified_at": "2025-04-27 20:51:37",
+        "tuition_cadence": null,
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 6,
+        "is_import_external": 0,
+        "first_name": "Yogesh",
+        "last_name": "joshi",
+        "middle_name": "kumar",
+        "birthdate": "2024-01-24",
+        "p_name": "Little Learners Center",
+        "cs_name": "Play class ",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Drop In"
+    },
+    {
+        "id": 272,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 67,
+        "child_id": 304,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-22",
+        "enroll_end_date": null,
+        "tuition": "100.00",
+        "payment_status": "paid",
+        "enrollment_status": "approved",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-22 04:08:12",
+        "modified_at": "2025-04-29 20:44:50",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 1,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "ABC",
+        "last_name": "DEF",
+        "middle_name": "",
+        "birthdate": "2023-01-29",
+        "p_name": "Little Learners Center",
+        "cs_name": "Test class for QA",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 271,
+        "transaction_id": "cs_test_a1rXW26vS0GOXd9H1957n4E3kbOcS8AdvKHBgmM0QLqCKSj6hvhkJY0AcB",
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 67,
+        "child_id": 319,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-22",
+        "enroll_end_date": null,
+        "tuition": "100.00",
+        "payment_status": "paid",
+        "enrollment_status": "approved",
+        "status": "Active",
+        "payment_receipt": "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xUTQ0MHdIWG5VWFhVT2FxKJzjncAGMgaURbS-iZw6LBYOPB2i9mzDlbQLe8fLgdkRgjEFzkFv4KcIHbcUWfkx3l7OknrlFvSG0ElR",
+        "created_at": "2025-04-22 03:37:23",
+        "modified_at": "2025-04-22 03:38:20",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "Test",
+        "last_name": "QA",
+        "middle_name": null,
+        "birthdate": "2022-01-03",
+        "p_name": "Little Learners Center",
+        "cs_name": "Test class for QA",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 270,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 67,
+        "child_id": 318,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-22",
+        "enroll_end_date": null,
+        "tuition": "100.00",
+        "payment_status": "paid",
+        "enrollment_status": "approved",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-22 03:24:14",
+        "modified_at": "2025-04-22 03:35:56",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 1,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "Joy",
+        "last_name": "max",
+        "middle_name": "",
+        "birthdate": "2023-01-16",
+        "p_name": "Little Learners Center",
+        "cs_name": "Test class for QA",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 267,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 66,
+        "child_id": 311,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-23",
+        "enroll_end_date": null,
+        "tuition": "200.00",
+        "payment_status": "pending",
+        "enrollment_status": "in-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-20 23:39:52",
+        "modified_at": "2025-05-06 23:28:01",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "ASDFG",
+        "last_name": "FGHJ",
+        "middle_name": "",
+        "birthdate": "2025-01-19",
+        "p_name": "Little Learners Center",
+        "cs_name": "Play class ",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 266,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 66,
+        "child_id": 312,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-20",
+        "enroll_end_date": null,
+        "tuition": "100.00",
+        "payment_status": "",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-20 22:28:45",
+        "modified_at": "2025-04-20 22:28:45",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 3,
+        "is_import_external": 0,
+        "first_name": "Nil",
+        "last_name": "Singh",
+        "middle_name": "",
+        "birthdate": "2022-12-30",
+        "p_name": "Little Learners Center",
+        "cs_name": "Play class ",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Part Time (Afternoons)"
+    },
+    {
+        "id": 265,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 66,
+        "child_id": 301,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-18",
+        "enroll_end_date": null,
+        "tuition": "120.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-17 00:26:45",
+        "modified_at": "2025-04-17 00:26:45",
+        "tuition_cadence": "biweekly",
+        "isSubsidyEligible": 1,
+        "schedule_type_id": 4,
+        "is_import_external": 0,
+        "first_name": "Jeet",
+        "last_name": "roy",
+        "middle_name": "",
+        "birthdate": "2025-02-02",
+        "p_name": "Little Learners Center",
+        "cs_name": "Play class ",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Part Time (MWF)"
+    },
+    {
+        "id": 260,
+        "transaction_id": "cs_test_a1yYNre4JdcZ2kVv8ov77URWf9hqKZjpJ1tzYE3JuHIKPrwTk8lT0T10S3",
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 66,
+        "child_id": 304,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-17",
+        "enroll_end_date": null,
+        "tuition": "200.00",
+        "payment_status": "paid",
+        "enrollment_status": "approved",
+        "status": "Active",
+        "payment_receipt": "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xUTQ0MHdIWG5VWFhVT2FxKPSUrMAGMga4UnnMJes6LBarRwWx5UC1G_HzSuuaX-0nFKQLZH0efQbgE-f06FbmcXFlW_yh-OTnami3",
+        "created_at": "2025-04-16 20:41:15",
+        "modified_at": "2025-04-24 21:07:17",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "ABC",
+        "last_name": "DEF",
+        "middle_name": "",
+        "birthdate": "2023-01-29",
+        "p_name": "Little Learners Center",
+        "cs_name": "Play class ",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 259,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 67,
+        "child_id": 303,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-16",
+        "enroll_end_date": null,
+        "tuition": "100.00",
+        "payment_status": "pending",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-16 00:34:19",
+        "modified_at": "2025-04-16 00:36:21",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "Shubham",
+        "last_name": "patidar",
+        "middle_name": "",
+        "birthdate": "2022-12-31",
+        "p_name": "Little Learners Center",
+        "cs_name": "Test class for QA",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 258,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 66,
+        "child_id": 301,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-30",
+        "enroll_end_date": null,
+        "tuition": "200.00",
+        "payment_status": "N/A",
+        "enrollment_status": "Wait Listed",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-16 00:26:47",
+        "modified_at": "2025-04-16 00:26:47",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "Jeet",
+        "last_name": "roy",
+        "middle_name": "",
+        "birthdate": "2025-02-02",
+        "p_name": "Little Learners Center",
+        "cs_name": "Play class ",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 257,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 66,
+        "child_id": 301,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-16",
+        "enroll_end_date": null,
+        "tuition": "200.00",
+        "payment_status": "pending",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-15 23:50:26",
+        "modified_at": "2025-04-15 23:53:27",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "Jeet",
+        "last_name": "roy",
+        "middle_name": "",
+        "birthdate": "2025-02-02",
+        "p_name": "Little Learners Center",
+        "cs_name": "Play class ",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 256,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 66,
+        "child_id": 300,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-30",
+        "enroll_end_date": null,
+        "tuition": "200.00",
+        "payment_status": "pending",
+        "enrollment_status": "Wait Listed",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-15 22:52:36",
+        "modified_at": "2025-04-15 22:52:51",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "jay",
+        "last_name": "sharama",
+        "middle_name": "",
+        "birthdate": "2025-02-02",
+        "p_name": "Little Learners Center",
+        "cs_name": "Play class ",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 255,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 66,
+        "child_id": 301,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-16",
+        "enroll_end_date": "2025-04-16",
+        "tuition": "150.00",
+        "payment_status": "pending",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-15 22:46:19",
+        "modified_at": "2025-04-15 22:46:48",
+        "tuition_cadence": null,
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 6,
+        "is_import_external": 0,
+        "first_name": "Jeet",
+        "last_name": "roy",
+        "middle_name": "",
+        "birthdate": "2025-02-02",
+        "p_name": "Little Learners Center",
+        "cs_name": "Play class ",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Drop In"
+    },
+    {
+        "id": 254,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 66,
+        "child_id": 301,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-16",
+        "enroll_end_date": null,
+        "tuition": "200.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-15 21:07:35",
+        "modified_at": "2025-04-15 22:52:06",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "Jeet",
+        "last_name": "roy",
+        "middle_name": "",
+        "birthdate": "2025-02-02",
+        "p_name": "Little Learners Center",
+        "cs_name": "Play class ",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 253,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 1,
+        "classroom_id": 53,
+        "child_id": 301,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-15",
+        "enroll_end_date": null,
+        "tuition": "100.00",
+        "payment_status": "N/A",
+        "enrollment_status": "Wait Listed",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-15 05:25:04",
+        "modified_at": "2025-04-15 05:25:04",
+        "tuition_cadence": "biweekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 2,
+        "is_import_external": 0,
+        "first_name": "Jeet",
+        "last_name": "roy",
+        "middle_name": "",
+        "birthdate": "2025-02-02",
+        "p_name": "Nurture with Care Kids Academy",
+        "cs_name": "Baby",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Part Time (Mornings)"
+    },
+    {
+        "id": 252,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 65,
+        "child_id": 300,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-16",
+        "enroll_end_date": null,
+        "tuition": "100.00",
+        "payment_status": "paid",
+        "enrollment_status": "rejected",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-15 05:20:51",
+        "modified_at": "2025-04-15 20:42:43",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "jay",
+        "last_name": "sharama",
+        "middle_name": "",
+        "birthdate": "2025-02-02",
+        "p_name": "Little Learners Center",
+        "cs_name": "pankaj new Classroom",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 251,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 65,
+        "child_id": 300,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-15",
+        "enroll_end_date": "2025-04-16",
+        "tuition": "50.00",
+        "payment_status": "paid",
+        "enrollment_status": "rejected",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-15 05:17:25",
+        "modified_at": "2025-04-15 21:07:04",
+        "tuition_cadence": "biweekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 2,
+        "is_import_external": 0,
+        "first_name": "jay",
+        "last_name": "sharama",
+        "middle_name": "",
+        "birthdate": "2025-02-02",
+        "p_name": "Little Learners Center",
+        "cs_name": "pankaj new Classroom",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Part Time (Mornings)"
+    },
+    {
+        "id": 250,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 65,
+        "child_id": 300,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-15",
+        "enroll_end_date": "2025-04-16",
+        "tuition": "50.00",
+        "payment_status": "paid",
+        "enrollment_status": "rejected",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-15 05:17:12",
+        "modified_at": "2025-04-15 21:07:09",
+        "tuition_cadence": "biweekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 2,
+        "is_import_external": 0,
+        "first_name": "jay",
+        "last_name": "sharama",
+        "middle_name": "",
+        "birthdate": "2025-02-02",
+        "p_name": "Little Learners Center",
+        "cs_name": "pankaj new Classroom",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Part Time (Mornings)"
+    },
+    {
+        "id": 249,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 65,
+        "child_id": 301,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-15",
+        "enroll_end_date": null,
+        "tuition": "55.00",
+        "payment_status": "paid",
+        "enrollment_status": "rejected",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-15 05:01:41",
+        "modified_at": "2025-04-15 21:07:15",
+        "tuition_cadence": "semi-monthly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 3,
+        "is_import_external": 0,
+        "first_name": "Jeet",
+        "last_name": "roy",
+        "middle_name": "",
+        "birthdate": "2025-02-02",
+        "p_name": "Little Learners Center",
+        "cs_name": "pankaj new Classroom",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Part Time (Afternoons)"
+    },
+    {
+        "id": 248,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 65,
+        "child_id": 268,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-15",
+        "enroll_end_date": null,
+        "tuition": "100.00",
+        "payment_status": "paid",
+        "enrollment_status": "rejected",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-15 04:54:57",
+        "modified_at": "2025-04-15 21:07:20",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "Yogesh",
+        "last_name": "joshi",
+        "middle_name": "kumar",
+        "birthdate": "2024-01-24",
+        "p_name": "Little Learners Center",
+        "cs_name": "pankaj new Classroom",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 247,
+        "transaction_id": "cs_test_a11isQMzZbflVtKHAdljqyiOa0Oq6E9yOpzi9kbNfJj3BI3g89uMZ9ffse",
+        "avail_id": 0,
+        "provider_id": 11,
+        "classroom_id": 65,
+        "child_id": 300,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-15",
+        "enroll_end_date": null,
+        "tuition": "50.00",
+        "payment_status": "paid",
+        "enrollment_status": "rejected",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-15 04:49:10",
+        "modified_at": "2025-04-15 21:07:25",
+        "tuition_cadence": "biweekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 2,
+        "is_import_external": 0,
+        "first_name": "jay",
+        "last_name": "sharama",
+        "middle_name": "",
+        "birthdate": "2025-02-02",
+        "p_name": "Little Learners Center",
+        "cs_name": "pankaj new Classroom",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Part Time (Mornings)"
+    },
+    {
+        "id": 246,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 9,
+        "classroom_id": 64,
+        "child_id": 268,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-16",
+        "enroll_end_date": null,
+        "tuition": "90.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-14 21:01:55",
+        "modified_at": "2025-04-14 21:01:55",
+        "tuition_cadence": "biweekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 4,
+        "is_import_external": 0,
+        "first_name": "Yogesh",
+        "last_name": "joshi",
+        "middle_name": "kumar",
+        "birthdate": "2024-01-24",
+        "p_name": "Pulkit Academy",
+        "cs_name": "Pankaj's ",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Part Time (MWF)"
+    },
+    {
+        "id": 245,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 9,
+        "classroom_id": 64,
+        "child_id": 268,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-16",
+        "enroll_end_date": null,
+        "tuition": "100.00",
+        "payment_status": "paid",
+        "enrollment_status": "approved",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-14 20:47:44",
+        "modified_at": "2025-04-15 05:18:53",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "Yogesh",
+        "last_name": "joshi",
+        "middle_name": "kumar",
+        "birthdate": "2024-01-24",
+        "p_name": "Pulkit Academy",
+        "cs_name": "Pankaj's ",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    },
+    {
+        "id": 244,
+        "transaction_id": "cs_test_a1Ao8uORBjJigIirQMKuRkj2dag5RjrTZTMxO9XU8wM3IyKXFmh0Bt7WVi",
+        "avail_id": 0,
+        "provider_id": 9,
+        "classroom_id": 56,
+        "child_id": 268,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-15",
+        "enroll_end_date": "2025-04-15",
+        "tuition": "80.00",
+        "payment_status": "paid",
+        "enrollment_status": "approved",
+        "status": "Active",
+        "payment_receipt": "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xUTQ0MHdIWG5VWFhVT2FxKN7d8r8GMgazWUJe0Qc6LBZ7WSk2YbOanvr33ZMqfsKYugQY3Kct0rKVAqEQTq4dYPWDdNrmX78w47aj",
+        "created_at": "2025-04-13 23:43:50",
+        "modified_at": "2025-04-13 23:44:47",
+        "tuition_cadence": null,
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 6,
+        "is_import_external": 0,
+        "first_name": "Yogesh",
+        "last_name": "joshi",
+        "middle_name": "kumar",
+        "birthdate": "2024-01-24",
+        "p_name": "Pulkit Academy",
+        "cs_name": "tod",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Drop In"
+    },
+    {
+        "id": 238,
+        "transaction_id": "cs_test_a1B20mtnaxYaBbEIMpCWO4A26Ax72kCkF91tS5pKgqRjwIuYTW9fQIgOiI",
+        "avail_id": 0,
+        "provider_id": 9,
+        "classroom_id": 56,
+        "child_id": 268,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-11",
+        "enroll_end_date": "2025-04-11",
+        "tuition": "80.00",
+        "payment_status": "paid",
+        "enrollment_status": "approved",
+        "status": "Active",
+        "payment_receipt": "https://pay.stripe.com/receipts/payment/CAcaFwoVYWNjdF8xUTQ0MHdIWG5VWFhVT2FxKOvb8r8GMgYNfzggLxA6LBYoW58aKNxf_S-AOpiZSIVLnair1v-JBFZkiQ5hjYRLImWlQI24T7vzdDiW",
+        "created_at": "2025-04-11 02:44:51",
+        "modified_at": "2025-04-13 23:40:44",
+        "tuition_cadence": null,
+        "isSubsidyEligible": 0,
+        "schedule_type_id": 6,
+        "is_import_external": 0,
+        "first_name": "Yogesh",
+        "last_name": "joshi",
+        "middle_name": "kumar",
+        "birthdate": "2024-01-24",
+        "p_name": "Pulkit Academy",
+        "cs_name": "tod",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Drop In"
+    },
+    {
+        "id": 237,
+        "transaction_id": null,
+        "avail_id": 0,
+        "provider_id": 1,
+        "classroom_id": 51,
+        "child_id": 268,
+        "user_id": 99,
+        "enroll_type": null,
+        "enroll_start_date": "2025-04-25",
+        "enroll_end_date": null,
+        "tuition": "300.00",
+        "payment_status": "N/A",
+        "enrollment_status": "pending-review",
+        "status": "Active",
+        "payment_receipt": null,
+        "created_at": "2025-04-11 02:43:37",
+        "modified_at": "2025-04-11 02:43:37",
+        "tuition_cadence": "weekly",
+        "isSubsidyEligible": 1,
+        "schedule_type_id": 1,
+        "is_import_external": 0,
+        "first_name": "Yogesh",
+        "last_name": "joshi",
+        "middle_name": "kumar",
+        "birthdate": "2024-01-24",
+        "p_name": "Nurture with Care Kids Academy",
+        "cs_name": "Bear",
+        "p_address": "1162 SW Fort Nugent Ave",
+        "p_city": "Oak Harbor",
+        "p_state": "WA",
+        "p_zip_code": "98277",
+        "schedule_type": "Full Time"
+    }
+]</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:42:14 pm</td>
+        <td>
+          Response Headers:
+<pre>Date: Mon, 19 May 2025 13:12:14 GMT
+Server: Apache
+Content-Security-Policy: default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests
+Cross-Origin-Opener-Policy: same-origin
+Cross-Origin-Resource-Policy: same-origin
+Origin-Agent-Cluster: ?1
+Referrer-Policy: no-referrer
+Strict-Transport-Security: max-age=15552000; includeSubDomains
+X-Content-Type-Options: nosniff
+X-DNS-Prefetch-Control: off
+X-Download-Options: noopen
+X-Frame-Options: SAMEORIGIN
+X-Permitted-Cross-Domain-Policies: none
+X-XSS-Protection: 0
+Access-Control-Allow-Origin: *
+Content-Type: application/json; charset=utf-8
+Content-Length: 41316
+ETag: W/"a164-nsRqsDnPnnrtfirmtu4LKWqNUXw"
+Vary: Accept-Encoding
+Keep-Alive: timeout=5
+Connection: Keep-Alive
+</pre>
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:42:14 pm</td>
+        <td>
+          Content-Type: application/json; charset=utf-8
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:42:14 pm</td>
+        <td>
+          Validating status code: expected 200
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:42:14 pm</td>
+        <td>
+          Asserting status code. Expected: 200, Actual: 200
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log info-bg">Info</span></td>
+        <td>6:42:14 pm</td>
+        <td>
+          Validating response against schema: schema/Get Enrollments.json
+        </td>
+      </tr>
+      <tr class="event-row">
+        <td><span class="badge log pass-bg">Pass</span></td>
+        <td>6:42:15 pm</td>
+        <td>
+          Scenario Passed: Validate response schema
+        </td>
+      </tr>
+  </tbody>
+</table>
+</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+<div class="test-content scrollable">
+<div class="test-content-tools">
+<ul><li><a class="back-to-test" href="#"><i class="fa fa-arrow-left"></i></a></li></ul>
+</div>
+<div class="test-content-detail"><div class="detail-body"></div></div>
+</div></div>
+<div class="container-fluid p-4 view dashboard-view">
+<div class="row">
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Started</p>
+<h3>May 19, 2025 06:42:08 pm</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0">Ended</p>
+<h3>May 19, 2025 06:42:15 pm</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-pass">Tests Passed</p>
+<h3>1</h3>
+</div></div>
+</div>
+<div class="col-md-3">
+<div class="card"><div class="card-body">
+<p class="m-b-0 text-fail">Tests Failed</p>
+<h3>0</h3>
+</div></div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Tests</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='parent-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='100%'>
+<b>1</b> tests passed
+</small>
+</div>
+<div>
+<small data-tooltip='0%'><b>0</b> tests failed,
+<b>0</b> skipped, <b data-tooltip='0%'>0</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+<div class="card">
+<div class="card-header">
+<h6 class="card-title">Log events</h6>
+</div>
+<div class="card-body">
+<div class="">
+<canvas id='events-analysis' width='115' height='90'></canvas>
+</div>
+</div>
+<div class="card-footer">
+<div><small data-tooltip='8%'><b>1</b> events passed</small></div>
+<div>
+<small data-tooltip='0%'><b>0</b> events failed,
+<b data-tooltip='%'>11</b> others
+</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><div class="col-md-12">
+<div class="card"><div class="card-header"><p>Timeline</p></div>
+<div class="card-body pt-0"><div>
+<canvas id="timeline" height="120"></canvas>
+</div></div>
+</div>
+</div></div>
+<script>
+var timeline = {
+"Validate response schema":6.318
+};
+</script>
+<div class="row">
+<div class="col-lg-6 col-md-12 sysenv-container">
+<div class="card">
+<div class="card-header"><p>System/Environment</p></div>
+<div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+<thead><tr class="bg-gray"><th>Name</th><th>Value</th></tr></thead>
+<tbody>
+<tr>
+<td>Project</td>
+<td>API Testing</td>
+</tr>
+<tr>
+<td>Tester</td>
+<td>Jitendra Kumar</td>
+</tr>
+<tr>
+<td>Environment</td>
+<td>Dev</td>
+</tr>
+<tr>
+<td>Tool</td>
+<td>Postman</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+</div>
+<script>
+var statusGroup = {
+parentCount: 5,
+passParent: 1,
+failParent: 0,
+warningParent: 0,
+skipParent: 0,
+childCount: 5,
+passChild: 0,
+failChild: 0,
+warningChild: 0,
+skipChild: 0,
+infoChild: 0,
+grandChildCount: 5,
+passGrandChild: 0,
+failGrandChild: 0,
+warningGrandChild: 0,
+skipGrandChild: 0,
+infoGrandChild: 0,
+eventsCount: 5,
+passEvents: 1,
+failEvents: 0,
+warningEvents: 0,
+skipEvents: 0,
+infoEvents: 11
+};
+</script>        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@c05cd28cde1617b9d0c05a831daff6cb97fd9fd5/spark/js/spark-script.js"></script>
+<script type="text/javascript"></script></body>
+</html>

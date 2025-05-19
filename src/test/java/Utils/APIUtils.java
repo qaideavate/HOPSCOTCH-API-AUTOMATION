@@ -19,7 +19,6 @@ public class APIUtils
 	    test.info("Response Headers:\n" + sb.toString());
 	}
 	
-	
 	public static void logRequestHeaders(ExtentTest test, Map<String, String> headers)
 	{
 		if (headers == null || headers.isEmpty())
@@ -38,7 +37,6 @@ public class APIUtils
 	    sb.append("</pre>");
 	    test.info("Request Headers:\n" + sb.toString());
 	}
-    
 	
     public static void logRequestBody(ExtentTest test, Map<String, String> requestBody)
     {
@@ -50,7 +48,6 @@ public class APIUtils
         test.info("Request Body:\n<pre>" + requestBody + "</pre>");
     }
   
-    
     public static String getJsonBodyIfValid(Response res) 
     {
         String contentType = res.getHeader("Content-Type");

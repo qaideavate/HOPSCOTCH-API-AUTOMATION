@@ -21,7 +21,7 @@ import io.cucumber.junit.CucumberOptions;
 		monochrome=true,
 		plugin = {"pretty",
 			    "html:target/cucumber-html-report",
-			    "json:target/cucumber-json.json", 
+			    "json:target/cucumber.json", 
 			    "junit:target/cucumber-xml.xml",
 			    }
 		)

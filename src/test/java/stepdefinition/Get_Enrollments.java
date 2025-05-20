@@ -2,12 +2,9 @@ package stepdefinition;
 
 import static io.restassured.RestAssured.given;
 import java.util.Map;
+
+import Utils.*;
 import com.aventstack.extentreports.ExtentTest;
-import Utils.APIUtils;
-import Utils.BaseMethods;
-import Utils.ConfigReader;
-import Utils.Extent_Report_Manager;
-import Utils.GlobalTokenStore;
 import io.cucumber.java.en.*;
 import io.restassured.builder.ResponseBuilder;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -26,7 +23,7 @@ public class Get_Enrollments
 		 this.test = Extent_Report_Manager.getTest();
 		 this.headers = ConfigReader.getHeadersFromConfig("header");
 		 baseURL = ConfigReader.getProperty("baseURL");
-		 getEnrolled = ConfigReader.getProperty("getEnrollment");
+		 getEnrolled = Endpoints.GET_ENROLLMENT;
 	}
 	
 	@When("I send a GET request of Get Enrollments API")

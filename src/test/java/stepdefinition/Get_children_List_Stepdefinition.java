@@ -13,34 +13,27 @@ import io.restassured.response.Response;
 import static io.restassured.RestAssured.*;
 import com.aventstack.extentreports.ExtentTest;
 import java.util.List;
+import Utils.Endpoints;
 import java.util.Map;
 import io.cucumber.datatable.*;
 public class Get_children_List_Stepdefinition
 {
 	private Response res ;
-	private String baseURL ;
-	private String getchildren;
-	private ExtentTest test;
-	private Map<String, String> headers;
-	
-	public Get_children_List_Stepdefinition()
-	{
-		 this.test = Extent_Report_Manager.getTest();
-		 this.headers = ConfigReader.getHeadersFromConfig("header");
-		 baseURL = ConfigReader.getProperty("baseURL");
-		 getchildren = ConfigReader.getProperty("getChildren");
-	}
-	
+	private String baseURL = ConfigReader.getProperty("baseURL");
+	private String getchildren = Endpoints.GET_CHILDREN;
+	private ExtentTest test = Extent_Report_Manager.getTest();
+	private Map<String, String> headers =ConfigReader.getHeadersFromConfig("header");
+
 	@When("I send a GET request of children-with-enrollments API")
 	public void i_send_a_get_request_of_children_with_enrollments_api() 
-	{     String parentToken = GlobalTokenStore.getToken("parent");
+	{       String parentToken = GlobalTokenStore.getToken("parent");
 	        APIUtils.logRequestHeaders(test, headers);
 
 	        test.info("Sending GET request to: " + baseURL + getchildren);
 	        test.info("Using Authorization token for parent.");
 	        
 	        // Sending GET request
-	        res = given()
+	        this.res = given()
 	                .baseUri(baseURL)
 	                .headers(headers)
 	               // .contentType("application/json; charset=utf-8")
@@ -54,14 +47,13 @@ public class Get_children_List_Stepdefinition
 	        APIUtils.logResponseToExtent(res, test);
 	        String contentType = res.getHeader("Content-Type");
 	        test.info("Content-Type: " + contentType);
-	        System.out.println(res.asPrettyString());
 	    }
 
 		@Then("the response body should match the predefined JSON schema {string}")
 		public void the_response_body_should_match_the_predefined_json_schema(String schemaFileName)
 		{
 		  test.info("Validating response against schema: schema/" + schemaFileName); 
-		  String cleanedJson = APIUtils.getJsonBodyIfValid(res); // common logic reuse
+		  String cleanedJson = APIUtils.getJsonBodyIfValid(res);   // common logic reuse
 
 	      // Rebuild response with cleaned body
 		  Response cleanedResponse = new ResponseBuilder().clone(res).setBody(cleanedJson).build();
@@ -73,8 +65,8 @@ public class Get_children_List_Stepdefinition
 	  @Then("the child list response status code should be {int}") 
 	  public void the_child_list_status_code_should_be(Integer expectedStatusCode) 
 	  {
-		  test.info("Validating status code: expected " + expectedStatusCode);
-		  BaseMethods.validateStatusCode(res, expectedStatusCode, test); 
+		   test.info("Validating status code: expected " + expectedStatusCode);
+		   BaseMethods.validateStatusCode(res, expectedStatusCode, test);
 	   }
 	  
 	  @Then("all children should have the same {string}")

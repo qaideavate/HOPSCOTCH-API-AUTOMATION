@@ -26,20 +26,20 @@ Feature: Save Parent/Guardian information with child
 
     Examples:    
     | field             | value               | statuscode |status| message                                                 | fieldPath                    		         |
-    | firstName         |                     | 400        |false |First name is required.                                  | parentInfo[0].firstName  							   |
-    | lastName          |                     | 400        |false |Last name is required.                                   | parentInfo[0].lastName   							   |
-    | email             |                     | 400        |false |Valid email is required.                                 | parentInfo[0].email    							     |
-    | cellPhone         |                     | 400        |false |Cell phone must be a valid 10-digit number.              | parentInfo[0].cellPhone    							 |
-    | streetAddress     |                     | 400        |false |Parent/Guardian 1: Street address is required.           | parentInfo[0].streetAddress    					 |
-    | apt               |                     | 200        |true  |Parent information saved successfully.                   |N/A                                        | 							                     
-    | city              |                     | 400        |false |Parent/Guardian 1: City is required.                     |parentInfo[0].city    							     |
-    | zipCode           |                     | 400        |false |Parent/Guardian 1: Valid US ZIP code is required.        |parentInfo[0].zipCode    							   |
-    | sameAddressAsChild|   false             | 200        |true  |Parent information saved successfully.                   |N/A 							                         |
-    | relationship      |                     | 400        |false |Relationship is required.                                |parentInfo[0].relationship    					 | 
-    | parentId          |   A                 | 400        |false |parentId should be integer type                          |parentInfo[0].integer    							   | 
-    | middleName        |                     | 200        |true  |Parent information saved successfully.                   |N/A  																     |
-    | workPhone         |                     | 200        |true  | Parent information saved successfully.                  |N/A																       |
-    | altPhone          |                     | 200        |true  | Parent information saved successfully.                  |N/A  																     |
+    | firstName         |                     | 400        |false |First name is required.                                  | parentInfo[0].firstName  					 |
+    | lastName          |                     | 400        |false |Last name is required.                                   | parentInfo[0].lastName   		    		 |
+    | email             |                     | 400        |false |Valid email is required.                                 | parentInfo[0].email    					 |
+    | cellPhone         |                     | 400        |false |Cell phone must be a valid 10-digit number.              | parentInfo[0].cellPhone    				 |
+    | streetAddress     |                     | 400        |false |Parent/Guardian 1: Street address is required.           | parentInfo[0].streetAddress    			 |
+    | apt               |                     | 200        |true  |Parent information saved successfully.                   |N/A                                         |
+    | city              |                     | 400        |false |Parent/Guardian 1: City is required.                     |parentInfo[0].city    						 |
+    | zipCode           |                     | 400        |false |Parent/Guardian 1: Valid US ZIP code is required.        |parentInfo[0].zipCode    					 |
+    | sameAddressAsChild|   false             | 200        |true  |Parent information saved successfully.                   |N/A 							             |
+    | relationship      |                     | 400        |false |Relationship is required.                                |parentInfo[0].relationship    				 |
+    | parentId          |   A                 | 400        |false |parentId should be integer type                          |parentInfo[0].integer    					 |
+    | middleName        |                     | 200        |true  |Parent information saved successfully.                   |N/A  										 |
+    | workPhone         |                     | 200        |true  | Parent information saved successfully.                  |N/A										 |
+    | altPhone          |                     | 200        |true  | Parent information saved successfully.                  |N/A  									     |
  
     
     

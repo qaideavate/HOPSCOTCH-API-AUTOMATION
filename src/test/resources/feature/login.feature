@@ -9,7 +9,7 @@ Feature: Login Functionality for Parent and Provider
    
     Examples:
       | user_type | email                         | password   |
-      | Parent    | pankaj@yopmail.com  				  | Test@12345 |
+      | Parent    | pankaj@yopmail.com  		  | Test@12345 |
       | Provider  | pankaj.patidar@mindruby.com   | Test@12345 |
 
   Scenario Outline: Login with Empty/Invalid credentials : <user_type>-<email>-<password>
@@ -21,18 +21,18 @@ Feature: Login Functionality for Parent and Provider
 
     Examples:
       | user_type | email                       | password   | statusCode | error_message                             					  |
-      | Provider  |                             | Test@12345 | 422        | Please include a valid email            					    |
+      | Provider  |                             | Test@12345 | 422        | Please include a valid email            				      |
       | Provider  | pankaj.patidar@mindruby.com |            | 422        | Password is required                  					      |
-  	  | Provider  |                             |            | 422        | Please include a valid email,Password is required 		|
+  	  | Provider  |                             |            | 422        | Please include a valid email,Password is required 		      |
       | Provider  | pankaj@yopmail.com          | Test@12345 | 401        | provider_not_found,login                   					  |
-      | Provider  | pankajpatidar@mindruby.com  | Test@12345 | 401        | provider_not_found,login              							  |
+      | Provider  | pankajpatidar@mindruby.com  | Test@12345 | 401        | provider_not_found,login              						  |
       | Provider  | pankaj.patidar@mindruby.com | Test@1234  | 401        | credentials_not_match,login            					      |
     
       | Parent 	  |                             | Test@12345 | 422        | Please include a valid email               					  |
       | Parent    | pankaj@yopmail.com          |            | 422        | Password is required                      					  |
-  	  | Parent    |                             |            | 422        | Please include a valid email,Password is required 		|
-      | Parent    | pankaj.patidar@mindruby.com | Test@12345 | 400        | An error occurred,Illegal arguments: string, object   |
-      | Parent    | pankajmindruby.com          | Test@12345 | 422        | Please include a valid email            					    |
-      | Parent    | pankaj@yopmail.com          | Test@1234  | 401        | credentials_not_match,login             					    |
+  	  | Parent    |                             |            | 422        | Please include a valid email,Password is required 		      |
+      | Parent    | pankaj.patidar@mindruby.com | Test@12345 | 400        | An error occurred,Illegal arguments: string, object           |
+      | Parent    | pankajmindruby.com          | Test@12345 | 422        | Please include a valid email            					  |
+      | Parent    | pankaj@yopmail.com          | Test@1234  | 401        | credentials_not_match,login             				      |
       
       

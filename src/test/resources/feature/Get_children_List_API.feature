@@ -38,10 +38,10 @@ Background: Given I have a valid ParentToken
 			 |first_name			| 
 			 |last_name				| 
 			 |birthdate				|
-			 |street_address  |
-			 |city						|
+			 |street_address        |
+			 |city					|
 			 |zip_code				| 
-			 |gender					|
+			 |gender				|
  
  
   Scenario: Validate id matches child_info_id

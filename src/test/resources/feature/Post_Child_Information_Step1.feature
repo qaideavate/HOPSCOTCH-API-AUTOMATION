@@ -23,7 +23,7 @@ Scenario Outline: Validate Child registration with Empty/Invalid data : <field> 
 Examples:
 | field          | value           | statuscode |expectedMessage                           |expectedFieldPath          |
 | lastName       |                 | 400        |Last name is required.                    | childInfo.lastName        |
-| childId        |                 | 200        |Child information saved successfully.     | 									         |
+| childId        |                 | 200        |Child information saved successfully.     | 						   |
 | lastName       |                 | 400        |Last name is required.                    | childInfo.lastName        |
 | firstName      |                 | 400        |First name is required.                   | childInfo.firstName       |
 | birthdate      |                 | 400        |Valid birthdate is required.              | childInfo.birthdate       |

@@ -5,15 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import Utils.*;
 import org.json.JSONObject;
 import org.junit.Assert;
 import com.aventstack.extentreports.ExtentTest;
 
-import Utils.APIUtils;
-import Utils.BaseMethods;
-import Utils.ConfigReader;
-import Utils.Extent_Report_Manager;
-import Utils.GlobalTokenStore;
 import io.cucumber.java.en.*;
 import io.restassured.response.Response;
 
@@ -36,7 +33,7 @@ public class Post_Parent_Guardian_Information
         this.test = Extent_Report_Manager.getTest();
         this.baseURL = ConfigReader.getProperty("baseURL");
         this.headers = ConfigReader.getHeadersFromConfig("header");
-        this.endpoint = ConfigReader.getProperty("ParentRegisterEndpoint");
+        this.endpoint = Endpoints.PARENT_REGISTER;
     	}
 
     	 	@Given("I have a parent token")

@@ -1,15 +1,11 @@
 package stepdefinition;
 
+import Utils.*;
 import io.cucumber.java.en.*;
 import org.json.JSONObject;
 import org.junit.Assert;
 import com.aventstack.extentreports.ExtentTest;
 
-import Utils.APIUtils;
-import Utils.BaseMethods;
-import Utils.ConfigReader;
-import Utils.Extent_Report_Manager;
-import Utils.GlobalTokenStore;
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 import java.util.*;
@@ -31,7 +27,7 @@ public class Post_Child_Information_Step1
         this.test = Extent_Report_Manager.getTest();
         this.baseURL = ConfigReader.getProperty("baseURL");
         this.headers = ConfigReader.getHeadersFromConfig("header");
-        this.endpoint = ConfigReader.getProperty("ChildRegisterEndpoint");
+        this.endpoint = Endpoints.CHILD_REGISTER;
         test.info("Initialized Post_Child_Information_Step1 with baseURL: " + baseURL + ", endpoint: " + endpoint);
     	}
 

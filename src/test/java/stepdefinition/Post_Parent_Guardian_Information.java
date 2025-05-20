@@ -57,19 +57,20 @@ public class Post_Parent_Guardian_Information
 			@Given("I have a valid child ID")
 			public String i_have_a_valid_child_id() 
 			{ 
-				GlobalTokenStore gts = new GlobalTokenStore();
-				if(childId==null)
+				if (GlobalTokenStore.getChildId() == null || GlobalTokenStore.getChildId().isEmpty()) 
 				{
-				this.childId = GlobalTokenStore.getChildId();												
-			    System.out.println("   childId:  " + childId);
-			    test.info("Fetched existing child ID: " + childId);
-				}
-				else
-				{	this.childId = gts.generateChildId(); 												
-			    	test.info("Generated new child ID: " + childId);
-				 	
-					}
-				return childId;
+			        String generatedId = GlobalTokenStore.createChildAndGetId();  // generate and set it
+			        GlobalTokenStore.setChildId(generatedId);                     // optional, if not already set
+			        this.childId = generatedId;
+			        test.info("Generated new child ID: " + generatedId);
+			    } 
+				else {
+			        this.childId = GlobalTokenStore.getChildId();  // reuse existing
+			        test.info("Fetched existing child ID from GlobalTokenStore: " + childId);
+			    }
+
+			    System.out.println("   childId: " + childId);
+			    return childId;
 			}
 			
 			@Given("I prepare the parent registration payload with valid data")

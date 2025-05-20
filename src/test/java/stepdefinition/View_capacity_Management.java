@@ -3,27 +3,22 @@ import Utils.*;
 import com.aventstack.extentreports.ExtentTest;
 import io.restassured.response.Response;
 import io.cucumber.java.en.*;
-import io.restassured.path.json.JsonPath;
 import org.junit.Assert;
 import static io.restassured.RestAssured.*;
-import static org.junit.Assert.*;
 import java.util.Map;
 
 public class View_capacity_Management
 {
     private final String endpoint = Endpoints.PROVIDER_CAPACITY;
-    private Response response;
     private Response res;
     private ExtentTest test = Extent_Report_Manager.getTest();
     private Map<String, String> headers = ConfigReader.getHeadersFromConfig("header");
     String baseURL=ConfigReader.getProperty("baseURL");
-    private JsonPath json;
-    private int classroomId;
-
+    
+    
     @When("I send a GET request to the endpoint with path parameter {int}")
-    public void iSendAGETRequestToTheEndpointWithPathParameter(int classroomId)
+    public void i_Send_A_GET_Request_To_The_Endpoint_With_Path_Parameter(int classroomId)
     {
-        this.classroomId = classroomId;
         String ProviderToken=GlobalTokenStore.getToken("provider");
               res = given()
                 .baseUri(baseURL)
@@ -50,7 +45,7 @@ public class View_capacity_Management
     }
 
     @Then("the classroom object should have the following fields:")
-    public void theClassroomObjectShouldHaveTheFollowingFields(Map<String, String> expectedFields)
+    public void the_Classroom_Object_Should_Have_The_Following_Fields(Map<String, String> expectedFields)
     {
         for (Map.Entry<String, String> entry : expectedFields.entrySet())
         {
@@ -60,7 +55,7 @@ public class View_capacity_Management
     }
 
     @And("the full_time_enrollment should be {int}")
-    public void theFull_time_enrollmentShouldBe(Integer expectedValue)
+    public void theFull_time_enrollment_Should_Be(Integer expectedValue)
     {
         Integer actualValue = res.jsonPath().getInt("[0].schedule_capacity.full_time_enrollment");
         Assert.assertEquals(expectedValue, actualValue);

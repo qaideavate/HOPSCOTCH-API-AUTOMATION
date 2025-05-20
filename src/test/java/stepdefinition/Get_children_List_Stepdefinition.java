@@ -23,26 +23,27 @@ public class Get_children_List_Stepdefinition
 	private String getchildren = Endpoints.GET_CHILDREN;
 	private ExtentTest test = Extent_Report_Manager.getTest();
 	private Map<String, String> headers =ConfigReader.getHeadersFromConfig("header");
+	private final String parentToken = GlobalTokenStore.getToken("parent");
+	private final String parentUserId = GlobalTokenStore.getUserId("parent");
 
 	@When("I send a GET request of children-with-enrollments API")
 	public void i_send_a_get_request_of_children_with_enrollments_api() 
-	{       String parentToken = GlobalTokenStore.getToken("parent");
+	{  
+		    String parentToken = GlobalTokenStore.getToken("parent");
 	        APIUtils.logRequestHeaders(test, headers);
 
 	        test.info("Sending GET request to: " + baseURL + getchildren);
 	        test.info("Using Authorization token for parent.");
 	        
 	        // Sending GET request
-	        this.res = given()
+	        res = given()
 	                .baseUri(baseURL)
 	                .headers(headers)
-	               // .contentType("application/json; charset=utf-8")
+	                .contentType("application/json; charset=utf-8")
 	                .header("Authorization", "Bearer " + parentToken)
 	                .when()
-	                .get(getchildren)
-	                .then()
-	                .extract().response();
-	        
+	                .get(getchildren);
+	             
 	        // Log response to extent
 	        APIUtils.logResponseToExtent(res, test);
 	        String contentType = res.getHeader("Content-Type");
@@ -72,7 +73,7 @@ public class Get_children_List_Stepdefinition
 	  @Then("all children should have the same {string}")
 	  public void all_children_should_have_the_same(String expectedUserIdstr)
 	  {
-	    String expectedUserIdstr1 = GlobalTokenStore.getUserId(); // Fetch expected user ID
+		String expectedUserIdstr1 = GlobalTokenStore.getUserId("parent"); // Fetch expected user ID
 	    int expecteduserid=Integer.parseInt(expectedUserIdstr1);
 	    List<Integer> userIds = res.jsonPath().getList("user_id");
 	    

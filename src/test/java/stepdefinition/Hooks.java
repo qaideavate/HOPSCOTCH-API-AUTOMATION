@@ -37,13 +37,13 @@ import Utils.Extent_Report_Manager;
 	    }
 
 	    // Simulate @AfterAll with JVM shutdown hook
-	    /*static
+	    static
 	    {
 	        Runtime.getRuntime().addShutdownHook(new Thread(() -> 
 	        {
 	            Extent_Report_Manager.flushReports();
 	        }));
-	    }*/
+	    }
 	}
 
 

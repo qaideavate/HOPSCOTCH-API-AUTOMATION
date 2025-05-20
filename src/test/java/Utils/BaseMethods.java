@@ -37,7 +37,8 @@ public class BaseMethods
 	        throw new IllegalArgumentException("birthdate field is missing or empty");
 	    }
 	 }
-	public static String decodeJWT(String jwt) {
+	public static String decodeJWT(String jwt) 
+	{
 	    String[] split = jwt.split("\\.");
 	    return new String(Base64.getUrlDecoder().decode(split[1]));
 	}

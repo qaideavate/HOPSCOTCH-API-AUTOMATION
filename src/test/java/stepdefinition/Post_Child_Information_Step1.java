@@ -38,7 +38,6 @@ public class Post_Child_Information_Step1
 	        System.out.println(parentToken);
 	        test.info("Retrieved Parent Token: " + parentToken);
 	        return parentToken;
-	        
 	    }
     
 	    @Given("The base URL")
@@ -92,6 +91,7 @@ public class Post_Child_Information_Step1
 	       
 	       test.info("Response Received: " + res.getBody().asString());
 	       APIUtils.logResponseToExtent(res, test);
+	       
 	       GlobalTokenStore.setChildId(res.jsonPath().getString("childId"));
 	       return this;
 	    }

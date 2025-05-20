@@ -48,4 +48,3 @@ Background : Given I have a valid ProviderToken and baseurl
       | classroomId |
       | 78          |
       | 75          |
-      |             |

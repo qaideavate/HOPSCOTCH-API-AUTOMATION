@@ -16,7 +16,7 @@ Background : Given I have a valid ProviderToken and baseurl
       | enrollment_cutoff_range| 56          |
       | start_date             | 2025-05-13  |
     And the classroom should contain a schedule_capacity object
-    And the full_time_enrollment should be 12
+    And the full_time_enrollment should be 13
     And the dropin_capacity should contain today and tomorrow dates
     And the today dropin capacity should have:
       | date                    | 2025-05-20  |
@@ -34,10 +34,10 @@ Background : Given I have a valid ProviderToken and baseurl
       | classroom_name          | TEST Class  |
       | license_capacity        | 100         |
       | tuition                 | 23.00       |
-      | morning_used_capacity   | 12          |
-      | afternoon_used_capacity | 12          |
-      | total_used_capacity     | 12          |
-      | available_capacity      | 88          |
+      | morning_used_capacity   | 13          |
+      | afternoon_used_capacity | 13          |
+      | total_used_capacity     | 13          |
+      | available_capacity      | 87          |
 
   Scenario Outline: Verify the provider capacity API returns correct data for classroom ID <classroomId>
     When I send a GET request to the endpoint with path parameter <classroomId>

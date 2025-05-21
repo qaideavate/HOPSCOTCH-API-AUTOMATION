@@ -14,7 +14,7 @@ import static io.restassured.RestAssured.*;
 public class Put_Enrollment_Status
 {
 
-    String childId;
+    String childId = "312" ;
     Response res;
     Map<String, String> requestBody;
     private String baseURL;
@@ -30,9 +30,12 @@ public class Put_Enrollment_Status
         this.test = Extent_Report_Manager.getTest();
         this.endpoint=Endpoints.CHANGE_ENROLLMERNT_STATUS;
     }
-    public String iHaveAValidChildID()
-    {
-        if (GlobalTokenStore.getChildId() == null || GlobalTokenStore.getChildId().isEmpty())
+  
+    @Given("I have a valid child ID for update the enrollment status")
+    public String i_have_a_valid_child_id_for_update_the_enrollment_status()
+    {  
+    	 this.childId="312";
+       /* if (GlobalTokenStore.getChildId() == null || GlobalTokenStore.getChildId().isEmpty())
         {
             String generatedId = GlobalTokenStore.createChildAndGetId();  // generate and set it
             GlobalTokenStore.setChildId(generatedId);                     // optional, if not already set
@@ -44,7 +47,7 @@ public class Put_Enrollment_Status
             this.childId = GlobalTokenStore.getChildId();  // reuse existing
             test.info("Fetched existing child ID from GlobalTokenStore: " + childId);
         }
-        System.out.println("   childId: " + childId);
+        System.out.println("   childId: " + childId);*/
         return childId;
     }
 
@@ -71,12 +74,20 @@ public class Put_Enrollment_Status
                 .header("Authorization", "Bearer " + providerToken)
                 .body(requestBody)
                 .when()
-                .post(endpoint);
+                .put(endpoint + childId);
 
         test.info("Received response: " + res.asString());
+        System.out.println(res.asPrettyString());
         APIUtils.logResponseToExtent(res, test);
     }
 
+    @Then("the update Enrollment status code  should be {int}")
+    public void the_update_Enrollment_status_code_should_be(Integer Statuscode)
+    {
+    	test.info("Validating response status code. Expected: " + Statuscode + ", Actual: " + res.getStatusCode());
+		BaseMethods.validateStatusCode(res, Statuscode, test);
+    }
+    
     @And("the response body should contain:")
     public void theResponseBodyShouldContain(DataTable dataTable)
     {

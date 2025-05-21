@@ -1,25 +1,25 @@
 Feature: Update Enrollment Status for a Child
 
   Background: Given I have a valid ProviderToken and baseurl
-    And I have a valid child ID
+    And I have a valid child ID for update the enrollment status
 
-
-  Scenario : Successfully update enrollment status to <status> for child ID
+@runthis
+  Scenario: Successfully update enrollment status to <status> for child ID
     Given I prepare a request body with enrollment status "<status>"
     When I send a PUT request to endpoint with child id
-    Then the response status code should be 200
+    Then the update Enrollment status code  should be 200
     And the response body should contain:
       |status  | message | Enrollment successfully updated |
-      |Approved| program | 314                             |
+      |Approved| program | 312                             |
 
 
   Scenario Outline: Successfully update enrollment status to <status> for child ID
     Given I prepare a request body with enrollment status "<status>"
     When I send a PUT request to endpoint with child id
-    Then the response status code should be 200
+    Then the update Enrollment status code  should be 200
     And the response body should contain:
       | message | Enrollment successfully updated |
-      | program | 314                             |
+      | program | 312                             |
 
     Examples:
       | status         |

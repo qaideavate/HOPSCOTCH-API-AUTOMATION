@@ -9,7 +9,7 @@ Feature: Login Functionality for Parent and Provider
    
     Examples:
       | user_type | email                         | password   |
-      | Parent    | pankaj@yopmail.com  		      | Test@12345 |
+      | Parent    | pankaj@yopmail.com  		  | Test@12345 |
       | Provider  | pankaj.patidar@mindruby.com   | Test@12345 |
 
   Scenario Outline: Login with Empty/Invalid credentials : <user_type>-<email>-<password>

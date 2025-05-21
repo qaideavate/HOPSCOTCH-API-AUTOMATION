@@ -11,8 +11,8 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
-public class Extent_Report_Manager {
-
+public class Extent_Report_Manager
+{
     private static ExtentSparkReporter sparkReporter;
     private static ExtentReports extent;
     private static ExtentTest test;
@@ -61,7 +61,7 @@ public class Extent_Report_Manager {
         }
     }
 
-    // Flush the report and open it automatically
+   //  Flush the report and open it automatically
     public static void flushReports() {
         if (extent != null) {
             extent.flush();  // Ensure report is written

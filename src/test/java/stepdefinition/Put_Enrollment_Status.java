@@ -30,11 +30,11 @@ public class Put_Enrollment_Status
         this.test = Extent_Report_Manager.getTest();
         this.endpoint=Endpoints.CHANGE_ENROLLMERNT_STATUS;
     }
-  
+
     @Given("I have a valid child ID for update the enrollment status")
     public String i_have_a_valid_child_id_for_update_the_enrollment_status()
-    {  
-    	 this.childId="312";
+    {
+        this.childId="312";
        /* if (GlobalTokenStore.getChildId() == null || GlobalTokenStore.getChildId().isEmpty())
         {
             String generatedId = GlobalTokenStore.createChildAndGetId();  // generate and set it
@@ -84,10 +84,10 @@ public class Put_Enrollment_Status
     @Then("the update Enrollment status code  should be {int}")
     public void the_update_Enrollment_status_code_should_be(Integer Statuscode)
     {
-    	test.info("Validating response status code. Expected: " + Statuscode + ", Actual: " + res.getStatusCode());
-		BaseMethods.validateStatusCode(res, Statuscode, test);
+        test.info("Validating response status code. Expected: " + Statuscode + ", Actual: " + res.getStatusCode());
+        BaseMethods.validateStatusCode(res, Statuscode, test);
     }
-    
+
     @And("the response body should contain:")
     public void theResponseBodyShouldContain(DataTable dataTable)
     {

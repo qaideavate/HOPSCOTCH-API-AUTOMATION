@@ -3,16 +3,14 @@ package stepdefinition;
 import static io.restassured.RestAssured.*;
 import java.util.HashMap;
 import java.util.Map;
+
+import Utils.*;
 import org.junit.Assert;
 import com.aventstack.extentreports.ExtentTest;
-import Utils.APIUtils;
-import Utils.BaseMethods;
-import Utils.ConfigReader;
-import Utils.Extent_Report_Manager;
 import io.cucumber.java.en.*;
 import io.restassured.response.Response;
 
-public class Login_Stepdefinition 
+public class Post_Login
 {
 	private Response loginRes;
     private String email;
@@ -24,6 +22,7 @@ public class Login_Stepdefinition
     private String contentType="application/json";
     public static Map<String, String> userTokens = new HashMap<>();
   
+
 
     // Step for sending POST request to the login endpoint
     @When("The {string} sends a POST request to the login endpoint")
@@ -41,11 +40,9 @@ public class Login_Stepdefinition
                 .baseUri(baseURL)
                 .contentType(contentType)
                 .body(loginPayload)
-                .log().all()
                 .when()
                 .post(endpoint)
                 .then()
-                .log().all()
                 .extract().response();
         
         test.info("POST request completed. Status Code: " + loginRes.getStatusCode());
@@ -85,7 +82,7 @@ public class Login_Stepdefinition
     {
     	 this.email = (email == null || email.isEmpty()) ? "" : email;
          this.password = (password == null || password.isEmpty()) ? "" : password;
-         this.endpoint = userType.equalsIgnoreCase("Provider") ? "/auth/provider-login" : "/auth/login";
+         this.endpoint = userType.equalsIgnoreCase("Provider") ? Endpoints.PROVIDER_LOGIN : Endpoints.PARENT_LOGIN;
          this.contentType = headers.getOrDefault("Content-Type", "application/json");
         
          test.info("Login attempt for " + userType);

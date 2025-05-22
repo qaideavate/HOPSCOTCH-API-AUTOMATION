@@ -23,8 +23,8 @@ public class Get_children_List_Stepdefinition
 	private String getchildren = Endpoints.GET_CHILDREN;
 	private ExtentTest test = Extent_Report_Manager.getTest();
 	private Map<String, String> headers =ConfigReader.getHeadersFromConfig("header");
-	private final String parentToken = GlobalTokenStore.getToken("parent");
-	private final String parentUserId = GlobalTokenStore.getUserId("parent");
+	//private final String parentToken = GlobalTokenStore.getToken("parent");
+	//private final String parentUserId = GlobalTokenStore.getUserId("parent");
 
 	@When("I send a GET request of children-with-enrollments API")
 	public void i_send_a_get_request_of_children_with_enrollments_api() 

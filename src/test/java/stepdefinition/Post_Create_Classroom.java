@@ -8,7 +8,9 @@ import io.cucumber.java.en.*;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import static io.restassured.RestAssured.*;
 
@@ -21,6 +23,7 @@ public class Post_Create_Classroom
     private ExtentTest test;
     Faker faker = new Faker();
     private Map<String, String> headers;
+    String todayDate = LocalDate.now().toString();
 
     public Post_Create_Classroom()
     {
@@ -37,7 +40,7 @@ public class Post_Create_Classroom
         String todayDate = LocalDate.now().toString();
 
         payload = new HashMap<>();
-        payload.put("name", "Program_" + faker.lorem().word());
+        payload.put("name", "class " + faker.lorem().word());
         payload.put("min_age", 15);
         payload.put("max_age", 30);
         payload.put("start_date", todayDate);
@@ -53,6 +56,13 @@ public class Post_Create_Classroom
         payload.put("tuth_tuition_status", false);
         payload.put("dropin_tution_status", false);
         payload.put("keywords", "");
+
+        List<Map<String, Integer>> allocations = new ArrayList<>();
+        allocations.add(new HashMap<String, Integer>() {{ put("position_id", 1); put("staff_id", 12); }});
+        allocations.add(new HashMap<String, Integer>() {{ put("position_id", 2); put("staff_id", 14); }});
+        allocations.add(new HashMap<String, Integer>() {{ put("position_id", 3); put("staff_id", 13); }});
+        allocations.add(new HashMap<String, Integer>() {{ put("position_id", 4); put("staff_id", 15); }});
+        payload.put("allocations", allocations);
 
         test.log(Status.INFO, "Prepared payload: " + payload.toString());
     }
@@ -73,6 +83,7 @@ public class Post_Create_Classroom
         test.log(Status.INFO, "Request Payload: " + payload.toString());
         APIUtils.logResponseToExtent(res, test);
         test.log(Status.INFO, "Response: " + res.asString());
+        System.out.println(res);
     }
 
     @Then("the response status code on Creating Classroom  should be {int}")
@@ -107,7 +118,7 @@ public class Post_Create_Classroom
         payload.put("name", inputData.getOrDefault("name", "Program_" + faker.lorem().word()));
         payload.put("min_age", parseOrDefault(inputData.get("min_age"), 15));
         payload.put("max_age", parseOrDefault(inputData.get("max_age"), 30));
-        payload.put("start_date", inputData.getOrDefault("start_date", "2025-05-21"));
+        payload.put("start_date", inputData.getOrDefault("start_date", todayDate));
         payload.put("license_capacity", parseOrDefault(inputData.get("license_capacity"), 7));
         payload.put("capacity", parseOrDefault(inputData.get("capacity"), 4));
         payload.put("enrollment_cutoff_window", inputData.getOrDefault("enrollment_cutoff_window", "7"));
@@ -120,6 +131,18 @@ public class Post_Create_Classroom
         payload.put("tuth_tuition_status", parseBooleanOrDefault(inputData.get("tuth_tuition_status"), false));
         payload.put("dropin_tution_status", parseBooleanOrDefault(inputData.get("dropin_tution_status"), false));
         payload.put("keywords", inputData.getOrDefault("keywords", ""));
+
+        List<Map<String, Integer>> allocations = new ArrayList<>();
+
+       // Generate 4 allocation entries using Faker
+        for (int i = 1; i <= 4; i++)
+        {
+            Map<String, Integer> allocation = new HashMap<>();
+            allocation.put("position_id", i); // You can randomize this too if needed
+            allocation.put("staff_id", faker.number().numberBetween(10, 20)); // Random staff_id between 10 and 19
+            allocations.add(allocation);
+        }
+        payload.put("allocations", allocations);
 
         test.log(Status.INFO, "Prepared payload from DataTable: " + payload.toString());
     }

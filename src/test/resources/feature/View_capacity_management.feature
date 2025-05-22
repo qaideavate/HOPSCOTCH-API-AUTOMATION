@@ -47,4 +47,4 @@ Background : Given I have a valid ProviderToken and baseurl
     Examples:
       | classroomId |
       | 78          |
-      | 75          |
+      | 76          |

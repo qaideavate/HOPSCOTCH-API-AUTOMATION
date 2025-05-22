@@ -64,7 +64,7 @@ Background: Given I have a valid ParentToken
       | Girl              |
       | Prefer not to say |
   
-  @runthis
+
   Scenario: Validate enrollment_count is a positive integer
   	When I send a GET request of children-with-enrollments API
     Then the enrollment_count should be a equal to or greater than zero for each child

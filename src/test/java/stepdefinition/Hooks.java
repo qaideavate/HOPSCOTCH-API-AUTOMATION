@@ -35,15 +35,29 @@ import Utils.Extent_Report_Manager;
 	            test.pass("Scenario Passed: " + scenario.getName());
 	        }
 	    }
+	    
+	    @AfterAll
+	    public static void afterAllTests()
+	    {
+	        Extent_Report_Manager.flushReports();
+	    }
 
 	    // Simulate @AfterAll with JVM shutdown hook
-	    static
-	    {
-	        Runtime.getRuntime().addShutdownHook(new Thread(() -> 
-	        {
-	            Extent_Report_Manager.flushReports();
-	        }));
-	    }
+	  /*  static {
+	        try {
+	            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+	                try {
+	                    Extent_Report_Manager.flushReports();
+	                } catch (Exception e) {
+	                    System.err.println("Failed to flush Extent reports during shutdown: " + e.getMessage());
+	                    e.printStackTrace();
+	                }
+	            }));
+	        } catch (IllegalStateException e) {
+	            System.err.println("Shutdown already in progress, cannot add shutdown hook.");
+	        }
+	    }*/
+	
 	}
 
 

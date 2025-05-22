@@ -1,7 +1,7 @@
 Feature: Create a New Classroom
 
   Background: Given I have the base URL and a valid provider token
-
+	
   Scenario: Successfully create a classroom using the provider token
     Given I prepare a valid request body for creating a classroom
     When I send a POST request to the "/providers/programs" endpoint
@@ -9,6 +9,7 @@ Feature: Create a New Classroom
     And the response body should contain "success" as true
     And the response body should contain the key "classroomId"
 
+ @runthis
   Scenario Outline: Create classroom with dynamic or optional values
     Given I prepare a request body with the following values:
       | name                      | <name>                      |

@@ -9,6 +9,8 @@ import io.restassured.response.Response;
 import org.junit.Assert;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,10 +39,9 @@ public class Post_Create_Classroom
     @Given("I prepare a valid request body for creating a classroom")
     public void iPrepareAValidRequestBodyForCreatingClassroom()
     {   // Get today's date in ISO format (yyyy-MM-dd)
-        String todayDate = LocalDate.now().toString();
 
         payload = new HashMap<>();
-        payload.put("name", "class " + faker.lorem().word());
+        payload.put("name", "Test class " + faker.number().randomNumber());
         payload.put("min_age", 15);
         payload.put("max_age", 30);
         payload.put("start_date", todayDate);
@@ -54,15 +55,10 @@ public class Post_Create_Classroom
         payload.put("afternoons_tuition_status", false);
         payload.put("mwf_tuition_status", false);
         payload.put("tuth_tuition_status", false);
-        payload.put("dropin_tution_status", false);
+        payload.put("dropin_tuition_status", false);
         payload.put("keywords", "");
 
-        List<Map<String, Integer>> allocations = new ArrayList<>();
-        allocations.add(new HashMap<String, Integer>() {{ put("position_id", 1); put("staff_id", 12); }});
-        allocations.add(new HashMap<String, Integer>() {{ put("position_id", 2); put("staff_id", 14); }});
-        allocations.add(new HashMap<String, Integer>() {{ put("position_id", 3); put("staff_id", 13); }});
-        allocations.add(new HashMap<String, Integer>() {{ put("position_id", 4); put("staff_id", 15); }});
-        payload.put("allocations", allocations);
+        payload.put("allocations", generateUniqueAllocations());
 
         test.log(Status.INFO, "Prepared payload: " + payload.toString());
     }
@@ -82,8 +78,8 @@ public class Post_Create_Classroom
 
         test.log(Status.INFO, "Request Payload: " + payload.toString());
         APIUtils.logResponseToExtent(res, test);
-        test.log(Status.INFO, "Response: " + res.asString());
-        System.out.println(res);
+        System.out.println(res.asPrettyString());
+        System.out.println(payload.toString());
     }
 
     @Then("the response status code on Creating Classroom  should be {int}")
@@ -115,53 +111,66 @@ public class Post_Create_Classroom
         Map<String, String> inputData = dataTable.asMap(String.class, String.class);
         payload = new HashMap<>();
         // Use values from the data table or generate defaults using Faker
-        payload.put("name", inputData.getOrDefault("name", "Program_" + faker.lorem().word()));
-        payload.put("min_age", parseOrDefault(inputData.get("min_age"), 15));
-        payload.put("max_age", parseOrDefault(inputData.get("max_age"), 30));
+        payload.put("name", resolveName(inputData.get("name")));
+        payload.put("min_age", parseOrFaker(inputData.get("min_age"), 1, 50));
+        payload.put("max_age", parseOrFaker(inputData.get("max_age"), 51, 100));
         payload.put("start_date", inputData.getOrDefault("start_date", todayDate));
-        payload.put("license_capacity", parseOrDefault(inputData.get("license_capacity"), 7));
-        payload.put("capacity", parseOrDefault(inputData.get("capacity"), 4));
-        payload.put("enrollment_cutoff_window", inputData.getOrDefault("enrollment_cutoff_window", "7"));
-        payload.put("fulltime_tuition", parseOrDefault(inputData.get("fulltime_tuition"), 10));
+        payload.put("license_capacity", parseOrFaker(inputData.get("license_capacity"), 1, 10));
+        payload.put("capacity", parseOrFaker(inputData.get("capacity"), 11, 50));
+        payload.put("enrollment_cutoff_window", parseOrFaker(inputData.get("enrollment_cutoff_window"), 7, 56));
+        payload.put("fulltime_tuition", parseOrFaker(inputData.get("fulltime_tuition"), 12, 25));
         payload.put("fulltime_tuition_cadence", inputData.getOrDefault("fulltime_tuition_cadence", "weekly"));
-        payload.put("fulltime_tuition_status", parseBooleanOrDefault(inputData.get("fulltime_tuition_status"), true));
-        payload.put("mornings_tuition_status", parseBooleanOrDefault(inputData.get("mornings_tuition_status"), false));
-        payload.put("afternoons_tuition_status", parseBooleanOrDefault(inputData.get("afternoons_tuition_status"), false));
-        payload.put("mwf_tuition_status", parseBooleanOrDefault(inputData.get("mwf_tuition_status"), false));
-        payload.put("tuth_tuition_status", parseBooleanOrDefault(inputData.get("tuth_tuition_status"), false));
-        payload.put("dropin_tution_status", parseBooleanOrDefault(inputData.get("dropin_tution_status"), false));
+        payload.put("fulltime_tuition_status", parseBooleanOrFaker(inputData.get("fulltime_tuition_status")));
+        payload.put("mornings_tuition_status", parseBooleanOrFaker(inputData.get("mornings_tuition_status")));
+        payload.put("afternoons_tuition_status", parseBooleanOrFaker(inputData.get("afternoons_tuition_status")));
+        payload.put("mwf_tuition_status", parseBooleanOrFaker(inputData.get("mwf_tuition_status")));
+        payload.put("tuth_tuition_status", parseBooleanOrFaker(inputData.get("tuth_tuition_status")));
+        payload.put("dropin_tuition_status", parseBooleanOrFaker(inputData.get("dropin_tution_status")));
         payload.put("keywords", inputData.getOrDefault("keywords", ""));
-
-        List<Map<String, Integer>> allocations = new ArrayList<>();
-
-       // Generate 4 allocation entries using Faker
-        for (int i = 1; i <= 4; i++)
-        {
-            Map<String, Integer> allocation = new HashMap<>();
-            allocation.put("position_id", i); // You can randomize this too if needed
-            allocation.put("staff_id", faker.number().numberBetween(10, 20)); // Random staff_id between 10 and 19
-            allocations.add(allocation);
-        }
-        payload.put("allocations", allocations);
-
+        
+        payload.put("allocations", generateUniqueAllocations());
         test.log(Status.INFO, "Prepared payload from DataTable: " + payload.toString());
     }
     // Helper method to parse integer or return default
-    private int parseOrDefault(String value, int defaultValue)
-    {   try
+     private int parseOrFaker(String value, int min, int max) 
+     {
+        try {
+            return (value == null || value.trim().isEmpty()) ? faker.number().numberBetween(min, max): Integer.parseInt(value.trim());
+        } 
+        catch (NumberFormatException e)
         {
-            return value == null || value.isEmpty() ? defaultValue : Integer.parseInt(value);
-        }   catch (NumberFormatException e)
-        {    test.warning("Invalid integer for value: '" + value + "', defaulting to: " + defaultValue);
-            return defaultValue;
+            return faker.number().numberBetween(min, max);
         }
     }
 
-    // Helper method to parse boolean or return default
-    private boolean parseBooleanOrDefault(String value, boolean defaultValue)
+     private boolean parseBooleanOrFaker(String value) 
+     {
+    	    if (value == null || value.trim().isEmpty()) {
+    	        return faker.bool().bool(); // Random true or false
+    	    }
+    	    return Boolean.parseBoolean(value);
+    	}
+    
+    private String resolveName(String nameInput) 
     {
-        if (value == null || value.isEmpty()) return defaultValue;
-        return Boolean.parseBoolean(value);
+        if (nameInput == null || nameInput.trim().isEmpty() || nameInput.equalsIgnoreCase("[empty]")) {
+            return "Test class " + faker.number().randomNumber();
+        }
+        return nameInput;
+    }
+    
+    private List<Map<String, Integer>> generateUniqueAllocations()
+    {
+        List<Integer> staffIds = new ArrayList<>(Arrays.asList(12, 13, 14, 15));
+        Collections.shuffle(staffIds);
+        List<Map<String, Integer>> allocations = new ArrayList<>();
+        for (int i = 0; i < staffIds.size(); i++) {
+            Map<String, Integer> allocation = new HashMap<>();
+            allocation.put("position_id", i + 1);
+            allocation.put("staff_id", staffIds.get(i));
+            allocations.add(allocation);
+        }
+        return allocations;
     }
 }
 

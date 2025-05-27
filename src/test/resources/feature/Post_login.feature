@@ -6,11 +6,19 @@ Feature: Login Functionality for Parent and Provider
     Then The response status code should be 201
     And The response message should be "login_success"
     And The response should contain a valid access token
-   
+    Examples:
+      | user_type | email                         | password   |
+      | Provider  | pankaj.patidar@mindruby.com   | Test@12345 |
+
+  Scenario Outline: Successful Login with Valid credentials
+    Given The "<user_type>" provides email "<email>" and password "<password>"
+    When The "<user_type>" sends a POST request to the login endpoint
+    Then The response status code should be 201
+    And The response message should be "login_success"
+    And The response should contain a valid access token
     Examples:
       | user_type | email                         | password   |
       | Parent    | pankaj@yopmail.com  		  | Test@12345 |
-      | Provider  | pankaj.patidar@mindruby.com   | Test@12345 |
 
   Scenario Outline: Login with Empty/Invalid credentials : <user_type>-<email>-<password>
     Given The "<user_type>" provides email "<email>" and password "<password>"

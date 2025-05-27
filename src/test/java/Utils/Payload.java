@@ -254,8 +254,6 @@ public class Payload
 
 		    return new Gson().toJson(payload);
 		}
-		
-		 
 
 		public Map<String, Object> MarkingAbsence(int enrollmentId)
 		{
@@ -268,6 +266,45 @@ public class Payload
 		    requestBody.put("enrollment_id", enrollmentId);
 		    requestBody.put("reason", "Test");
 		    return requestBody;
+		}
+
+		public Map<String, Object> getEnrollChildPayload(int providerId, int classroomId, int childId, String startDate)
+		{
+			Map<String, Object> consent = new HashMap<>();
+			consent.put("childId", childId);
+			consent.put("providerId", providerId);
+			consent.put("transportationSchoolPersonalVehicle", 1);
+			consent.put("transportationSchoolPublicTransportation", false);
+			consent.put("transportationSchoolWalking", false);
+			consent.put("transportationFieldTripsPersonalVehicle", false);
+			consent.put("transportationFieldTripsPublicTransportation", 1);
+			consent.put("transportationFieldTripsWalking", false);
+			consent.put("transportationOccasionalErrandsPersonalVehicle", false);
+			consent.put("transportationOccasionalErrandsPublicTransportation", false);
+			consent.put("transportationOccasionalErrandsWalking", 1);
+			consent.put("transportationOther", "");
+			consent.put("transportationOtherPersonalVehicle", false);
+			consent.put("transportationOtherPublicTransportation", false);
+			consent.put("transportationOtherWalking", false);
+			consent.put("swimming", 1);
+			consent.put("bathingAfterAccident", 1);
+			consent.put("bathingOvernightCare", false);
+			consent.put("takePhotos", false);
+			consent.put("takeVideos", 1);
+			consent.put("captureOnSurveillance", false);
+
+			Map<String, Object> payload = new HashMap<>();
+			payload.put("provider_id", providerId);
+			payload.put("classroom_id", classroomId);
+			payload.put("child", childId);
+			payload.put("start_date", startDate);
+			payload.put("tuition", "30.00");
+			payload.put("schedule_type_id", 6);
+			payload.put("tuition_cadence", "Not Applicable");
+			payload.put("consent", consent);
+			payload.put("isSubsidyEligible", false);
+
+			return payload;
 		}
 
 }

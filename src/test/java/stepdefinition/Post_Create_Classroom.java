@@ -30,8 +30,8 @@ public class Post_Create_Classroom
         test.info("Decoded JWT: " + BaseMethods.decodeJWT(ProviderToken));
     }
 
-    @When("I send a POST request to the endpoint")
-    public void i_Send_Post_Request()
+    @When("I send a POST request to create classroom at classroom endpoint")
+    public void i_send_a_post_request_to_create_classroom_at_classroom_endpoint()
     {   String payload = Pl.classroom_payload(); 
     	
     	test.log(Status.INFO, "Sending POST request to: " + Endpoints.create_classroom);
@@ -57,8 +57,8 @@ public class Post_Create_Classroom
         BaseMethods.validateStatusCode(res, expectedStatusCode, test);
     }
 
-    @Then("the response body should contain {string} as true")
-    public void responseBodyShouldContainSuccessAsTrue(String key)
+    @Then("the response body for classroom should contain {string} as true")
+    public void responseBodyforclassroomShouldContainSuccessAsTrue(String key)
     {
         boolean value = res.jsonPath().getBoolean(key);
         Assert.assertTrue(" Expected " + key + "to be true", value);

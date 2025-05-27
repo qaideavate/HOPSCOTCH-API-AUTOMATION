@@ -9,7 +9,6 @@ import java.util.*;
 import static io.restassured.RestAssured.*;
 public class Post_Mark_Absent 
 {
-
     private String baseUrl;
     private String providerToken;
     private Map<String, String> headers;
@@ -23,15 +22,15 @@ public class Post_Mark_Absent
         this.providerToken = GlobalTokenStore.getToken("provider");
         this.headers = ConfigReader.getHeadersFromConfig("header");
     }
-	    @When("When I send a POST request to providers/enrollments/mark-absent ")
-	    When I_send_a_POST_request_to_providers/enrollments/mark-absent() 
+
+	@When("When I send a POST request to providers/enrollments/mark-absent")
+	public void I_send_Post_Request_To_MarkAbsent(int enrollmentId)
 	    {
-	    	payload =Pl.MarkingAbsence(int enrollmentId)
-	        test.log(Status.INFO, "Sending POST request to: " + baseUrl + endpoint);
-	        test.log(Status.INFO, "Prepared request body: " + requestBody.toString());
-	        
-	        APIUtils.logRequestHeaders(test, headers);
-	        APIUtils.logRequestBody(test, requestBody);
+			String endpoint = "/providers/enrollments/mark-absent";
+			requestBody = Pl.MarkingAbsence(enrollmentId);
+			test.log(Status.INFO, "Sending POST request to: " + Endpoints.baseURL +" "+Endpoints.mark_absent);
+			test.log(Status.INFO, "Prepared request body: " + requestBody.toString());
+			APIUtils.logRequestHeaders(test, headers);
 
 	        response = given()
 	                .baseUri(baseUrl)
@@ -45,27 +44,27 @@ public class Post_Mark_Absent
 	    }
 
 	    @Then("the response status code should be {int}")
-	    public void theResponseStatusCodeShouldBe(int expectedCode) {
+	    public void theResponseStatusCodeShouldBe(int expectedCode)
+		{
 	        int actualCode = response.getStatusCode();
 	        Assert.assertEquals("Unexpected status code!", expectedCode, actualCode);
 	        test.pass("Validated status code: " + actualCode);
 	    }
 
 	    @Then("the response body should contain {string} as true")
-	    public void theResponseBodyShouldContainKeyAsTrue(String key) {
+	    public void theResponseBodyShouldContainKeyAsTrue(String key)
+		{
 	        boolean value = response.jsonPath().getBoolean(key);
 	        Assert.assertTrue("Expected " + key + " to be true", value);
 	        test.pass("Key " + key + " is true in the response");
 	    }
 
-	    @Then("the response body should contain the key {string}")
-	    public void theResponseBodyShouldContainKey(String key) {
+	    @Then("the response body should contain the keyvalue {string}")
+	    public void theResponseBodyShouldContainKeyvalue(String key)
+		{
 	        Object value = response.jsonPath().get(key);
 	        Assert.assertNotNull("Expected response to contain key: " + key, value);
 	        test.pass("Response contains key: " + key + " with value: " + value);
 	    }
-	}
 
-	
-	
 }

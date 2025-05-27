@@ -406,7 +406,7 @@ public class Post_Child_Information_Step1
 	   @When("I update child {string} with {string}")
 	    public void updateField(String field, String value)
 	    {
-	    	 test.info("Updating field '" + field + "' with value '" + value + "'");
+	    	test.info("Updating field '" + field + "' with value '" + value + "'");
 	        childInfo.put(field, value);
 	
 	        JSONObject json = new JSONObject(childInfo);

@@ -1,14 +1,25 @@
 package Utils;
  
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.json.JSONObject;
+
+import com.aventstack.extentreports.Status;
+import com.github.javafaker.Faker;
+import com.google.gson.Gson;
+
+import io.cucumber.java.en.Given;
  
 public class Payload 
 {
 	String ParentId;
 	String childId ;
+	Faker faker = new Faker();
  
 	public String child_registration_payload() 
 	{
@@ -207,6 +218,57 @@ public class Payload
 		    return root.toString();
 		}
 
+		public String classroom_payload() 
+		{
+		    String todayDate = LocalDate.now().toString();
+		    Map<String, Object> payload = new HashMap<>();
+		    
+		    payload.put("name", "Test class " + faker.number().randomNumber());
+		    payload.put("min_age", 15);
+		    payload.put("max_age", 30);
+		    payload.put("start_date", todayDate);
+		    payload.put("license_capacity", 7);
+		    payload.put("capacity", 4);
+		    payload.put("enrollment_cutoff_window", "7");
+		    payload.put("fulltime_tuition", 10);
+		    payload.put("fulltime_tuition_cadence", "weekly");
+		    payload.put("fulltime_tuition_status", true);
+		    payload.put("mornings_tuition_status", false);
+		    payload.put("afternoons_tuition_status", false);
+		    payload.put("mwf_tuition_status", false);
+		    payload.put("tuth_tuition_status", false);
+		    payload.put("dropin_tuition_status", false);
+		    payload.put("keywords", "");
 
+		    // Inline allocation generation
+		    List<Integer> staffIds = new ArrayList<>(Arrays.asList(12, 13, 14, 15));
+		    Collections.shuffle(staffIds);
+		    List<Map<String, Integer>> allocations = new ArrayList<>();
+		    for (int i = 0; i < staffIds.size(); i++) {
+		        Map<String, Integer> allocation = new HashMap<>();
+		        allocation.put("position_id", i + 1);
+		        allocation.put("staff_id", staffIds.get(i));
+		        allocations.add(allocation);
+		    }
+		    payload.put("allocations", allocations);
+
+		    return new Gson().toJson(payload);
+		}
+		
+		 
+
+		public Map<String, Object> MarkingAbsence(int enrollmentId)
+		{
+		    Map<String, Object> requestBody = new HashMap<>();
+
+		    LocalDate today = LocalDate.now();
+		    LocalDate tomorrow = today.plusDays(1);
+
+		    requestBody.put("request_date", Arrays.asList(today.toString(), tomorrow.toString()));
+		    requestBody.put("enrollment_id", enrollmentId);
+		    requestBody.put("reason", "Test");
+
+		    return requestBody;
+		}
 
 }

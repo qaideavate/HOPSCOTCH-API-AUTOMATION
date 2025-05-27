@@ -2,8 +2,8 @@ package Utils;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import stepdefinition.Post_Child_Information_Step1;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import static io.restassured.RestAssured.*;
@@ -12,7 +12,7 @@ public class GlobalTokenStore
 {
     private static final Map<String, String> userTokens = new ConcurrentHashMap<>();
     private static final Map<String, String> userIds = new ConcurrentHashMap<>();
-    private static String childId;
+    private static final Map<String, String> store = new ConcurrentHashMap<>();
 
 	    public static String getToken(String userType)
 	    {
@@ -28,14 +28,14 @@ public class GlobalTokenStore
 	        switch (userType.toLowerCase()) 
 	        {
 	            case "parent":
-	                loginURL = "https://dev-api.hopscotchconnect.com/api/auth/login";
-	                payload.put("email", ConfigReader.getProperty("parent.email"));
-	                payload.put("password", ConfigReader.getProperty("parent.password"));
+	                loginURL = Endpoints.baseURL + Endpoints.PARENT_LOGIN;
+	                payload.put("email", Endpoints.parent_email);
+	                payload.put("password", Endpoints.parent_password);
 	                break;
 	            case "provider":
-	                loginURL = "https://dev-api.hopscotchconnect.com/api/auth/provider-login";
-	                payload.put("email", ConfigReader.getProperty("provider.email"));
-	                payload.put("password", ConfigReader.getProperty("provider.password"));
+	                loginURL = Endpoints.baseURL + Endpoints.PROVIDER_LOGIN;
+	                payload.put("email", Endpoints.provider_email);
+	                payload.put("password", Endpoints.provider_password);
 	                break;
 	            default:
 	                throw new IllegalArgumentException("❌ Unknown user type: " + userType);
@@ -58,35 +58,39 @@ public class GlobalTokenStore
 	            throw new RuntimeException("❌ Failed to get token. Status: " + res.getStatusCode() + " | Response: " + res.asString());
 	        }
 	    }
-
 	
 	    public static void setToken(String userType, String token) 
 	    {
 	        userTokens.put(userType.toLowerCase(), token);
 	    }
-	
+	    	
 	    public static String getUserId(String userType) 
 	    {
 	        return userIds.get(userType.toLowerCase());
 	    }
 	    
-	    public static String createChildAndGetId() {
-	        Post_Child_Information_Step1 step = new Post_Child_Information_Step1();
-	        step.i_have_a_valid_parent_token();
-	        step.the_base_url()
-	            .i_prepare_the_child_registration_payload_with_valid_data()
-	            .i_send_a_post_request_to();
-	        return getChildId();
+	    // ✅ Specific setter for childId
+	    public static void setChildId(String childId) 
+	    {
+	        store.put("childId", childId);
 	    }
 
-	    public static void setChildId(String id) 
+	    // ✅ Getter for childId
+	    public static String getChildId()
 	    {
-	        childId = id;
+	        return store.get("childId");
 	    }
 
-	    public static String getChildId() 
+	    // ✅ Specific setter for parentId
+	    public static void setParentId(String parentId)
 	    {
-	        return childId;
+	        store.put("parentId", parentId);
+	    }
+
+	    // ✅ Getter for parentId
+	    public static String getParentId()
+	    {
+	        return store.get("parentId");
 	    }
 	    
 }

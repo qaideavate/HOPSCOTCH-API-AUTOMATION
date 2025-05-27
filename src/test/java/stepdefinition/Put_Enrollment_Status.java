@@ -13,11 +13,9 @@ import static io.restassured.RestAssured.*;
 
 public class Put_Enrollment_Status
 {
-
     String childId = "312" ;
     Response res;
     Map<String, String> requestBody;
-    private String baseURL;
     private Map<String, String> headers;
     String endpoint;
     private ExtentTest test;
@@ -25,7 +23,6 @@ public class Put_Enrollment_Status
 
     public Put_Enrollment_Status()
     {
-        this.baseURL = ConfigReader.getProperty("baseURL");
         this.headers = ConfigReader.getHeadersFromConfig("header");
         this.test = Extent_Report_Manager.getTest();
         this.endpoint=Endpoints.CHANGE_ENROLLMERNT_STATUS;
@@ -68,7 +65,7 @@ public class Put_Enrollment_Status
         APIUtils.logRequestBody(test, requestBody);
         test.info("Sending POST request to endpoint: " + endpoint);
         res = given()
-                .baseUri(baseURL)
+                .baseUri(Endpoints.baseURL)
                 .headers(headers)
                 .contentType(contentType)
                 .header("Authorization", "Bearer " + providerToken)

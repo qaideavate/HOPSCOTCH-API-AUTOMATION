@@ -1,15 +1,16 @@
 package Utils;
-
+ 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-
+ 
 public class ConfigReader 
 {
     private static Properties prop;
-
+    static String path =  ".//src/test/resources/config.properties";
     static {
         try {
         	String path =  ".//src/test/resources/config.properties";
@@ -26,11 +27,10 @@ public class ConfigReader
             throw new RuntimeException("Failed to load config.properties file.");
         }
     }
-
+ 
     public static String getProperty(String key) {
         return prop.getProperty(key);
     }
-    
     // Get all properties starting with a specific prefix as a map
     public static Map<String, String> getHeadersFromConfig(String prefix) {
         Map<String, String> headers = new HashMap<>();
@@ -42,8 +42,7 @@ public class ConfigReader
         }
         return headers;
     }
-    
- // Optional: Get all properties as a Map (useful for debugging)
+// Optional: Get all properties as a Map (useful for debugging)
     public static Map<String, String> getAllProperties() {
         Map<String, String> allProps = new HashMap<>();
         for (String name : prop.stringPropertyNames()) {
@@ -51,5 +50,31 @@ public class ConfigReader
         }
         return allProps;
     }
-
+ 
+// WRITE: Save multiple key-value pairs at once
+    public static void writeMultipleProperties(Map<String, String> propertiesToWrite) 
+    {
+        try {
+            // Load existing properties
+            FileInputStream fis = new FileInputStream(path);
+            Properties existingProps = new Properties();
+            existingProps.load(fis);
+            fis.close();
+ 
+            // Add all new properties
+            for (Map.Entry<String, String> entry : propertiesToWrite.entrySet()) {
+                existingProps.setProperty(entry.getKey(), entry.getValue());
+            }
+ 
+            // Save back to file
+            FileOutputStream fos = new FileOutputStream(path);
+            existingProps.store(fos, null);
+            fos.close();
+        } 
+        catch (IOException e) 
+        {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to write multiple properties to config.properties file.");
+        }
+    }
 }

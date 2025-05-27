@@ -19,12 +19,8 @@ import io.cucumber.datatable.*;
 public class Get_children_List_Stepdefinition
 {
 	private Response res ;
-	private String baseURL = ConfigReader.getProperty("baseURL");
-	private String getchildren = Endpoints.GET_CHILDREN;
 	private ExtentTest test = Extent_Report_Manager.getTest();
 	private Map<String, String> headers =ConfigReader.getHeadersFromConfig("header");
-	//private final String parentToken = GlobalTokenStore.getToken("parent");
-	//private final String parentUserId = GlobalTokenStore.getUserId("parent");
 
 	@When("I send a GET request of children-with-enrollments API")
 	public void i_send_a_get_request_of_children_with_enrollments_api() 
@@ -32,17 +28,17 @@ public class Get_children_List_Stepdefinition
 		    String parentToken = GlobalTokenStore.getToken("parent");
 	        APIUtils.logRequestHeaders(test, headers);
 
-	        test.info("Sending GET request to: " + baseURL + getchildren);
+	        test.info("Sending GET request to: " + Endpoints.baseURL + Endpoints.GET_CHILDREN);
 	        test.info("Using Authorization token for parent.");
 	        
 	        // Sending GET request
 	        res = given()
-	                .baseUri(baseURL)
+	                .baseUri(Endpoints.baseURL)
 	                .headers(headers)
 	                .contentType("application/json; charset=utf-8")
 	                .header("Authorization", "Bearer " + parentToken)
 	                .when()
-	                .get(getchildren);
+	                .get(Endpoints.GET_CHILDREN);
 	             
 	        // Log response to extent
 	        APIUtils.logResponseToExtent(res, test);

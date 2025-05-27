@@ -267,7 +267,6 @@ public class Payload
 		    requestBody.put("request_date", Arrays.asList(today.toString(), tomorrow.toString()));
 		    requestBody.put("enrollment_id", enrollmentId);
 		    requestBody.put("reason", "Test");
-
 		    return requestBody;
 		}
 

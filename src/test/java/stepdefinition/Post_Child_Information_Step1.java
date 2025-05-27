@@ -47,7 +47,7 @@ public class Post_Child_Information_Step1
 	    }
 
 	    @When("I send a POST request to child endpoint")
-	    public void i_send_a_post_request_to() 
+	    public String i_send_a_post_request_to() 
 	    {   String payload = Pl.child_registration_payload();
 	        APIUtils.logRequestHeaders(test, headers);
 	        APIUtils.logRequestBody(test, payload);
@@ -66,6 +66,7 @@ public class Post_Child_Information_Step1
 
 	        test.info("Response Received: " + childres.getBody().asString());
 	        APIUtils.logResponseToExtent(childres, test);
+	        return childres.jsonPath().getString("childId");
 	    }
 
 	    @Then("the child registration response should store childId")

@@ -22,7 +22,7 @@ public class Get_Enrollments
 	{
 		 this.test = Extent_Report_Manager.getTest();
 		 this.headers = ConfigReader.getHeadersFromConfig("header");
-		 baseURL = ConfigReader.getProperty("baseURL");
+		
 		 getEnrolled = Endpoints.GET_ENROLLMENT;
 	}
 	
@@ -32,12 +32,12 @@ public class Get_Enrollments
 		 String parentToken = GlobalTokenStore.getToken("parent");
 	     APIUtils.logRequestHeaders(test, headers);
 	     
-	        test.info("Sending GET request to: " + baseURL + getEnrolled);
+	        test.info("Sending GET request to: " + Endpoints.baseURL + getEnrolled);
 	        test.info("Using Authorization token for parent.");
 	        
 	        // Sending GET request
 	        res = given()
-	                .baseUri(baseURL)
+	                .baseUri(Endpoints.baseURL)
 	                .headers(headers)
 	                 // .contentType("application/json; charset=utf-8")
 	                .header("Authorization", "Bearer " + parentToken)

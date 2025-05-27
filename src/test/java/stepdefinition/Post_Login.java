@@ -15,17 +15,14 @@ public class Post_Login
     private String email;
     private String password;
     private String endpoint;
-    private String baseURL = ConfigReader.getProperty("baseURL");
     private ExtentTest test = Extent_Report_Manager.getTest();
     private Map<String, String> headers = ConfigReader.getHeadersFromConfig("header");
     private String contentType="application/json";
     public static Map<String, String> userTokens = new HashMap<>();
-  
-
 
     // Step for sending POST request to the login endpoint
     @When("The {string} sends a POST request to the login endpoint")
-    public void the_sends_a_post_request_to_the_login_endpoint(String userType)
+    public String the_sends_a_post_request_to_the_login_endpoint(String userType)
     { 
     	test.info("Preparing login request for: " + userType);
         HashMap<String, String> loginPayload = new HashMap<>();
@@ -36,7 +33,7 @@ public class Post_Login
         APIUtils.logRequestBody(test, loginPayload);
         test.info("Sending POST request to: " + endpoint);
         loginRes = given()
-                .baseUri(baseURL)
+                .baseUri(Endpoints.baseURL)
                 .contentType(contentType)
                 .body(loginPayload)
                 .when()
@@ -53,7 +50,9 @@ public class Post_Login
             String logintoken = loginRes.jsonPath().getString("accessToken");
             test.info("Decoded JWT: " + BaseMethods.decodeJWT(logintoken));
             test.info(userType + " token retrieved and stored successfully.");
+            return logintoken;
         }
+        return null;
     }
     
     // Step for checking the status code

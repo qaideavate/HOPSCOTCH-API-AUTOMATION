@@ -6,11 +6,10 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith (Cucumber.class)
 @CucumberOptions
 	(
-	 //	features= {"classpath:feature/Post_Emergency_Contact_step_3.feature"},
-	  //  tags= "@runthis",
+	    tags= "@runthis",
 		
 	      features ={
-		//		    "classpath:feature/Post_login.feature",                                 
+			//	      "classpath:feature/Post_login.feature",                                 
 	    //		     "classpath:feature/Get_children_List_API.feature",
 		//		     "classpath:feature/Get_Enrollments.feature",
 	 	  //         "classpath:feature/Post_Child_Information_Step1.feature",                         
@@ -18,7 +17,7 @@ import io.cucumber.junit.CucumberOptions;
 		//		    "classpath:feature/Put_Enrollment_Status.feature",						
 	 	//          "classpath:feature/Post_Create_Classroom.feature"
 	  //  		  "classpath:feature/Post_Mark_Absent.feature"
-	    			
+				 "classpath:feature/scenario.feature"
 				    },
 	    
 		

@@ -13,8 +13,6 @@ import io.restassured.response.Response;
 public class Get_Enrollments
 {
 	private Response res ;
-	private String baseURL ;
-	private String getEnrolled ;
 	private ExtentTest test;
 	private Map<String, String> headers;
 	
@@ -22,8 +20,6 @@ public class Get_Enrollments
 	{
 		 this.test = Extent_Report_Manager.getTest();
 		 this.headers = ConfigReader.getHeadersFromConfig("header");
-		
-		 getEnrolled = Endpoints.GET_ENROLLMENT;
 	}
 	
 	@When("I send a GET request of Get Enrollments API")
@@ -32,7 +28,7 @@ public class Get_Enrollments
 		 String parentToken = GlobalTokenStore.getToken("parent");
 	     APIUtils.logRequestHeaders(test, headers);
 	     
-	        test.info("Sending GET request to: " + Endpoints.baseURL + getEnrolled);
+	        test.info("Sending GET request to: " + Endpoints.baseURL + Endpoints.GET_ENROLLMENT);
 	        test.info("Using Authorization token for parent.");
 	        
 	        // Sending GET request
@@ -42,7 +38,7 @@ public class Get_Enrollments
 	                 // .contentType("application/json; charset=utf-8")
 	                .header("Authorization", "Bearer " + parentToken)
 	                .when()
-	                .get(getEnrolled)
+	                .get(Endpoints.GET_ENROLLMENT)
 	                .then()
 	                .extract().response();
 	        

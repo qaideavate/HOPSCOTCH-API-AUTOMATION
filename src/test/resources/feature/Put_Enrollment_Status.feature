@@ -10,7 +10,7 @@ Feature: Update Enrollment Status for a Child
     Then the update Enrollment status code  should be 200
     And the response body should contain:
       |status  | message | Enrollment successfully updated |
-      |Approved| program | 312                             |
+      |Approved| program | 265                             |
 
 
   Scenario Outline: Successfully update enrollment status to <status> for child ID
@@ -19,7 +19,7 @@ Feature: Update Enrollment Status for a Child
     Then the update Enrollment status code  should be 200
     And the response body should contain:
       | message | Enrollment successfully updated |
-      | program | 312                             |
+      | program | 265                             |
 
     Examples:
       | status         |

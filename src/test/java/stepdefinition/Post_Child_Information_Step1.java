@@ -6,7 +6,6 @@ import org.json.JSONObject;
 import org.junit.Assert;
 import com.aventstack.extentreports.ExtentTest;
 import static org.hamcrest.Matchers.equalTo;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.notNullValue;

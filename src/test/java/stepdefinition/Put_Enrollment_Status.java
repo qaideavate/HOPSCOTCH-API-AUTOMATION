@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.*;
 
 public class Put_Enrollment_Status
 {
-    String childId = "312" ;
+    String childId ;
     Response res;
     Map<String, String> requestBody;
     private Map<String, String> headers;
@@ -25,13 +25,12 @@ public class Put_Enrollment_Status
     {
         this.headers = ConfigReader.getHeadersFromConfig("header");
         this.test = Extent_Report_Manager.getTest();
-        this.endpoint=Endpoints.CHANGE_ENROLLMERNT_STATUS;
     }
 
     @Given("I have a valid child ID for update the enrollment status")
     public String i_have_a_valid_child_id_for_update_the_enrollment_status()
     {
-        this.childId="312";
+        this.childId=ConfigReader.getProperty(childId);
        /* if (GlobalTokenStore.getChildId() == null || GlobalTokenStore.getChildId().isEmpty())
         {
             String generatedId = GlobalTokenStore.createChildAndGetId();  // generate and set it
@@ -56,14 +55,13 @@ public class Put_Enrollment_Status
         requestBody.put("enrollment_status", status);
     }
 
-
     @When("I send a PUT request to endpoint with child id")
     public void iSendAPUTRequestToEndpointWithChildId()
     {
         String providerToken =GlobalTokenStore.getToken("provider");
         APIUtils.logRequestHeaders(test, headers);
         APIUtils.logRequestBody(test, requestBody);
-        test.info("Sending POST request to endpoint: " + endpoint);
+        test.info("Sending POST request to endpoint: " + Endpoints.CHANGE_ENROLLMERNT_STATUS);
         res = given()
                 .baseUri(Endpoints.baseURL)
                 .headers(headers)
@@ -71,7 +69,7 @@ public class Put_Enrollment_Status
                 .header("Authorization", "Bearer " + providerToken)
                 .body(requestBody)
                 .when()
-                .put(endpoint + childId);
+                .put(Endpoints.CHANGE_ENROLLMERNT_STATUS + childId);
 
         test.info("Received response: " + res.asString());
         System.out.println(res.asPrettyString());

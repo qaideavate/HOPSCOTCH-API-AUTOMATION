@@ -1,5 +1,5 @@
 Feature: Classroom Capacity and Enrollment Management
-
+@runthis
   Scenario: Initialize classroom and check initial capacity
     When the "Provider" login via the POST login endpoint
     And the provider creates a new classroom using the POST classroom endpoint

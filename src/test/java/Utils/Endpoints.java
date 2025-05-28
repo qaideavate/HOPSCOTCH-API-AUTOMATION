@@ -20,6 +20,7 @@ public class Endpoints
         public static final String create_classroom = "providers/programs";
         public static final String mark_absent ="providers/enrollments/mark-absent";
         public static final String enroll_dropin ="api/user/enroll-child";
+        public static final String enroll_regular ="user/enroll-fulltime-child";
         
         
         

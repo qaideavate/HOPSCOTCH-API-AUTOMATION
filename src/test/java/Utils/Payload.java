@@ -268,7 +268,7 @@ public class Payload
 		    return requestBody;
 		}
 
-		public Map<String, Object> getEnrollChildPayload(int providerId, int classroomId, int childId, String startDate)
+		public Map<String, Object> getEnrollDropinChildPayload(int providerId, int classroomId, int childId, String startDate)
 		{
 			Map<String, Object> consent = new HashMap<>();
 			consent.put("childId", childId);
@@ -305,6 +305,45 @@ public class Payload
 			payload.put("isSubsidyEligible", false);
 
 			return payload;
+		}
+		
+		public Map<String, Object> getEnrollRegularChildPayload(int providerId, int classroomId, int childId, String startDate) {
+		    Map<String, Object> consent = new HashMap<>();
+		    consent.put("childId", childId);
+		    consent.put("providerId", providerId);
+		    consent.put("transportationSchoolPersonalVehicle", false);
+		    consent.put("transportationSchoolPublicTransportation", false);
+		    consent.put("transportationSchoolWalking", true);
+		    consent.put("transportationFieldTripsPersonalVehicle", false);
+		    consent.put("transportationFieldTripsPublicTransportation", false);
+		    consent.put("transportationFieldTripsWalking", false);
+		    consent.put("transportationOccasionalErrandsPersonalVehicle", false);
+		    consent.put("transportationOccasionalErrandsPublicTransportation", false);
+		    consent.put("transportationOccasionalErrandsWalking", false);
+		    consent.put("transportationOther", "");
+		    consent.put("transportationOtherPersonalVehicle", false);
+		    consent.put("transportationOtherPublicTransportation", false);
+		    consent.put("transportationOtherWalking", false);
+		    consent.put("swimming", false);
+		    consent.put("bathingAfterAccident", false);
+		    consent.put("bathingOvernightCare", false);
+		    consent.put("takePhotos", true);
+		    consent.put("takeVideos", false);
+		    consent.put("captureOnSurveillance", false);
+		    consent.put("isSubsidy", true);
+
+		    Map<String, Object> payload = new HashMap<>();
+		    payload.put("provider_id", providerId);
+		    payload.put("classroom_id", classroomId);
+		    payload.put("child", String.valueOf(childId)); // matching "child": "268" (as a String)
+		    payload.put("start_date", startDate);
+		    payload.put("tuition", "111.00");
+		    payload.put("consent", consent);
+		    payload.put("schedule_type_id", "1");
+		    payload.put("tuition_cadence", "weekly");
+		    payload.put("isSubsidyEligible", true);
+
+		    return payload;
 		}
 
 }

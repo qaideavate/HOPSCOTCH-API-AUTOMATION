@@ -7,7 +7,7 @@ import Utils.ConfigReader;
 import Utils.GlobalTokenStore;
 import io.cucumber.java.en.*;
 
-public class scenario
+public class Happy_Path_Flow
 {
 	String ParentToken;
 	String ProviderToken;
@@ -31,7 +31,7 @@ public class scenario
 	@When("the provider retrieves the classroom capacity using the GET classroom endpoint with the classroom ID")
 	public void the_provider_retrieves_the_classroom_capacity_using_the_get_classroom_endpoint_with_the_classroom_id() 
 	{
-		View_capacity_management capacity = new View_capacity_management();
+		Get_capacity_management capacity = new Get_capacity_management();
 		capacity.i_send_a_get_request_to_view_classroom_capacity_at_classroom_endpoint_with_classroom_id();
 	}
 	

@@ -3,6 +3,7 @@ import Utils.*;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import io.cucumber.java.en.*;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import java.util.*;
@@ -24,13 +25,12 @@ public class Post_Mark_Absent
 
     @When("I send a POST request to providers\\/enrollments\\/mark-absent with {int}")
     public void i_send_a_post_request_to_providers_enrollments_mark_absent_with(Integer enrollmentid)
-	    {	this.providerToken = GlobalTokenStore.getToken("provider");
-	    	System.out.println(providerToken);
-			requestBody = Pl.MarkingAbsence(488);
+	    {	this.providerToken = ConfigReader.getProperty("ProviderToken");
+			requestBody = Pl.MarkingAbsence(enrollmentid);
 			test.log(Status.INFO, "Sending POST request to: " + Endpoints.baseURL +" "+Endpoints.mark_absent);
 			test.log(Status.INFO, "Prepared request body: " + requestBody.toString());
 			APIUtils.logRequestHeaders(test, headers);
-
+			System.out.println(requestBody);
 	        response = given()
 	                .baseUri(Endpoints.baseURL)
 	                .headers(headers)
@@ -54,9 +54,10 @@ public class Post_Mark_Absent
 	    @Then("the response body should contain {string} as true")
 	    public void theResponseBodyShouldContainKeyAsTrue(String key)
 		{
-	        boolean value = response.jsonPath().getBoolean(key);
-	        Assert.assertTrue("Expected " + key + " to be true", value);
-	        test.pass("Key " + key + " is true in the response");
+	    	    JsonPath jsonPath = response.jsonPath();
+	    	    Boolean actualValue = jsonPath.getBoolean(key);
+	    	    Assert.assertNotNull("Expected key '" + key + "' not found in response.", actualValue);
+	    	    Assert.assertTrue("Expected value of '" + key + "' to be true but was false.", actualValue);
 	    }
 
 	    @Then("the response body should contain the keyvalue {string}")

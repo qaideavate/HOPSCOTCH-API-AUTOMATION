@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import Utils.ConfigReader;
+import Utils.Endpoints;
 import Utils.GlobalTokenStore;
 import io.cucumber.java.en.*;
 
@@ -13,21 +14,64 @@ public class Happy_Path_Flow
 {
 	String ParentToken;
 	String ProviderToken;
-	@When("the {string} login via the POST login endpoint")
-	public void the_login_via_the_post_login_endpoint(String userType ) 
+	 Post_Login login = new Post_Login();
+	@When("both Parent and Provider login via the POST login endpoint")
+	public void both_login_via_the_post_login_endpoint() 
 	{
-	   Post_Login login = new Post_Login();       
-	   login.the_provides_email_and_password(userType, "pankaj.patidar@mindruby.com", "Test@12345");
-	   this.ProviderToken = login.the_sends_a_post_request_to_the_login_endpoint(userType);
-	   GlobalTokenStore.setToken("Provider", ProviderToken);
+	    // Login for Provider
+	    login.the_provides_email_and_password("Provider", Endpoints.provider_email, Endpoints.provider_password);
+	    String providerToken = login.the_sends_a_post_request_to_the_login_endpoint("Provider");
+	    GlobalTokenStore.setToken("Provider", providerToken);
+
+	    // Login for Parent
+	    login.the_provides_email_and_password("Parent", Endpoints.parent_email, Endpoints.parent_password);
+	    String parentToken = login.the_sends_a_post_request_to_the_login_endpoint("Parent");
+	    GlobalTokenStore.setToken("Parent", parentToken);
+
+	    // Store tokens in properties file using writeMultipleProperties
+	    Map<String, String> tokens = new HashMap<>();
+	    tokens.put("ProviderToken", providerToken);
+	    tokens.put("ParentToken", parentToken);
+	    ConfigReader.writeMultipleProperties(tokens);
+	}
+	
+	@When("the {string} login via the POST login endpoint")
+	public void the_login_via_the_post_login_endpoint(String string)
+	{
+		 login.the_provides_email_and_password("Parent", Endpoints.parent_email, Endpoints.parent_password);
+		 String parentToken = login.the_sends_a_post_request_to_the_login_endpoint("Parent");
+		 GlobalTokenStore.setToken("Parent", parentToken);
 	}
 	
 	@When("the provider creates a new classroom using the POST classroom endpoint")
 	public void the_provider_creates_a_new_classroom_using_the_post_classroom_endpoint() 
 	{
+		 try {
+		        // ⏳ Wait for 3 seconds (optional - adjust as needed)
+		        System.out.println("⏳ Waiting for 3 seconds before reading config...");
+		        Thread.sleep(3000); 
+		    } catch (InterruptedException e) {
+		        Thread.currentThread().interrupt();
+		        throw new RuntimeException("Thread was interrupted", e);
+		    }
+
+		    // 🔄 Refresh the config file (force reload)
+		    ConfigReader.reloadProperties();
+	    
 		 Post_Create_Classroom classroom = new Post_Create_Classroom();
 		 classroom.i_send_a_post_request_to_create_classroom_at_classroom_endpoint();
 		 classroom.responseBodyShouldContainKey("classroomId");
+		 try {
+		        // ⏳ Wait for 3 seconds (optional - adjust as needed)
+		        System.out.println("⏳ Waiting for 3 seconds before reading config...");
+		        Thread.sleep(3000); 
+		    } catch (InterruptedException e) {
+		        Thread.currentThread().interrupt();
+		        throw new RuntimeException("Thread was interrupted", e);
+		    }
+
+		    // 🔄 Refresh the config file (force reload)
+		    ConfigReader.reloadProperties();
 	}
 	
 	@When("the provider retrieves the classroom capacity using the GET classroom endpoint with the classroom ID")
@@ -37,34 +81,27 @@ public class Happy_Path_Flow
 		capacity.i_send_a_get_request_to_view_classroom_capacity_at_classroom_endpoint_with_classroom_id();
 	}
 	
-	
-	@When("the {string} logs in via the POST login endpoint")
-	public void the_logs_in_via_the_post_login_endpoint(String userType)
-	{
-		 Post_Login login = new Post_Login();
-		 login.the_provides_email_and_password(userType, "pankaj@yopmail.com", "Test@12345");
-		 this.ParentToken = login.the_sends_a_post_request_to_the_login_endpoint(userType); // ✅ Get token here
-		 GlobalTokenStore.setToken("Parent", ParentToken);
-	}
-	
 	@When("the parent creates {int} new children with valid information")
-	public void the_parent_creates_new_children_with_valid_information(Integer numberOfChildren)
+	public void the_parent_creates_new_children_with_valid_information(Integer numberOfChildren) 
 	{
 	    Post_Child_Information_Step1 PCIS = new Post_Child_Information_Step1();
 	    Map<String, String> allChildIds = new HashMap<>();
-	    for (int i = 1; i <= numberOfChildren; i++)
-	    {	PCIS.i_have_a_valid_parent_token();
+
+	    // Create the parent only once
+	    PCIS.i_have_a_valid_parent_token();
+
+	    for (int i = 1; i <= numberOfChildren; i++) {
 	        String childId = PCIS.i_send_a_post_request_to();
-	        if (childId == null || childId.isEmpty()) 
-	        {
+	        if (childId == null || childId.isEmpty()) {
 	            System.out.println("❌ Failed to create child #" + i);
 	            continue;
 	        }
+
 	        allChildIds.put("ChildId" + i, childId);
 
 	        // Perform the rest of the child creation steps
 	        PCIS.the_child_registration_response_should_store_child_id();
-	        PCIS.i_send_a_post_request_to_parent_endpoint();
+	        PCIS.i_send_a_post_request_to_parent_endpoint(); // This might just link child to parent, not create a new one
 	        PCIS.the_response_should_contain_the_parent_id();
 	        PCIS.i_send_a_post_request_to_emergency_contact_endpoint();
 	        PCIS.i_send_a_post_request_to_pickup_contact_endpoint();
@@ -73,13 +110,12 @@ public class Happy_Path_Flow
 	        PCIS.i_send_a_post_request_to_consent_endpoint();
 	        PCIS.i_send_a_put_request_to_final_submission_endpoint();
 	    }
-	    if (!allChildIds.isEmpty()) 
-	    {
-	    	
+
+	    if (!allChildIds.isEmpty()) {
 	        ConfigReader.writeMultipleProperties(allChildIds);
-	    
-	    	}
 	    }
+	}
+
 	
 	@When("the parent enrolls {int} children for regular care in the classroom")
 	public void the_parent_enrolls_children_for_regular_care_in_the_classroom(Integer numberOfChildren) 
@@ -142,7 +178,6 @@ public class Happy_Path_Flow
 	@When("the provider marks {int} enrolled child as absent for today and tomorrow using the enrollment ID")
 	public void the_provider_marks_enrolled_child_as_absent_for_today_and_tomorrow_using_the_enrollment_id(Integer childIndex)
 	{
-		
 	    // Construct the property key based on the index (e.g., ChildId1, ChildId2, etc.)
 	    String enrollmentKey = "enrollmentId_ChildId3";
 	    String enrollmentIdStr = ConfigReader.getProperty(enrollmentKey);
@@ -157,10 +192,31 @@ public class Happy_Path_Flow
 	    absent.i_send_a_post_request_to_providers_enrollments_mark_absent_with(enrollmentId);
 	}
 
-	@When("the parent attempts to enroll a drop-in child on the same dates another child is absent")
-	public void the_parent_attempts_to_enroll_a_drop_in_child_on_the_same_dates_another_child_is_absent()
+	@When("the parent attempts to drop-in {int} child on the same dates another child is absent")
+	public void the_parent_attempts_to_enroll_a_drop_in_child_on_the_same_dates_another_child_is_absent(Integer numberOfChildren)
 	{
-	   
+		try {
+	        // ⏳ Wait for 3 seconds (optional - adjust as needed)
+	        System.out.println("⏳ Waiting for 3 seconds before reading config...");
+	        Thread.sleep(3000); 
+	    } catch (InterruptedException e) {
+	        Thread.currentThread().interrupt();
+	        throw new RuntimeException("Thread was interrupted", e);
+	    }
+
+	    // 🔄 Refresh the config file (force reload)
+	    ConfigReader.reloadProperties();
+    
+	enroll_Regular_Dropin regular = new enroll_Regular_Dropin();
+    String childrenToDrop = ConfigReader.getProperty("DROPIN_CHILDREN");
+    List<String> selectedChildKeys = Arrays.asList(childrenToDrop.split(","));
+
+    for (int i = 0; i < numberOfChildren && i < selectedChildKeys.size(); i++)
+    {
+        String childKey = selectedChildKeys.get(i).trim();
+        System.out.println("📌 Enrolling child with key: " + childKey);
+        regular.i_send_a_post_request_to_enroll_regular_child_api_with_valid_body(childKey);
+    }
 	}
 
 	@When("the provider graduates {int} enrolled child effective from today's date")

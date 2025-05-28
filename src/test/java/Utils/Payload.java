@@ -25,9 +25,9 @@ public class Payload
 	{
         Map<String, Object> childInfo = new HashMap<>();
         childInfo.put("childId", "");
-        childInfo.put("lastName", "down");
+        childInfo.put("lastName",faker.name().lastName() );
         childInfo.put("middleName", "");
-        childInfo.put("firstName", "up");
+        childInfo.put("firstName", faker.name().firstName());
         childInfo.put("nickname", "");
         childInfo.put("birthdate", "2007-08-15");
         childInfo.put("gender", "Boy");

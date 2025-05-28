@@ -51,6 +51,7 @@ public class Post_Child_Information_Step1
 	        APIUtils.logRequestHeaders(test, headers);
 	        APIUtils.logRequestBody(test, payload);
 	        test.info("Sending POST request to: " + Endpoints.baseURL + Endpoints.CHILD_REGISTER);
+	        System.out.println(payload.toString());
 	       
 	  childres = given()
 	            .baseUri(Endpoints.baseURL)
@@ -60,11 +61,13 @@ public class Post_Child_Information_Step1
 	            .when()
 	            .post(Endpoints.CHILD_REGISTER)
 	            .then()
+	            .statusCode(200)
 	            .extract().response();
 	  		lastres = childres;
 
 	        test.info("Response Received: " + childres.getBody().asString());
 	        APIUtils.logResponseToExtent(childres, test);
+	        System.out.println(childres.asPrettyString());
 	        return childres.jsonPath().getString("childId");
 	    }
 
@@ -103,7 +106,7 @@ public class Post_Child_Information_Step1
 	    	APIUtils.logRequestHeaders(test, headers);
 	    	APIUtils.logRequestBody(test, payload);
 	    	test.info("Sending POST request to endpoint: " + Endpoints.PARENT_REGISTER);
-
+	    	System.out.println(payload.toString());
 	    	Parentres = given()
 	    	            .baseUri(Endpoints.baseURL)
 	    	            .headers(headers)
@@ -112,9 +115,10 @@ public class Post_Child_Information_Step1
 	    	            .when()
 	    	            .post(Endpoints.PARENT_REGISTER)
 	    	            .then()
+	    	            .statusCode(200)
 	    	            .extract().response();
 	    	lastres = Parentres;
-
+	    	System.out.println(Parentres.asPrettyString());
 	    	test.info("Received response: " + Parentres.asString());
 	    	APIUtils.logResponseToExtent(Parentres, test);
 	    }
@@ -138,6 +142,7 @@ public class Post_Child_Information_Step1
 			String payload = Pl.emergency_contact_payload(childId, parentId);
 	    	APIUtils.logRequestHeaders(test, headers);
 	    	APIUtils.logRequestBody(test, payload);
+	    	System.out.println(payload.toString());
 			      lastres = given()
 			            .baseUri(Endpoints.baseURL)
 			            .headers(headers)
@@ -146,7 +151,9 @@ public class Post_Child_Information_Step1
 			            .when()
 			            .post(Endpoints.Emergency_Contact)
 			            .then()
+			            .statusCode(200)
 		                .extract().response(); // ✅ Make sure to extract the response
+		System.out.println(lastres.asPrettyString());
 		}
 
 		@Then("the response should contain the emergency contact ID\\(s)")
@@ -168,7 +175,7 @@ public class Post_Child_Information_Step1
 
 		    APIUtils.logRequestHeaders(test, headers);
 		    APIUtils.logRequestBody(test, payload);
-
+		    System.out.println(payload.toString());
 		    lastres = given()
 		            .baseUri(Endpoints.baseURL)
 		            .headers(headers)
@@ -177,7 +184,9 @@ public class Post_Child_Information_Step1
 		            .when()
 		            .post(Endpoints.Add_pickup)
 		            .then()
+		            .statusCode(200)
 	                .extract().response(); // ✅ Make sure to extract the response;
+		    System.out.println(lastres.asPrettyString());
 		}
 
 		@Then("the response should contain the pickup contact ID\\(s)")
@@ -198,7 +207,7 @@ public class Post_Child_Information_Step1
 
 		    APIUtils.logRequestHeaders(test, headers);
 		    test.info("Sending POST request to Health Document Upload endpoint with childId: " + childId);
-
+		    
 		    lastres = given()
 		            .baseUri(Endpoints.baseURL) // Should be https://dev-api.hopscotchconnect.com
 		            .headers(headers)
@@ -210,6 +219,7 @@ public class Post_Child_Information_Step1
 		            .post(Endpoints.Add_Health_document_sub)
 		            .then()
 		            .log().all()
+		            .statusCode(200)
 		            .extract()
 		            .response();
 
@@ -238,7 +248,7 @@ public class Post_Child_Information_Step1
 		    APIUtils.logRequestHeaders(test, headers);
 		    APIUtils.logRequestBody(test, requestBody);
 		    test.info("Sending DELETE request to endpoint: " + Endpoints.Delete_Document_sub);
-
+		    System.out.println(requestBody.toString());
 		    lastres = given()
 		                .baseUri(Endpoints.baseURL)
 		                .headers(headers)
@@ -246,7 +256,7 @@ public class Post_Child_Information_Step1
 		                .body(requestBody)
 		            .when()
 		                .post(Endpoints.Delete_Document_sub);
-
+		    System.out.println(lastres.asPrettyString());
 		    test.info("Received response: " + lastres.asString());
 		    APIUtils.logResponseToExtent(lastres, test);
 		}
@@ -269,7 +279,7 @@ public class Post_Child_Information_Step1
 		    APIUtils.logRequestBody(test, payload);  // Use the correct variable name (was: requestBody)
 
 		    test.info("Sending POST request to endpoint: " + Endpoints.Health);
-
+		    System.out.println(payload.toString());
 		    lastres = given()
 		                .baseUri(Endpoints.baseURL)
 		                .headers(headers)
@@ -277,7 +287,7 @@ public class Post_Child_Information_Step1
 		                .body(payload)
 		              .when()
 		                .post(Endpoints.Health);
-
+		    System.out.println(lastres.asPrettyString());
 		    test.info("Received response: " + lastres.asString());
 		    APIUtils.logResponseToExtent(lastres, test);
 		}
@@ -299,6 +309,7 @@ public class Post_Child_Information_Step1
 			APIUtils.logRequestHeaders(test, headers);
 	        APIUtils.logRequestBody(test, payload);
 			test.info("Sending POST request to endpoint: " + endpoint);
+			System.out.println(payload.toString());
 			lastres = given()
 			            .baseUri(Endpoints.baseURL)
 			            .headers(headers)
@@ -306,7 +317,7 @@ public class Post_Child_Information_Step1
 			            .body(payload)
 			            .when()
 			            .post(Endpoints.Add_Consent);
-			
+			System.out.println(lastres.asPrettyString());
 			 test.info("Received response: " + lastres.asString());
 			 APIUtils.logResponseToExtent(lastres, test);
 		}
@@ -329,6 +340,7 @@ public class Post_Child_Information_Step1
 			APIUtils.logRequestHeaders(test, headers);
 	        APIUtils.logRequestBody(test, payload);
 			test.info("Sending POST request to endpoint: " + Endpoints.Submit_Child);
+			System.out.println(payload.toString());
 			lastres = given()
 			            .baseUri(Endpoints.baseURL)
 			            .headers(headers)
@@ -336,7 +348,7 @@ public class Post_Child_Information_Step1
 			            .body(payload)
 			            .when()
 			            .post(Endpoints.Submit_Child);
-			
+			System.out.println(lastres.asPrettyString());
 			 test.info("Received response: " + lastres.asString());
 			 APIUtils.logResponseToExtent(lastres, test);
 		}

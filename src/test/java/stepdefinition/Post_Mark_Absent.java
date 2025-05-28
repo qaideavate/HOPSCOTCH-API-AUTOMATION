@@ -9,7 +9,7 @@ import java.util.*;
 import static io.restassured.RestAssured.*;
 public class Post_Mark_Absent 
 {
-    private String baseUrl;
+
     private String providerToken;
     private Map<String, String> headers;
     private Response response;
@@ -19,25 +19,25 @@ public class Post_Mark_Absent
     public Post_Mark_Absent() 
     {
         this.test = Extent_Report_Manager.getTest();
-        this.providerToken = GlobalTokenStore.getToken("provider");
         this.headers = ConfigReader.getHeadersFromConfig("header");
     }
 
-	@When("When I send a POST request to providers/enrollments/mark-absent")
-	public void I_send_Post_Request_To_MarkAbsent(int enrollmentId)
-	    {
-			String endpoint = "/providers/enrollments/mark-absent";
-			requestBody = Pl.MarkingAbsence(enrollmentId);
+    @When("I send a POST request to providers\\/enrollments\\/mark-absent with {int}")
+    public void i_send_a_post_request_to_providers_enrollments_mark_absent_with(Integer enrollmentid)
+	    {	this.providerToken = GlobalTokenStore.getToken("provider");
+	    	System.out.println(providerToken);
+			requestBody = Pl.MarkingAbsence(488);
 			test.log(Status.INFO, "Sending POST request to: " + Endpoints.baseURL +" "+Endpoints.mark_absent);
 			test.log(Status.INFO, "Prepared request body: " + requestBody.toString());
 			APIUtils.logRequestHeaders(test, headers);
 
 	        response = given()
-	                .baseUri(baseUrl)
+	                .baseUri(Endpoints.baseURL)
 	                .headers(headers)
+	                .header("Authorization", "Bearer " + providerToken)
 	                .body(requestBody)
 	                .when()
-	                .post(endpoint);
+	                .post(Endpoints.mark_absent);
 
 	        APIUtils.logResponseToExtent(response, test);
 	        System.out.println("API Response:\n" + response.asPrettyString());

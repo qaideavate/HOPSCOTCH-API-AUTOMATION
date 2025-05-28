@@ -34,7 +34,7 @@ public class Extent_Report_Manager
             extent.attachReporter(sparkReporter);
 
             extent.setSystemInfo("Project", "API Testing");
-            extent.setSystemInfo("Tester", "Jitendra Kumar");
+            extent.setSystemInfo("Tester", "Pankaj");
             extent.setSystemInfo("Environment", "Dev");
             extent.setSystemInfo("Tool", "Postman");
             

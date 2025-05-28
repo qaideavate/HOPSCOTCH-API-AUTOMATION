@@ -27,41 +27,19 @@ public class Put_Enrollment_Status
         this.test = Extent_Report_Manager.getTest();
     }
 
-    @Given("I have a valid child ID for update the enrollment status")
-    public String i_have_a_valid_child_id_for_update_the_enrollment_status()
-    {
-        this.childId=ConfigReader.getProperty(childId);
-       /* if (GlobalTokenStore.getChildId() == null || GlobalTokenStore.getChildId().isEmpty())
-        {
-            String generatedId = GlobalTokenStore.createChildAndGetId();  // generate and set it
-            GlobalTokenStore.setChildId(generatedId);                     // optional, if not already set
-            this.childId = generatedId;
-            test.info("Generated new child ID: " + generatedId);
-        }
-
-        {
-            this.childId = GlobalTokenStore.getChildId();  // reuse existing
-            test.info("Fetched existing child ID from GlobalTokenStore: " + childId);
-        }
-        System.out.println("   childId: " + childId);*/
-        return childId;
-    }
-
-
-    @Given("I prepare a request body with enrollment status {string}")
-    public void iPrepareARequestBodyWithEnrollmentStatus(String status)
-    {
-        requestBody = new HashMap<>();
-        requestBody.put("enrollment_status", status);
-    }
-
-    @When("I send a PUT request to endpoint with child id")
-    public void iSendAPUTRequestToEndpointWithChildId()
-    {
+    @When("I send a PUT request to endpoint with {string} and status {string}")
+    public void i_send_a_put_request_to_endpoint_with_and_status(String childId, String status) 
+    {	
+    	 requestBody = new HashMap<>();
+    	 requestBody.put("enrollment_status", status);
+    	
         String providerToken =GlobalTokenStore.getToken("provider");
+        
         APIUtils.logRequestHeaders(test, headers);
         APIUtils.logRequestBody(test, requestBody);
+        
         test.info("Sending POST request to endpoint: " + Endpoints.CHANGE_ENROLLMERNT_STATUS);
+        System.out.println(requestBody);
         res = given()
                 .baseUri(Endpoints.baseURL)
                 .headers(headers)

@@ -25,11 +25,11 @@ public class Payload
 	{
         Map<String, Object> childInfo = new HashMap<>();
         childInfo.put("childId", "");
-        childInfo.put("lastName", "AsadApi");
+        childInfo.put("lastName", "down");
         childInfo.put("middleName", "");
-        childInfo.put("firstName", "AsadApi");
+        childInfo.put("firstName", "up");
         childInfo.put("nickname", "");
-        childInfo.put("birthdate", "2012-08-15");
+        childInfo.put("birthdate", "2007-08-15");
         childInfo.put("gender", "Boy");
         childInfo.put("streetAddress", "830 Southeast Ireland Street");
         childInfo.put("city", "Oak Harbor");
@@ -223,12 +223,12 @@ public class Payload
 		    String todayDate = LocalDate.now().toString();
 		    Map<String, Object> payload = new HashMap<>();
 		    
-		    payload.put("name", "Test class " + faker.number().randomNumber());
-		    payload.put("min_age", 15);
-		    payload.put("max_age", 30);
+		    payload.put("name", "class Test " + faker.number().randomNumber());
+		    payload.put("min_age", 200);
+		    payload.put("max_age", 500);
 		    payload.put("start_date", todayDate);
-		    payload.put("license_capacity", 7);
-		    payload.put("capacity", 4);
+		    payload.put("license_capacity", 2);
+		    payload.put("capacity", 2);
 		    payload.put("enrollment_cutoff_window", "7");
 		    payload.put("fulltime_tuition", 10);
 		    payload.put("fulltime_tuition_cadence", "weekly");
@@ -237,7 +237,8 @@ public class Payload
 		    payload.put("afternoons_tuition_status", false);
 		    payload.put("mwf_tuition_status", false);
 		    payload.put("tuth_tuition_status", false);
-		    payload.put("dropin_tuition_status", false);
+		    payload.put("dropin_tution_status", true);
+		    payload.put("dropin_tution", 20);
 		    payload.put("keywords", "");
 
 		    // Inline allocation generation

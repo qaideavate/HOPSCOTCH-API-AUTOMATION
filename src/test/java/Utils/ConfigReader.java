@@ -51,6 +51,20 @@ public class ConfigReader
         return allProps;
     }
  
+    
+    
+    public static void reloadProperties() {
+        try (FileInputStream fis = new FileInputStream(path)) 
+        {
+            prop.clear(); // Clear old values
+            prop.load(fis);
+            System.out.println("🔄 Config file reloaded successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("❌ Failed to reload config file", e);
+        }
+    }
+
 // WRITE: Save multiple key-value pairs at once
     public static void writeMultipleProperties(Map<String, String> propertiesToWrite) 
     {

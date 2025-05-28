@@ -68,5 +68,4 @@ public class Get_Enrollments
    	  // Schema validation
 		 cleanedResponse.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/" + schemaFileName));
 	}
-
 }

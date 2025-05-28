@@ -48,7 +48,7 @@ Background:
     Then I should receive a 200 OK response
     And the child registration status should be updated to COMPLETE
  
- @runthis 
+
    Scenario: Validate Child Registration with valid data
     When I send a POST request to child endpoint
     Then I should receive a 200 OK response
@@ -56,7 +56,7 @@ Background:
     Then the returned childId should be a positive number
     Then the child registration response should store childId
     
- @runthis
+
    Scenario: Register a new parent linked to a child with valid data
     When I send a POST request to Parent endpoint
      Then I should receive a 200 OK response

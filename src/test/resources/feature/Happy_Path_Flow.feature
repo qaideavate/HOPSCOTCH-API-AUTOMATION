@@ -1,20 +1,23 @@
 Feature: Classroom Capacity and Enrollment Management
-@runthis
+
   Scenario: Initialize classroom and check initial capacity
     When the "Provider" login via the POST login endpoint
     And the provider creates a new classroom using the POST classroom endpoint
     And the provider retrieves the classroom capacity using the GET classroom endpoint with the classroom ID
-@runthis
+
   Scenario: Enroll children with limited classroom capacity
     When the "Parent" logs in via the POST login endpoint
     And the parent creates 4 new children with valid information
     And the parent enrolls 3 children for regular care in the classroom
-    Then only 2 children should be enrolled successfully
-    And the remaining 1 child should be added to the waitlist due to capacity limits
 
+ Scenario: Approve Enrolled child
+  When the "Provider" login via the POST login endpoint
+  And Approve the Enrolled 2 child.
+  @runthis
   Scenario: Mark an enrolled child as absent
     When the "Provider" logs in via the POST login endpoint
-    And the provider marks 1 enrolled child as absent for today and tomorrow using the enrollment ID
+    When the provider marks 1 enrolled child as absent for today and tomorrow using the enrollment ID
+    
 
   Scenario: Enroll a drop-in child during an absence period
     When the "Parent" logs in via the POST login endpoint

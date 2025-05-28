@@ -37,6 +37,7 @@ public class Post_Create_Classroom
     	test.log(Status.INFO, "Sending POST request to: " + Endpoints.create_classroom);
          APIUtils.logRequestHeaders(test, headers);
          APIUtils.logRequestBody(test, payload.toString());
+         System.out.println(payload);
           res = given()
                 .baseUri(Endpoints.baseURL)
                 .headers(headers)
@@ -49,6 +50,7 @@ public class Post_Create_Classroom
         APIUtils.logResponseToExtent(res, test);
         System.out.println(res.asPrettyString());
     }
+    
 
     @Then("the response status code on Creating Classroom  should be {int}")
     public void theResponseStatusCodeOnCreatingClassroomShouldBe(int expectedStatusCode)
@@ -68,7 +70,7 @@ public class Post_Create_Classroom
     @Then("the response body should contain the key {string}")
     public void responseBodyShouldContainKey(String key)
     {
-        Object classroomId = res.jsonPath().get("classroomId");
+        Object classroomId = res.jsonPath().getString("classroomId");
         Assert.assertNotNull("Expected response to contain key: " + key, classroomId);
         test.pass("Response contains key: " + key + " with value: " + classroomId);
         

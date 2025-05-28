@@ -1,6 +1,8 @@
 package stepdefinition;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import Utils.ConfigReader;
@@ -58,10 +60,12 @@ public class Happy_Path_Flow
 	            System.out.println("❌ Failed to create child #" + i);
 	            continue;
 	        }
-	        allChildIds.put("CHILDID" + i, childId);
+	        allChildIds.put("ChildId" + i, childId);
 
 	        // Perform the rest of the child creation steps
+	        PCIS.the_child_registration_response_should_store_child_id();
 	        PCIS.i_send_a_post_request_to_parent_endpoint();
+	        PCIS.the_response_should_contain_the_parent_id();
 	        PCIS.i_send_a_post_request_to_emergency_contact_endpoint();
 	        PCIS.i_send_a_post_request_to_pickup_contact_endpoint();
 	        PCIS.i_send_a_Post_request_to_health_document_delete_endpoint();
@@ -71,25 +75,113 @@ public class Happy_Path_Flow
 	    }
 	    if (!allChildIds.isEmpty()) 
 	    {
+	    	
 	        ConfigReader.writeMultipleProperties(allChildIds);
+	    
+	    	}
 	    }
-	}
 	
 	@When("the parent enrolls {int} children for regular care in the classroom")
-	public void the_parent_enrolls_children_for_regular_care_in_the_classroom(Integer int1) 
+	public void the_parent_enrolls_children_for_regular_care_in_the_classroom(Integer numberOfChildren) 
 	{
+		 try {
+		        // ⏳ Wait for 3 seconds (optional - adjust as needed)
+		        System.out.println("⏳ Waiting for 3 seconds before reading config...");
+		        Thread.sleep(3000); 
+		    } catch (InterruptedException e) {
+		        Thread.currentThread().interrupt();
+		        throw new RuntimeException("Thread was interrupted", e);
+		    }
+
+		    // 🔄 Refresh the config file (force reload)
+		    ConfigReader.reloadProperties();
 	    
+		enroll_Regular_Dropin regular = new enroll_Regular_Dropin();
+	    String childrenToEnroll = ConfigReader.getProperty("ENROLL_CHILDREN");
+	    List<String> selectedChildKeys = Arrays.asList(childrenToEnroll.split(","));
+
+	    for (int i = 0; i < numberOfChildren && i < selectedChildKeys.size(); i++)
+	    {
+	        String childKey = selectedChildKeys.get(i).trim();
+	        System.out.println("📌 Enrolling child with key: " + childKey);
+	        regular.i_send_a_post_request_to_enroll_regular_child_api_with_valid_body(childKey);
+	    }
 	}
-	@Then("only {int} children should be enrolled successfully")
-	public void only_children_should_be_enrolled_successfully(Integer int1) 
+
+
+	@When("Approve the Enrolled {int} child.")
+	public void approve_the_enrolled_child(Integer count) 
 	{
-	  
+		 try {
+		        // ⏳ Wait for 3 seconds (optional - adjust as needed)
+		        System.out.println("⏳ Waiting for 3 seconds before reading config...");
+		        Thread.sleep(3000); 
+		    } catch (InterruptedException e) 
+		 {
+		        Thread.currentThread().interrupt();
+		        throw new RuntimeException("Thread was interrupted", e);
+		    }
+		    // 🔄 Refresh the config file (force reload)
+		    ConfigReader.reloadProperties();
+		  Put_Enrollment_Status statusUpdater = new Put_Enrollment_Status();
+		  String enrollChildrenStr = ConfigReader.getProperty("enrollmentid");
+		  String[] childKeys = enrollChildrenStr.split(",");
+		   for (int i = 0; i < count; i++)
+			 {
+				String childKey = childKeys[i].trim();  // e.g., "ChildId4"
+			    String childId = ConfigReader.getProperty(childKey); // e.g., "2009"
+
+		    if (childId != null && !childId.isEmpty())
+		    {  statusUpdater.i_send_a_put_request_to_endpoint_with_and_status(childId, "approved");
+				        } 
+		    else { System.out.println("⚠️ Child ID not found for key: " + childKey);
+				   }
+		 }
 	}
-	@Then("the remaining {int} child should be added to the waitlist due to capacity limits")
-	public void the_remaining_child_should_be_added_to_the_waitlist_due_to_capacity_limits(Integer int1) 
+
+	@When("the provider marks {int} enrolled child as absent for today and tomorrow using the enrollment ID")
+	public void the_provider_marks_enrolled_child_as_absent_for_today_and_tomorrow_using_the_enrollment_id(Integer childIndex)
 	{
+		
+	    // Construct the property key based on the index (e.g., ChildId1, ChildId2, etc.)
+	    String enrollmentKey = "enrollmentId_ChildId3";
+	    String enrollmentIdStr = ConfigReader.getProperty(enrollmentKey);
 	    
+	    if (enrollmentIdStr == null || enrollmentIdStr.isEmpty()) {
+	        throw new RuntimeException("❌ Enrollment ID not found for key: " + enrollmentKey);
+	    }
+
+	    int enrollmentId = Integer.parseInt(enrollmentIdStr.trim());
+	    System.out.println(enrollmentId);
+	    Post_Mark_Absent absent = new Post_Mark_Absent();
+	    absent.i_send_a_post_request_to_providers_enrollments_mark_absent_with(enrollmentId);
 	}
+
+	@When("the parent attempts to enroll a drop-in child on the same dates another child is absent")
+	public void the_parent_attempts_to_enroll_a_drop_in_child_on_the_same_dates_another_child_is_absent()
+	{
+	   
+	}
+
+	@When("the provider graduates {int} enrolled child effective from today's date")
+	public void the_provider_graduates_enrolled_child_effective_from_today_s_date(Integer int1) {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+
+	@When("the parent enrolls the 4th child starting from the day after the graduation date")
+	public void the_parent_enrolls_the_4th_child_starting_from_the_day_after_the_graduation_date() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+
+	@Then("the updated classroom capacity should be accurately reflected by the system")
+	public void the_updated_classroom_capacity_should_be_accurately_reflected_by_the_system() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new io.cucumber.java.PendingException();
+	}
+
+
 
 
 

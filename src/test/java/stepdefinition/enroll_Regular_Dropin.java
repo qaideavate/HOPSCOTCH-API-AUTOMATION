@@ -27,6 +27,16 @@ public class enroll_Regular_Dropin
     @When("I send a POST request to enroll-Dropin child {string} API with valid body")
     public void i_send_a_post_request_to_enroll_dropin_child_api_with_valid_body(String childIdKey)
     {
+    	 try {
+		        // ⏳ Wait for 3 seconds (optional - adjust as needed)
+		        System.out.println("⏳ Waiting for 3 seconds before reading config...");
+		        Thread.sleep(3000); 
+		    } catch (InterruptedException e) {
+		        Thread.currentThread().interrupt();
+		        throw new RuntimeException("Thread was interrupted", e);
+		    }
+    	    // 🔄 Refresh the config file (force reload)
+		    ConfigReader.reloadProperties();
     	String providerIdStr = ConfigReader.getProperty("provider_id");
         String classroomIdStr = ConfigReader.getProperty("classroomId");
         String childIdStr = ConfigReader.getProperty(childIdKey);
@@ -58,12 +68,30 @@ public class enroll_Regular_Dropin
                 .when()
                 .post(Endpoints.enroll_dropin + "?t=" + System.currentTimeMillis());
        
-        int enrollmentId = response.jsonPath().getInt("childEnrollmentId");
-        Map<String, String> enrollmentMap = new HashMap<>();
-        enrollmentMap.put("enrollmentId_" + childIdKey, String.valueOf(enrollmentId));
-        ConfigReader.writeMultipleProperties(enrollmentMap);
+        System.out.println("Response: " + response.asString());
+        boolean isSuccess = false;
+        try {
+            isSuccess = response.jsonPath().getBoolean("success");
+        } catch (Exception e) {
+            System.out.println("⚠️ Unable to parse success field: " + e.getMessage());
+        }
 
-        System.out.println("✅ Dropping ID saved for " + childIdKey + ": " + enrollmentId);
+        if (isSuccess) {
+            Integer enrollmentId = response.jsonPath().get("data");
+
+            if (enrollmentId != null) {
+                Map<String, String> enrollmentMap = new HashMap<>();
+                enrollmentMap.put("enrollmentId_" + childIdKey, String.valueOf(enrollmentId));
+                ConfigReader.writeMultipleProperties(enrollmentMap);
+                System.out.println("✅ Enrollment ID saved: " + enrollmentId);
+            } else {
+                System.out.println("❌ Enrollment ID is missing in success response.");
+            }
+        } else {
+            String err = response.jsonPath().getString("error");
+            System.out.println("❌ API call failed. Error: " + err);
+            throw new RuntimeException("Drop-in enrollment failed. Error from API: " + err);
+        }
         
         APIUtils.logResponseToExtent(response, test);
         System.out.println(response.prettyPrint());

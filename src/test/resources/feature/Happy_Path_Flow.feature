@@ -26,6 +26,11 @@ Feature: Classroom Capacity and Enrollment Management
   Scenario: Enroll a drop-in child during an absence period
     When the "Parent" login via the POST login endpoint
     And the parent attempts to drop-in 1 child on the same dates another child is absent
+    
+    @runthis
+ Scenario: Approve Enrolled child
+  When the "Provider" login via the POST login endpoint
+  And Approve the Enrolled drop in 1 child.
 
   Scenario: Graduate an enrolled child
     When the "Provider" login via the POST login endpoint

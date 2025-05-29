@@ -215,9 +215,40 @@ public class Happy_Path_Flow
     {
         String childKey = selectedChildKeys.get(i).trim();
         System.out.println("📌 Enrolling child with key: " + childKey);
-        regular.i_send_a_post_request_to_enroll_regular_child_api_with_valid_body(childKey);
+        regular.i_send_a_post_request_to_enroll_dropin_child_api_with_valid_body(childKey);
     }
 	}
+	
+	@When("Approve the Enrolled drop in {int} child.")
+	public void approve_the_enrolled_child_drop_in(Integer count) 
+	{
+		 try {
+		        // ⏳ Wait for 3 seconds (optional - adjust as needed)
+		        System.out.println("⏳ Waiting for 3 seconds before reading config...");
+		        Thread.sleep(3000); 
+		    } catch (InterruptedException e) 
+		 {
+		        Thread.currentThread().interrupt();
+		        throw new RuntimeException("Thread was interrupted", e);
+		    }
+		    // 🔄 Refresh the config file (force reload)
+		    ConfigReader.reloadProperties();
+		  Put_Enrollment_Status statusUpdater = new Put_Enrollment_Status();
+		  String enrollChildrenStr = ConfigReader.getProperty("enrollmentId_ChildId1");
+		  String[] childKeys = enrollChildrenStr.split(",");
+		   for (int i = 0; i < count; i++)
+			 {
+				String childKey = childKeys[i].trim();  // e.g., "ChildId4"
+			    String childId = ConfigReader.getProperty(childKey); // e.g., "2009"
+
+		    if (childId != null && !childId.isEmpty())
+		    {  statusUpdater.i_send_a_put_request_to_endpoint_with_and_status(childId, "approved");
+				        } 
+		    else { System.out.println("⚠️ Child ID not found for key: " + childKey);
+				   }
+		 }
+	}
+
 
 	@When("the provider graduates {int} enrolled child effective from today's date")
 	public void the_provider_graduates_enrolled_child_effective_from_today_s_date(Integer int1) {

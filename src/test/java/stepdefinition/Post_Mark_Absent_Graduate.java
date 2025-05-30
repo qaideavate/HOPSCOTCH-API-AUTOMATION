@@ -8,7 +8,7 @@ import io.restassured.response.Response;
 import org.junit.Assert;
 import java.util.*;
 import static io.restassured.RestAssured.*;
-public class Post_Mark_Absent 
+public class Post_Mark_Absent_Graduate
 {
 
     private String providerToken;
@@ -17,7 +17,7 @@ public class Post_Mark_Absent
     private Map<String, Object> requestBody;
     private ExtentTest test;
     Payload Pl = new Payload();
-    public Post_Mark_Absent() 
+    public Post_Mark_Absent_Graduate() 
     {
         this.test = Extent_Report_Manager.getTest();
         this.headers = ConfigReader.getHeadersFromConfig("header");
@@ -43,6 +43,7 @@ public class Post_Mark_Absent
 	        System.out.println("API Response:\n" + response.asPrettyString());
 	    }
 
+    
 	    @Then("the response status code should be {int}")
 	    public void theResponseStatusCodeShouldBe(int expectedCode)
 		{
@@ -68,4 +69,25 @@ public class Post_Mark_Absent
 	        test.pass("Response contains key: " + key + " with value: " + value);
 	    }
 
+	    @When("I send a POST request to providers\\/enrollments\\/mark-graduation with {int}")
+	    public void i_send_a_post_request_to_providers_enrollments_mark_graduation_with(Integer enrollmentid)
+	    {
+	    	this.providerToken = ConfigReader.getProperty("ProviderToken");
+			requestBody = Pl.GraduateChild(enrollmentid);
+			test.log(Status.INFO, "Sending POST request to: " + Endpoints.baseURL +" "+Endpoints.child_Graduate);
+			test.log(Status.INFO, "Prepared request body: " + requestBody.toString());
+			APIUtils.logRequestHeaders(test, headers);
+			System.out.println(requestBody);
+			System.out.println(Endpoints.baseURL+Endpoints.child_Graduate);
+	        response = given()
+	                .baseUri(Endpoints.baseURL)
+	                .headers(headers)
+	                .header("Authorization", "Bearer " + providerToken)
+	                .body(requestBody)
+	                .when()
+	                .post(Endpoints.child_Graduate);
+
+	        APIUtils.logResponseToExtent(response, test);
+	        System.out.println("API Response:\n" + response.asPrettyString());
+	    }
 }

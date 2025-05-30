@@ -5,7 +5,6 @@ import com.aventstack.extentreports.Status;
 import io.cucumber.java.en.*;
 import io.restassured.response.Response;
 import org.junit.Assert;
-
 import java.util.HashMap;
 import java.util.Map;
 import static io.restassured.RestAssured.*;
@@ -27,20 +26,11 @@ public class enroll_Regular_Dropin
     @When("I send a POST request to enroll-Dropin child {string} API with valid body")
     public void i_send_a_post_request_to_enroll_dropin_child_api_with_valid_body(String childIdKey)
     {
-    	 try {
-		        // ⏳ Wait for 3 seconds (optional - adjust as needed)
-		        System.out.println("⏳ Waiting for 3 seconds before reading config...");
-		        Thread.sleep(3000); 
-		    } catch (InterruptedException e) {
-		        Thread.currentThread().interrupt();
-		        throw new RuntimeException("Thread was interrupted", e);
-		    }
-    	    // 🔄 Refresh the config file (force reload)
-		    ConfigReader.reloadProperties();
+    	ConfigReader.waitAndReloadConfig(3000);
     	String providerIdStr = ConfigReader.getProperty("provider_id");
         String classroomIdStr = ConfigReader.getProperty("classroomId");
         String childIdStr = ConfigReader.getProperty(childIdKey);
-        String startDate = ConfigReader.getProperty("start_date");
+        String startDate = ConfigReader.getProperty("Today");
 
         if (providerIdStr == null || classroomIdStr == null || childIdStr == null || startDate == null) {
             throw new RuntimeException("❌ Missing config values: provider_id=" + providerIdStr +
@@ -112,24 +102,13 @@ public class enroll_Regular_Dropin
     }
     
     //regular Enroll child
-    @When("I send a POST request to enroll-regular child {string} API with valid body")
-    public void i_send_a_post_request_to_enroll_regular_child_api_with_valid_body(String childIdKey)
+    @When("I send a POST request to enroll-regular child {string} API with valid body {string}")
+    public void i_send_a_post_request_to_enroll_regular_child_api_with_valid_body(String childIdKey, String dateKey)
     {
-    	 try {
-		        // ⏳ Wait for 3 seconds (optional - adjust as needed)
-		        System.out.println("⏳ Waiting for 3 seconds before reading config...");
-		        Thread.sleep(3000); 
-		    } catch (InterruptedException e) {
-		        Thread.currentThread().interrupt();
-		        throw new RuntimeException("Thread was interrupted", e);
-		    }
-
-		    // 🔄 Refresh the config file (force reload)
-		    ConfigReader.reloadProperties();
         String providerIdStr = ConfigReader.getProperty("provider_id");
         String classroomIdStr = ConfigReader.getProperty("classroomId");
         String childIdStr = ConfigReader.getProperty(childIdKey);
-        String startDate = ConfigReader.getProperty("start_date");
+        String startDate = ConfigReader.getProperty(dateKey);
 
         if (providerIdStr == null || classroomIdStr == null || childIdStr == null || startDate == null) {
             throw new RuntimeException("❌ Missing config values: provider_id=" + providerIdStr +
@@ -162,7 +141,7 @@ public class enroll_Regular_Dropin
         
         if (enrollmentId != null) {
             Map<String, String> enrollmentMap = new HashMap<>();
-            enrollmentMap.put("enrollmentId_" + childIdKey, String.valueOf(enrollmentId));
+            enrollmentMap.put("EnrollmentId_" + childIdKey, String.valueOf(enrollmentId));
             ConfigReader.writeMultipleProperties(enrollmentMap);
 
             System.out.println("✅ Enrollment ID saved for " + childIdKey + ": " + enrollmentId);

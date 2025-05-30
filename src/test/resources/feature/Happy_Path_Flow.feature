@@ -17,7 +17,7 @@ Feature: Classroom Capacity and Enrollment Management
   When the "Provider" login via the POST login endpoint
   And Approve the Enrolled 2 child.
   
-  @runthis
+@runthis
   Scenario: Mark an enrolled child as absent
     When the "Provider" login via the POST login endpoint
     When the provider marks 1 enrolled child as absent for today and tomorrow using the enrollment ID
@@ -27,19 +27,21 @@ Feature: Classroom Capacity and Enrollment Management
     When the "Parent" login via the POST login endpoint
     And the parent attempts to drop-in 1 child on the same dates another child is absent
     
-    @runthis
+@runthis
  Scenario: Approve Enrolled child
   When the "Provider" login via the POST login endpoint
   And Approve the Enrolled drop in 1 child.
-
+  
+@runthis
   Scenario: Graduate an enrolled child
     When the "Provider" login via the POST login endpoint
     And the provider graduates 1 enrolled child effective from today's date
-
+    
+@runthis
   Scenario: Enroll a new child after a graduation
-    When the "Parent" logs in via the POST login endpoint
-    And the parent enrolls the 4th child starting from the day after the graduation date
+    When the "Parent" login via the POST login endpoint
+    And the parent enrolls the 1 child starting from the day after the graduation date
 
   Scenario: View updated classroom capacity
-    When the "Provider" logs in via the POST login endpoint
+    When the "Provider" login via the POST login endpoint
     Then the updated classroom capacity should be accurately reflected by the system

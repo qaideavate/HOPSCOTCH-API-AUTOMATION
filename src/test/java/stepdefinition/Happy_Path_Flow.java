@@ -1,10 +1,8 @@
 package stepdefinition;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import Utils.ConfigReader;
 import Utils.Endpoints;
 import Utils.GlobalTokenStore;
@@ -46,32 +44,11 @@ public class Happy_Path_Flow
 	@When("the provider creates a new classroom using the POST classroom endpoint")
 	public void the_provider_creates_a_new_classroom_using_the_post_classroom_endpoint() 
 	{
-		 try {
-		        // ⏳ Wait for 3 seconds (optional - adjust as needed)
-		        System.out.println("⏳ Waiting for 3 seconds before reading config...");
-		        Thread.sleep(3000); 
-		    } catch (InterruptedException e) {
-		        Thread.currentThread().interrupt();
-		        throw new RuntimeException("Thread was interrupted", e);
-		    }
-
-		    // 🔄 Refresh the config file (force reload)
-		    ConfigReader.reloadProperties();
-	    
+		 ConfigReader.waitAndReloadConfig(3000);
 		 Post_Create_Classroom classroom = new Post_Create_Classroom();
 		 classroom.i_send_a_post_request_to_create_classroom_at_classroom_endpoint();
 		 classroom.responseBodyShouldContainKey("classroomId");
-		 try {
-		        // ⏳ Wait for 3 seconds (optional - adjust as needed)
-		        System.out.println("⏳ Waiting for 3 seconds before reading config...");
-		        Thread.sleep(3000); 
-		    } catch (InterruptedException e) {
-		        Thread.currentThread().interrupt();
-		        throw new RuntimeException("Thread was interrupted", e);
-		    }
-
-		    // 🔄 Refresh the config file (force reload)
-		    ConfigReader.reloadProperties();
+		 ConfigReader.waitAndReloadConfig(3000);
 	}
 	
 	@When("the provider retrieves the classroom capacity using the GET classroom endpoint with the classroom ID")
@@ -120,27 +97,16 @@ public class Happy_Path_Flow
 	@When("the parent enrolls {int} children for regular care in the classroom")
 	public void the_parent_enrolls_children_for_regular_care_in_the_classroom(Integer numberOfChildren) 
 	{
-		 try {
-		        // ⏳ Wait for 3 seconds (optional - adjust as needed)
-		        System.out.println("⏳ Waiting for 3 seconds before reading config...");
-		        Thread.sleep(3000); 
-		    } catch (InterruptedException e) {
-		        Thread.currentThread().interrupt();
-		        throw new RuntimeException("Thread was interrupted", e);
-		    }
-
-		    // 🔄 Refresh the config file (force reload)
-		    ConfigReader.reloadProperties();
-	    
+		ConfigReader.waitAndReloadConfig(3000);
 		enroll_Regular_Dropin regular = new enroll_Regular_Dropin();
-	    String childrenToEnroll = ConfigReader.getProperty("ENROLL_CHILDREN");
+	    String childrenToEnroll = ConfigReader.getProperty("Enroll_Children");
+	    
 	    List<String> selectedChildKeys = Arrays.asList(childrenToEnroll.split(","));
-
 	    for (int i = 0; i < numberOfChildren && i < selectedChildKeys.size(); i++)
 	    {
 	        String childKey = selectedChildKeys.get(i).trim();
 	        System.out.println("📌 Enrolling child with key: " + childKey);
-	        regular.i_send_a_post_request_to_enroll_regular_child_api_with_valid_body(childKey);
+	        regular.i_send_a_post_request_to_enroll_regular_child_api_with_valid_body(childKey, "Today");
 	    }
 	}
 
@@ -148,19 +114,9 @@ public class Happy_Path_Flow
 	@When("Approve the Enrolled {int} child.")
 	public void approve_the_enrolled_child(Integer count) 
 	{
-		 try {
-		        // ⏳ Wait for 3 seconds (optional - adjust as needed)
-		        System.out.println("⏳ Waiting for 3 seconds before reading config...");
-		        Thread.sleep(3000); 
-		    } catch (InterruptedException e) 
-		 {
-		        Thread.currentThread().interrupt();
-		        throw new RuntimeException("Thread was interrupted", e);
-		    }
-		    // 🔄 Refresh the config file (force reload)
-		    ConfigReader.reloadProperties();
+		 ConfigReader.waitAndReloadConfig(3000);
 		  Put_Enrollment_Status statusUpdater = new Put_Enrollment_Status();
-		  String enrollChildrenStr = ConfigReader.getProperty("enrollmentid");
+		  String enrollChildrenStr = ConfigReader.getProperty("Approve_EnrollmentId");
 		  String[] childKeys = enrollChildrenStr.split(",");
 		   for (int i = 0; i < count; i++)
 			 {
@@ -176,39 +132,42 @@ public class Happy_Path_Flow
 	}
 
 	@When("the provider marks {int} enrolled child as absent for today and tomorrow using the enrollment ID")
-	public void the_provider_marks_enrolled_child_as_absent_for_today_and_tomorrow_using_the_enrollment_id(Integer childIndex)
+	public void the_provider_marks_enrolled_child_as_absent_for_today_and_tomorrow_using_the_enrollment_id(Integer numberOfChildren)
 	{
 	    // Construct the property key based on the index (e.g., ChildId1, ChildId2, etc.)
-	    String enrollmentKey = "enrollmentId_ChildId3";
-	    String enrollmentIdStr = ConfigReader.getProperty(enrollmentKey);
-	    
-	    if (enrollmentIdStr == null || enrollmentIdStr.isEmpty()) {
-	        throw new RuntimeException("❌ Enrollment ID not found for key: " + enrollmentKey);
-	    }
+		 String absentKeys = ConfigReader.getProperty("Absent");
+		 if (absentKeys == null || absentKeys.isEmpty()) 
+		 {
+		        throw new RuntimeException("❌ No absent enrollment keys found in config.");
+		    }
 
-	    int enrollmentId = Integer.parseInt(enrollmentIdStr.trim());
-	    System.out.println(enrollmentId);
-	    Post_Mark_Absent absent = new Post_Mark_Absent();
-	    absent.i_send_a_post_request_to_providers_enrollments_mark_absent_with(enrollmentId);
+		    // 🧹 Clean and split the keys (e.g., EnrollmentId_ChildId1,EnrollmentId_ChildId2)
+		    List<String> enrollmentKeys = Arrays.asList(absentKeys.split(","));
+
+		    for (int i = 0; i < numberOfChildren && i < enrollmentKeys.size(); i++) 
+		    {
+		        String key = enrollmentKeys.get(i).trim();
+		        String idStr = ConfigReader.getProperty(key);
+
+		        if (idStr == null || idStr.isEmpty()) 
+		        {
+		            throw new RuntimeException("❌ Enrollment ID not found for key: " + key);
+		        }
+
+		        int enrollmentId = Integer.parseInt(idStr.trim());
+		        System.out.println("📌 Marking enrollment ID as absent: " + enrollmentId);
+
+		        Post_Mark_Absent_Graduate absent = new Post_Mark_Absent_Graduate();
+		        absent.i_send_a_post_request_to_providers_enrollments_mark_absent_with(enrollmentId);
+		    }
 	}
 
 	@When("the parent attempts to drop-in {int} child on the same dates another child is absent")
 	public void the_parent_attempts_to_enroll_a_drop_in_child_on_the_same_dates_another_child_is_absent(Integer numberOfChildren)
 	{
-		try {
-	        // ⏳ Wait for 3 seconds (optional - adjust as needed)
-	        System.out.println("⏳ Waiting for 3 seconds before reading config...");
-	        Thread.sleep(3000); 
-	    } catch (InterruptedException e) {
-	        Thread.currentThread().interrupt();
-	        throw new RuntimeException("Thread was interrupted", e);
-	    }
-
-	    // 🔄 Refresh the config file (force reload)
-	    ConfigReader.reloadProperties();
-    
+		 ConfigReader.waitAndReloadConfig(3000);
 	enroll_Regular_Dropin regular = new enroll_Regular_Dropin();
-    String childrenToDrop = ConfigReader.getProperty("DROPIN_CHILDREN");
+    String childrenToDrop = ConfigReader.getProperty("DropIn_Children");
     List<String> selectedChildKeys = Arrays.asList(childrenToDrop.split(","));
 
     for (int i = 0; i < numberOfChildren && i < selectedChildKeys.size(); i++)
@@ -222,19 +181,9 @@ public class Happy_Path_Flow
 	@When("Approve the Enrolled drop in {int} child.")
 	public void approve_the_enrolled_child_drop_in(Integer count) 
 	{
-		 try {
-		        // ⏳ Wait for 3 seconds (optional - adjust as needed)
-		        System.out.println("⏳ Waiting for 3 seconds before reading config...");
-		        Thread.sleep(3000); 
-		    } catch (InterruptedException e) 
-		 {
-		        Thread.currentThread().interrupt();
-		        throw new RuntimeException("Thread was interrupted", e);
-		    }
-		    // 🔄 Refresh the config file (force reload)
-		    ConfigReader.reloadProperties();
+		  ConfigReader.waitAndReloadConfig(3000);
 		  Put_Enrollment_Status statusUpdater = new Put_Enrollment_Status();
-		  String enrollChildrenStr = ConfigReader.getProperty("enrollmentId_ChildId1");
+		  String enrollChildrenStr = ConfigReader.getProperty("After_DropIn_Approve_EnrollmentId");
 		  String[] childKeys = enrollChildrenStr.split(",");
 		   for (int i = 0; i < count; i++)
 			 {
@@ -249,23 +198,56 @@ public class Happy_Path_Flow
 		 }
 	}
 
-
 	@When("the provider graduates {int} enrolled child effective from today's date")
-	public void the_provider_graduates_enrolled_child_effective_from_today_s_date(Integer int1) {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void the_provider_graduates_enrolled_child_effective_from_today_s_date(Integer numberOfChildren)
+	{
+		 String GraduateKeys = ConfigReader.getProperty("Graduate");
+		 if (GraduateKeys == null || GraduateKeys.isEmpty()) 
+		 {
+		        throw new RuntimeException("❌ No Graduate Enrollment Keys  found in config.");
+		    }
+
+		    // 🧹 Clean and split the keys (e.g., EnrollmentId_ChildId1,EnrollmentId_ChildId2)
+		    List<String> enrollmentKeys = Arrays.asList(GraduateKeys.split(","));
+
+		    for (int i = 0; i < numberOfChildren && i < enrollmentKeys.size(); i++) 
+		    {
+		        String key = enrollmentKeys.get(i).trim();
+		        String idStr = ConfigReader.getProperty(key);
+
+		        if (idStr == null || idStr.isEmpty()) 
+		        {
+		            throw new RuntimeException("❌ Enrollment ID not found for key: " + key);
+		        }
+
+		    int enrollmentId = Integer.parseInt(idStr.trim());
+		    System.out.println("📌 Marking enrollment ID as Graduate: " +enrollmentId);
+		    Post_Mark_Absent_Graduate Graduate = new Post_Mark_Absent_Graduate();
+		    Graduate.i_send_a_post_request_to_providers_enrollments_mark_graduation_with(enrollmentId);
+		    }
 	}
 
-	@When("the parent enrolls the 4th child starting from the day after the graduation date")
-	public void the_parent_enrolls_the_4th_child_starting_from_the_day_after_the_graduation_date() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	@When("the parent enrolls the {int} child starting from the day after the graduation date")
+	public void the_parent_enrolls_the_child_starting_from_the_day_after_the_graduation_date(Integer numberOfChildren)
+	{
+		    ConfigReader.waitAndReloadConfig(3000);
+			enroll_Regular_Dropin regular = new enroll_Regular_Dropin();
+		    String childrenToEnroll = ConfigReader.getProperty("After_Graduate_Enroll_Children");
+		   
+		    List<String> selectedChildKeys = Arrays.asList(childrenToEnroll.split(","));
+
+		    for (int i = 0; i < numberOfChildren && i < selectedChildKeys.size(); i++)
+		    {
+		        String childKey = selectedChildKeys.get(i).trim();
+		        System.out.println("📌 Enrolling child with key: " + childKey);
+		        regular.i_send_a_post_request_to_enroll_regular_child_api_with_valid_body(childKey,"Tomorrow");
+		    }
 	}
 
 	@Then("the updated classroom capacity should be accurately reflected by the system")
-	public void the_updated_classroom_capacity_should_be_accurately_reflected_by_the_system() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	public void the_updated_classroom_capacity_should_be_accurately_reflected_by_the_system() 
+	{
+	    
 	}
 
 

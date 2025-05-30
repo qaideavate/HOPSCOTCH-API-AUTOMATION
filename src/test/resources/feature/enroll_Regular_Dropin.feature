@@ -10,6 +10,6 @@ Feature: Enroll a child in a classroom
 
 @runthis
   Scenario: Successfully enroll regular child in a classroom
-    When I send a POST request to enroll-regular child "childId" API with valid body
+   When I send a POST request to enroll-regular child "childId" API with valid body "start_date"
     Then the response status code for Enrollchild should be 201
     And the response body should contain "message" as "Enrollment successful"

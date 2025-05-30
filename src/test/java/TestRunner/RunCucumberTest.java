@@ -16,7 +16,7 @@ import io.cucumber.junit.CucumberOptions;
 	 	 //           "classpath:feature/View_capacity_management.feature",
 		//		    "classpath:feature/Put_Enrollment_Status.feature",						
 	 	//          "classpath:feature/Post_Create_Classroom.feature",
-	   // 		  "classpath:feature/Post_Mark_Absent.feature"
+	    //		  "classpath:feature/Post_Mark_Absent_Graduate.feature"
 				 "classpath:feature/Happy_Path_Flow.feature"
 	    //		  "classpath:feature/enroll_Regular_Dropin.feature"		 	  
 	    },

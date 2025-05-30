@@ -268,6 +268,17 @@ public class Payload
 		    requestBody.put("reason", "Test");
 		    return requestBody;
 		}
+		
+		public Map<String, Object> GraduateChild(int enrollmentId) {
+		    Map<String, Object> requestBody = new HashMap<>();
+		    LocalDate today = LocalDate.now();
+
+		    requestBody.put("endDate", today.toString()); // "2025-05-30"
+		    requestBody.put("enrollment_id", enrollmentId); // 608
+
+		    return requestBody;
+		}
+
 
 		public Map<String, Object> getEnrollDropinChildPayload(int providerId, int classroomId, int childId, String startDate)
 		{

@@ -91,4 +91,19 @@ public class ConfigReader
             throw new RuntimeException("Failed to write multiple properties to config.properties file.");
         }
     }
+    
+    public static void waitAndReloadConfig(long waitTimeMillis)
+    {
+        try {
+            System.out.println("⏳ Waiting for " + (waitTimeMillis / 1000.0) + " seconds before reading config...");
+            Thread.sleep(waitTimeMillis);  // Wait for user-defined time
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Thread was interrupted", e);
+        }
+
+        // Refresh config properties
+        System.out.println("🔄 Reloading config properties...");
+        ConfigReader.reloadProperties();
+    }
 }

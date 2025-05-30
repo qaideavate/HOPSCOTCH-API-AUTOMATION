@@ -21,7 +21,7 @@ public class Endpoints
         public static final String mark_absent ="providers/enrollments/mark-absent";
         public static final String enroll_dropin ="user/enroll-child";
         public static final String enroll_regular ="user/enroll-fulltime-child";
-        
+        public static final String child_Graduate ="providers/enrollments/mark-graduation";
         
         
         public static final String baseURL="https://dev-api.hopscotchconnect.com/api/";

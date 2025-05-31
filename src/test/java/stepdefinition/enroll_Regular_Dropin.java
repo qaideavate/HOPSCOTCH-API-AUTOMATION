@@ -71,7 +71,7 @@ public class enroll_Regular_Dropin
 
             if (enrollmentId != null) {
                 Map<String, String> enrollmentMap = new HashMap<>();
-                enrollmentMap.put("enrollmentId_" + childIdKey, String.valueOf(enrollmentId));
+                enrollmentMap.put("EnrollmentId_" + childIdKey, String.valueOf(enrollmentId));
                 ConfigReader.writeMultipleProperties(enrollmentMap);
                 System.out.println("✅ Enrollment ID saved: " + enrollmentId);
             } else {
@@ -80,7 +80,7 @@ public class enroll_Regular_Dropin
         } else {
             String err = response.jsonPath().getString("error");
             System.out.println("❌ API call failed. Error: " + err);
-            throw new RuntimeException("Drop-in enrollment failed. Error from API: " + err);
+            throw new RuntimeException("Drop-in Enrollment failed. Error from API: " + err);
         }
         
         APIUtils.logResponseToExtent(response, test);

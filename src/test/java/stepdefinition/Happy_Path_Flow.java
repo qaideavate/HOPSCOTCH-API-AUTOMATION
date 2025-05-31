@@ -102,7 +102,7 @@ public class Happy_Path_Flow
 	    String childrenToEnroll = ConfigReader.getProperty("Enroll_Children");
 	    
 	    List<String> selectedChildKeys = Arrays.asList(childrenToEnroll.split(","));
-	    for (int i = 0; i < numberOfChildren && i < selectedChildKeys.size(); i++)
+	    for (int i = 0; i < numberOfChildren && i <= selectedChildKeys.size(); i++)
 	    {
 	        String childKey = selectedChildKeys.get(i).trim();
 	        System.out.println("📌 Enrolling child with key: " + childKey);
@@ -166,20 +166,20 @@ public class Happy_Path_Flow
 	public void the_parent_attempts_to_enroll_a_drop_in_child_on_the_same_dates_another_child_is_absent(Integer numberOfChildren)
 	{
 		 ConfigReader.waitAndReloadConfig(3000);
-	enroll_Regular_Dropin regular = new enroll_Regular_Dropin();
-    String childrenToDrop = ConfigReader.getProperty("DropIn_Children");
-    List<String> selectedChildKeys = Arrays.asList(childrenToDrop.split(","));
-
-    for (int i = 0; i < numberOfChildren && i < selectedChildKeys.size(); i++)
-    {
+		enroll_Regular_Dropin regular = new enroll_Regular_Dropin();
+	    String childrenToDrop = ConfigReader.getProperty("DropIn_Children");
+	    List<String> selectedChildKeys = Arrays.asList(childrenToDrop.split(","));
+	
+	    for (int i = 0; i < numberOfChildren && i < selectedChildKeys.size(); i++)
+	    {
         String childKey = selectedChildKeys.get(i).trim();
         System.out.println("📌 Enrolling child with key: " + childKey);
         regular.i_send_a_post_request_to_enroll_dropin_child_api_with_valid_body(childKey);
-    }
+	    }
 	}
 	
-	@When("Approve the Enrolled drop in {int} child.")
-	public void approve_the_enrolled_child_drop_in(Integer count) 
+	@When("Approve the Enrolled drop in {int} child")
+	public void approve_the_enrolled__drop_in_child(Integer count) 
 	{
 		  ConfigReader.waitAndReloadConfig(3000);
 		  Put_Enrollment_Status statusUpdater = new Put_Enrollment_Status();
@@ -244,6 +244,27 @@ public class Happy_Path_Flow
 		    }
 	}
 
+	@When("Approve the Enrolled {int} child after the Graduation of Another Child.")
+	public void approve_the_enrolled_child_after_the_graduation_of_another_child(Integer count) 
+	{
+		  ConfigReader.waitAndReloadConfig(3000);
+		  Put_Enrollment_Status statusUpdater = new Put_Enrollment_Status();
+		  String enrollChildrenStr = ConfigReader.getProperty("Graduate_Approve");
+		  String[] childKeys = enrollChildrenStr.split(",");
+		   for (int i = 0; i < count; i++)
+			 {
+				String childKey = childKeys[i].trim();  // e.g., "ChildId4"
+			    String childId = ConfigReader.getProperty(childKey); // e.g., "2009"
+
+		    if (childId != null && !childId.isEmpty())
+		    {  statusUpdater.i_send_a_put_request_to_endpoint_with_and_status(childId, "approved");
+				        } 
+		    else { System.out.println("⚠️ Child ID not found for key: " + childKey);
+				   }
+		 }
+	}
+	
+	
 	@Then("the updated classroom capacity should be accurately reflected by the system")
 	public void the_updated_classroom_capacity_should_be_accurately_reflected_by_the_system() 
 	{

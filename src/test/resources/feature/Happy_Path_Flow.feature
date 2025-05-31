@@ -30,7 +30,7 @@ Feature: Classroom Capacity and Enrollment Management
 @runthis
  Scenario: Approve Enrolled child
   When the "Provider" login via the POST login endpoint
-  And Approve the Enrolled drop in 1 child.
+  And Approve the Enrolled drop in 1 child
   
 @runthis
   Scenario: Graduate an enrolled child
@@ -41,6 +41,11 @@ Feature: Classroom Capacity and Enrollment Management
   Scenario: Enroll a new child after a graduation
     When the "Parent" login via the POST login endpoint
     And the parent enrolls the 1 child starting from the day after the graduation date
+    
+@runthis
+ Scenario: Approve Enrolled child
+  When the "Provider" login via the POST login endpoint
+  And Approve the Enrolled 1 child after the Graduation of Another Child.
 
   Scenario: View updated classroom capacity
     When the "Provider" login via the POST login endpoint

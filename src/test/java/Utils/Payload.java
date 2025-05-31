@@ -319,7 +319,8 @@ public class Payload
 			return payload;
 		}
 		
-		public Map<String, Object> getEnrollRegularChildPayload(int providerId, int classroomId, int childId, String startDate) {
+		public Map<String, Object> getEnrollRegularChildPayload(int providerId, int classroomId, int childId, String startDate)
+		{
 		    Map<String, Object> consent = new HashMap<>();
 		    consent.put("childId", childId);
 		    consent.put("providerId", providerId);

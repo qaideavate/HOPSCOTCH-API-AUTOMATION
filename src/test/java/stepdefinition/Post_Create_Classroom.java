@@ -25,7 +25,13 @@ public class Post_Create_Classroom
     public Post_Create_Classroom()
     {
         this.test = Extent_Report_Manager.getTest();
-        this.ProviderToken = GlobalTokenStore.getToken("provider");
+        this.ProviderToken = ConfigReader.getProperty("ProviderToken");
+        if (this.ProviderToken == null || this.ProviderToken.trim().isEmpty()) 
+        {
+            BaseMethods.providerLogin();  
+            ConfigReader.waitAndReloadConfig(3000);
+            this.ProviderToken = ConfigReader.getProperty("ProviderToken");
+        }
         this.headers = ConfigReader.getHeadersFromConfig("header");
         test.info("Decoded JWT: " + BaseMethods.decodeJWT(ProviderToken));
     }

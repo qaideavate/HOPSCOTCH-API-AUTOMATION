@@ -25,7 +25,12 @@ public class Get_Enrollments
 	@When("I send a GET request of Get Enrollments API")
 	public void i_send_a_get_request_of_get_enrollments_api() 
 	{
-		 String parentToken = GlobalTokenStore.getToken("parent");
+		 String parentToken = ConfigReader.getProperty("ParentToken");
+	        if (parentToken == null || parentToken.trim().isEmpty()) 
+	        {
+	            BaseMethods.parentLogin();  
+	            parentToken = ConfigReader.getProperty("ParentToken");
+	        }
 	     APIUtils.logRequestHeaders(test, headers);
 	     
 	        test.info("Sending GET request to: " + Endpoints.baseURL + Endpoints.GET_ENROLLMENT);

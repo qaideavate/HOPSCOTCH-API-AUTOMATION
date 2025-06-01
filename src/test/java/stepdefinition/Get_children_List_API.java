@@ -6,16 +6,13 @@ import Utils.APIUtils;
 import Utils.BaseMethods;
 import Utils.ConfigReader;
 import Utils.Extent_Report_Manager;
-import Utils.GlobalTokenStore;
 import io.cucumber.java.en.*;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.*;
 import com.aventstack.extentreports.ExtentTest;
-import java.util.List;
 import Utils.Endpoints;
 import java.util.Map;
-import io.cucumber.datatable.*;
 public class Get_children_List_API
 {
 	private Response res ;
@@ -25,7 +22,12 @@ public class Get_children_List_API
 	@When("I send a GET request of children-with-enrollments API")
 	public void i_send_a_get_request_of_children_with_enrollments_api() 
 	{  
-		    String parentToken = GlobalTokenStore.getToken("parent");
+		    String parentToken = ConfigReader.getProperty("ParentToken");
+	        if (parentToken == null || parentToken.trim().isEmpty()) 
+	        {
+	            BaseMethods.parentLogin();  
+	            parentToken = ConfigReader.getProperty("ParentToken");
+	        }
 	        APIUtils.logRequestHeaders(test, headers);
 
 	        test.info("Sending GET request to: " + Endpoints.baseURL + Endpoints.GET_CHILDREN);
@@ -66,11 +68,9 @@ public class Get_children_List_API
 		 cleanedResponse.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/" + schemaFileName));
 		}
 		    
-	
 		  @Then("the response status message should be {string}") 
 		  public void the_response_status_message_should_be(String expectedStatusMessage) 
-		  { 
-			  
+		  { 		  
 			  String actualStatusLine = res.getStatusLine();
 			  test.info("Validating status message. Expected: " + expectedStatusMessage + ", Actual: " + actualStatusLine + " ");
 		      Assert.assertNotNull("Status field is missing in response", actualStatusLine);

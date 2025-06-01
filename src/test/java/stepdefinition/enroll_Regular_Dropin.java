@@ -17,9 +17,14 @@ public class enroll_Regular_Dropin
     private ExtentTest test = Extent_Report_Manager.getTest();
     Payload Pl = new Payload();
 
-    public enroll_Regular_Dropin()
+    public enroll_Regular_Dropin() 
     {
-        parentToken = GlobalTokenStore.getToken("parent");
+        this.parentToken = ConfigReader.getProperty("ParentToken");
+        if (this.parentToken == null || this.parentToken.trim().isEmpty()) 
+        {
+            BaseMethods.parentLogin();  
+            this.parentToken = ConfigReader.getProperty("ParentToken");
+        }
         headers = ConfigReader.getHeadersFromConfig("header");
     }
 
@@ -32,9 +37,10 @@ public class enroll_Regular_Dropin
         String childIdStr = ConfigReader.getProperty(childIdKey);
         String startDate = ConfigReader.getProperty("Today");
 
-        if (providerIdStr == null || classroomIdStr == null || childIdStr == null || startDate == null) {
+        if (providerIdStr == null || classroomIdStr == null || childIdStr == null || startDate == null) 
+        {
             throw new RuntimeException("❌ Missing config values: provider_id=" + providerIdStr +
-                    ", classroomId=" + classroomIdStr + ", " + childIdKey + "=" + childIdStr + ", start_date=" + startDate);
+            ", classroomId=" + classroomIdStr + ", " + childIdKey + "=" + childIdStr + ", start_date=" + startDate);
         }
 
         int providerId = Integer.parseInt(providerIdStr.trim());

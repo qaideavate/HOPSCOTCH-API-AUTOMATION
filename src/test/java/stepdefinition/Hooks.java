@@ -7,7 +7,6 @@ import Utils.Extent_Report_Manager;
 
 	public class Hooks
 	{
-
 	    private static boolean isInitialized = false;
 
 	    @Before
@@ -36,27 +35,12 @@ import Utils.Extent_Report_Manager;
 	        }
 	    }
 	    
+	    
 	    @AfterAll
 	    public static void afterAllTests()
 	    {
 	        Extent_Report_Manager.flushReports();
 	    }
-
-	    // Simulate @AfterAll with JVM shutdown hook
-	  /*  static {
-	        try {
-	            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-	                try {
-	                    Extent_Report_Manager.flushReports();
-	                } catch (Exception e) {
-	                    System.err.println("Failed to flush Extent reports during shutdown: " + e.getMessage());
-	                    e.printStackTrace();
-	                }
-	            }));
-	        } catch (IllegalStateException e) {
-	            System.err.println("Shutdown already in progress, cannot add shutdown hook.");
-	        }
-	    }*/
 	
 	}
 

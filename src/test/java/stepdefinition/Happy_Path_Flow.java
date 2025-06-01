@@ -3,9 +3,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import Utils.BaseMethods;
 import Utils.ConfigReader;
-import Utils.Endpoints;
-import Utils.GlobalTokenStore;
 import io.cucumber.java.en.*;
 
 public class Happy_Path_Flow
@@ -16,29 +15,13 @@ public class Happy_Path_Flow
 	@When("both Parent and Provider login via the POST login endpoint")
 	public void both_login_via_the_post_login_endpoint() 
 	{
-	    // Login for Provider
-	    login.the_provides_email_and_password("Provider", Endpoints.provider_email, Endpoints.provider_password);
-	    String providerToken = login.the_sends_a_post_request_to_the_login_endpoint("Provider");
-	    GlobalTokenStore.setToken("Provider", providerToken);
-
-	    // Login for Parent
-	    login.the_provides_email_and_password("Parent", Endpoints.parent_email, Endpoints.parent_password);
-	    String parentToken = login.the_sends_a_post_request_to_the_login_endpoint("Parent");
-	    GlobalTokenStore.setToken("Parent", parentToken);
-
-	    // Store tokens in properties file using writeMultipleProperties
-	    Map<String, String> tokens = new HashMap<>();
-	    tokens.put("ProviderToken", providerToken);
-	    tokens.put("ParentToken", parentToken);
-	    ConfigReader.writeMultipleProperties(tokens);
+	  BaseMethods.providerLogin();
 	}
 	
 	@When("the {string} login via the POST login endpoint")
 	public void the_login_via_the_post_login_endpoint(String string)
 	{
-		 login.the_provides_email_and_password("Parent", Endpoints.parent_email, Endpoints.parent_password);
-		 String parentToken = login.the_sends_a_post_request_to_the_login_endpoint("Parent");
-		 GlobalTokenStore.setToken("Parent", parentToken);
+		 BaseMethods.parentLogin();
 	}
 	
 	@When("the provider creates a new classroom using the POST classroom endpoint")

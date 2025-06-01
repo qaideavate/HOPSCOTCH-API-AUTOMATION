@@ -39,7 +39,13 @@ public class Post_Child_Information_Step1
 	    @Given("I have a valid parent token")
 	    public String i_have_a_valid_parent_token()
 	    {
-	        this.parentToken = GlobalTokenStore.getToken("parent");
+	    	this.parentToken = ConfigReader.getProperty("ParentToken");
+	        if (this.parentToken == null || this.parentToken.trim().isEmpty()) 
+	        {
+	            BaseMethods.parentLogin();  
+	            ConfigReader.waitAndReloadConfig(3000);
+	            this.parentToken = ConfigReader.getProperty("ParentToken");
+	        }
 	        test.info("Retrieved Parent Token: " + parentToken);
 	        test.info("Decoded JWT: " + BaseMethods.decodeJWT(parentToken));
 			return parentToken;
@@ -53,7 +59,7 @@ public class Post_Child_Information_Step1
 	        test.info("Sending POST request to: " + Endpoints.baseURL + Endpoints.CHILD_REGISTER);
 	        System.out.println(payload.toString());
 	       
-	  childres = given()
+	    childres = given()
 	            .baseUri(Endpoints.baseURL)
 	            .headers(headers)
 	            .header("Authorization", "Bearer " + parentToken)
@@ -78,8 +84,6 @@ public class Post_Child_Information_Step1
 	        Assert.assertNotNull("childId is null in the response", childId);
 	        Assert.assertFalse("childId is empty", childId.trim().isEmpty());
 	        
-	        GlobalTokenStore.setChildId(childId);  // ✅ Store globally
-	        
 	        // ✅ Save to config.properties file
 	        Map<String, String> properties = new HashMap<>();
 	        properties.put("childId", childId);
@@ -101,7 +105,9 @@ public class Post_Child_Information_Step1
 	    @When("I send a POST request to Parent endpoint")
 	    public void i_send_a_post_request_to_parent_endpoint()
 	    {
-	    	String childId = GlobalTokenStore.getChildId(); // ✅ Fetch here, after it's stored
+	    	ConfigReader.waitAndReloadConfig(3000);
+	    	String childId = ConfigReader.getProperty("childId");
+	    
 	    	String payload = Pl.parent_registration_payload(childId); // ✅ Pass it in
 	    	APIUtils.logRequestHeaders(test, headers);
 	    	APIUtils.logRequestBody(test, payload);
@@ -127,18 +133,20 @@ public class Post_Child_Information_Step1
 		public void the_response_should_contain_the_parent_id()
 		{
 		   this.ParentId= Parentres.jsonPath().getString("parentIds.parentIds[0]");
-		   GlobalTokenStore.setParentId(ParentId);  			// ✅ Store globally
+		   Map<String, String> properties = new HashMap<>();
+	        properties.put("ParentId", ParentId);
+	        ConfigReader.writeMultipleProperties(properties);  	
+	        ConfigReader.waitAndReloadConfig(3000);
 		   
 		   test.pass("parentId successfully stored: " + ParentId);
 		    System.out.println("Stored parentId: " + ParentId); 
 		}	
 			
-		
 		@When("I send a POST request to Emergency Contact endpoint")
 		public void i_send_a_post_request_to_emergency_contact_endpoint() 
 		{
-			String childId = GlobalTokenStore.getChildId();
-			String parentId = GlobalTokenStore.getParentId();
+			String childId = ConfigReader.getProperty("childId");
+			String parentId = ConfigReader.getProperty("ParentId");
 			String payload = Pl.emergency_contact_payload(childId, parentId);
 	    	APIUtils.logRequestHeaders(test, headers);
 	    	APIUtils.logRequestBody(test, payload);
@@ -169,8 +177,8 @@ public class Post_Child_Information_Step1
 		@When("I send a POST request to Pickup Contact endpoint")
 		public void i_send_a_post_request_to_pickup_contact_endpoint() 
 		{
-		    String childId = GlobalTokenStore.getChildId();
-		    String parentId = GlobalTokenStore.getParentId();
+			String childId = ConfigReader.getProperty("childId");
+			String parentId = ConfigReader.getProperty("ParentId");
 		    String payload = Pl.add_Pickup_payload(childId, parentId); // Pass both IDs
 
 		    APIUtils.logRequestHeaders(test, headers);
@@ -200,7 +208,7 @@ public class Post_Child_Information_Step1
 		//5.
 		@When("I send a POST request to Health Document Upload endpoint")
 		public void i_send_a_post_request_to_health_document_upload_endpoint() {
-		    String childId = GlobalTokenStore.getChildId();  // e.g. "1819"
+		    String childId = ConfigReader.getProperty("childId");  
 		    File file = new File("src/test/resources/files/Screenshot_2.png");
 
 		    headers.remove("Content-Type");  // remove any Content-Type header you might have set
@@ -242,7 +250,7 @@ public class Post_Child_Information_Step1
 		
 		@When("I send a Post request to Health Document Delete endpoint")
 		public void i_send_a_Post_request_to_health_document_delete_endpoint() 
-		{	 childId = GlobalTokenStore.getChildId();
+		{	 childId = ConfigReader.getProperty("childId");
 			 String requestBody = Pl.child_id_payload(childId);
 
 		    APIUtils.logRequestHeaders(test, headers);
@@ -273,7 +281,7 @@ public class Post_Child_Information_Step1
 		
 		@When("I send a POST request to Health Info endpoint")
 		public void i_send_a_post_request_to_health_info_endpoint() 
-		{	String childId = GlobalTokenStore.getChildId();
+		{	String childId = ConfigReader.getProperty("childId");
 		    String payload = Pl.health_info_payload(childId);
 		    APIUtils.logRequestHeaders(test, headers);
 		    APIUtils.logRequestBody(test, payload);  // Use the correct variable name (was: requestBody)
@@ -304,7 +312,7 @@ public class Post_Child_Information_Step1
 		
 		@When("I send a POST request to Consent endpoint")
 		public void i_send_a_post_request_to_consent_endpoint()
-		{	String childId = GlobalTokenStore.getChildId();
+		{	String childId = ConfigReader.getProperty("childId");
 	        String payload = Pl.consent_payload(childId);
 			APIUtils.logRequestHeaders(test, headers);
 	        APIUtils.logRequestBody(test, payload);
@@ -335,7 +343,7 @@ public class Post_Child_Information_Step1
 				
 		@When("I send a PUT request to Final Submission endpoint")
 		public void i_send_a_put_request_to_final_submission_endpoint()
-		{	 childId = GlobalTokenStore.getChildId();
+		{	 childId = ConfigReader.getProperty("childId");
 			 String payload = Pl.child_id_payload(childId);
 			APIUtils.logRequestHeaders(test, headers);
 	        APIUtils.logRequestBody(test, payload);
@@ -455,7 +463,6 @@ public class Post_Child_Information_Step1
 	    	 int childId = lastres.jsonPath().getInt("childId");
 	    	 test.info("Validating childId is positive. Received childId: " + childId);
 	    	 Assert.assertTrue("Expected childId to be a positive number, but got: " + childId, childId > 0);
-	    	 GlobalTokenStore.setChildId(String.valueOf(childId));
 	    }
 	    
 	    @When("I update parent {string} with {string}")

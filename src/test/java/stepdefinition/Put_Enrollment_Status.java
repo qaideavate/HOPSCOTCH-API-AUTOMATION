@@ -33,7 +33,13 @@ public class Put_Enrollment_Status
     	 requestBody = new HashMap<>();
     	 requestBody.put("enrollment_status", status);
     	
-        String providerToken =GlobalTokenStore.getToken("provider");
+    	 String ProviderToken = ConfigReader.getProperty("ProviderToken");
+         if (ProviderToken == null ||ProviderToken.trim().isEmpty()) 
+         {
+             BaseMethods.providerLogin();  
+             ConfigReader.waitAndReloadConfig(3000);
+             ProviderToken = ConfigReader.getProperty("ProviderToken");
+         }
         
         APIUtils.logRequestHeaders(test, headers);
         APIUtils.logRequestBody(test, requestBody);
@@ -44,7 +50,7 @@ public class Put_Enrollment_Status
                 .baseUri(Endpoints.baseURL)
                 .headers(headers)
                 .contentType(contentType)
-                .header("Authorization", "Bearer " + providerToken)
+                .header("Authorization", "Bearer " + ProviderToken)
                 .body(requestBody)
                 .when()
                 .put(Endpoints.CHANGE_ENROLLMERNT_STATUS + childId);

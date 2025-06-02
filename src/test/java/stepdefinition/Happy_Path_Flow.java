@@ -1,4 +1,5 @@
 package stepdefinition;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,9 @@ public class Happy_Path_Flow
 	String ParentToken;
 	String ProviderToken;
 	 Post_Login login = new Post_Login();
+	 LocalDate today = LocalDate.now();
+	 LocalDate tomorrow = today.plusDays(1);
+	 
 	@When("both Parent and Provider login via the POST login endpoint")
 	public void both_login_via_the_post_login_endpoint() 
 	{
@@ -87,9 +91,10 @@ public class Happy_Path_Flow
 	    List<String> selectedChildKeys = Arrays.asList(childrenToEnroll.split(","));
 	    for (int i = 0; i < numberOfChildren && i <= selectedChildKeys.size(); i++)
 	    {
+	    	String Today = LocalDate.now().toString();
 	        String childKey = selectedChildKeys.get(i).trim();
 	        System.out.println("📌 Enrolling child with key: " + childKey);
-	        regular.i_send_a_post_request_to_enroll_regular_child_api_with_valid_body(childKey, "Today");
+	        regular.i_send_a_post_request_to_enroll_regular_child_api_with_valid_body(childKey, Today);
 	    }
 	}
 
@@ -221,9 +226,12 @@ public class Happy_Path_Flow
 
 		    for (int i = 0; i < numberOfChildren && i < selectedChildKeys.size(); i++)
 		    {
+		    	 LocalDate today = LocalDate.now();
+		    	 LocalDate tomorrow = today.plusDays(1);
+		    	 String tomorrowStr = tomorrow.toString();
 		        String childKey = selectedChildKeys.get(i).trim();
 		        System.out.println("📌 Enrolling child with key: " + childKey);
-		        regular.i_send_a_post_request_to_enroll_regular_child_api_with_valid_body(childKey,"Tomorrow");
+		        regular.i_send_a_post_request_to_enroll_regular_child_api_with_valid_body(childKey, tomorrowStr);
 		    }
 	}
 

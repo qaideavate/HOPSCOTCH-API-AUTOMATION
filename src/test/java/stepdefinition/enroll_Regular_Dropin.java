@@ -4,6 +4,8 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import io.cucumber.java.en.*;
 import io.restassured.response.Response;
+
+import org.joda.time.LocalDate;
 import org.junit.Assert;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +37,7 @@ public class enroll_Regular_Dropin
     	String providerIdStr = ConfigReader.getProperty("provider_id");
         String classroomIdStr = ConfigReader.getProperty("classroomId");
         String childIdStr = ConfigReader.getProperty(childIdKey);
-        String startDate = ConfigReader.getProperty("Today");
+        String startDate = LocalDate.now().toString();
 
         if (providerIdStr == null || classroomIdStr == null || childIdStr == null || startDate == null) 
         {
@@ -114,7 +116,7 @@ public class enroll_Regular_Dropin
         String providerIdStr = ConfigReader.getProperty("provider_id");
         String classroomIdStr = ConfigReader.getProperty("classroomId");
         String childIdStr = ConfigReader.getProperty(childIdKey);
-        String startDate = ConfigReader.getProperty(dateKey);
+        String startDate = dateKey;
 
         if (providerIdStr == null || classroomIdStr == null || childIdStr == null || startDate == null) {
             throw new RuntimeException("❌ Missing config values: provider_id=" + providerIdStr +

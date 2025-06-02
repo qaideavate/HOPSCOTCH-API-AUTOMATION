@@ -10,14 +10,14 @@ import io.cucumber.java.en.*;
 
 public class Happy_Path_Flow
 {
-	@When("both Parent and Provider login via the POST login endpoint")
+	@When("the Provider login via the POST login endpoint")
 	public void both_login_via_the_post_login_endpoint() 
 	{
 	  BaseMethods.providerLogin();
 	}
 	
-	@When("the {string} login via the POST login endpoint")
-	public void the_login_via_the_post_login_endpoint(String string)
+	@When("the Parent login via the POST login endpoint")
+	public void the_login_via_the_post_login_endpoint()
 	{
 		 BaseMethods.parentLogin();
 	}

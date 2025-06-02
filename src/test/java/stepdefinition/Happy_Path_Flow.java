@@ -10,12 +10,6 @@ import io.cucumber.java.en.*;
 
 public class Happy_Path_Flow
 {
-	String ParentToken;
-	String ProviderToken;
-	 Post_Login login = new Post_Login();
-	 LocalDate today = LocalDate.now();
-	 LocalDate tomorrow = today.plusDays(1);
-	 
 	@When("both Parent and Provider login via the POST login endpoint")
 	public void both_login_via_the_post_login_endpoint() 
 	{
@@ -44,52 +38,54 @@ public class Happy_Path_Flow
 		Get_capacity_management capacity = new Get_capacity_management();
 		capacity.i_send_a_get_request_to_view_classroom_capacity_at_classroom_endpoint_with_classroom_id();
 	}
-	
-	@When("the parent creates {int} new children with valid information")
-	public void the_parent_creates_new_children_with_valid_information(Integer numberOfChildren) 
+
+	@When("the parent creates new children with valid information")
+	public void the_parent_creates_new_children_with_valid_information()
 	{
-	    Post_Child_Information_Step1 PCIS = new Post_Child_Information_Step1();
-	    Map<String, String> allChildIds = new HashMap<>();
+		Post_Child_Information_Step1 PCIS = new Post_Child_Information_Step1();
+		Map<String, String> allChildIds = new HashMap<>();
 
-	    // Create the parent only once
-	    PCIS.i_have_a_valid_parent_token();
+		int numberOfChildren = Integer.parseInt(ConfigReader.getProperty("number_of_children_to_create"));
+		// Create the parent only once
+		PCIS.i_have_a_valid_parent_token();
 
-	    for (int i = 1; i <= numberOfChildren; i++) {
-	        String childId = PCIS.i_send_a_post_request_to();
-	        if (childId == null || childId.isEmpty()) {
-	            System.out.println("❌ Failed to create child #" + i);
-	            continue;
-	        }
+		for (int i = 1; i <= numberOfChildren; i++)
+		{
+			String childId = PCIS.i_send_a_post_request_to();
+			if (childId == null || childId.isEmpty())
+			{
+				System.out.println("❌ Failed to create child #" + i);
+				continue;
+			}
 
-	        allChildIds.put("ChildId" + i, childId);
+			allChildIds.put("ChildId" + i, childId);
 
-	        // Perform the rest of the child creation steps
-	        PCIS.the_child_registration_response_should_store_child_id();
-	        PCIS.i_send_a_post_request_to_parent_endpoint(); // This might just link child to parent, not create a new one
-	        PCIS.the_response_should_contain_the_parent_id();
-	        PCIS.i_send_a_post_request_to_emergency_contact_endpoint();
-	        PCIS.i_send_a_post_request_to_pickup_contact_endpoint();
-	        PCIS.i_send_a_Post_request_to_health_document_delete_endpoint();
-	        PCIS.i_send_a_post_request_to_health_info_endpoint();
-	        PCIS.i_send_a_post_request_to_consent_endpoint();
-	        PCIS.i_send_a_put_request_to_final_submission_endpoint();
-	    }
+			// Perform the rest of the child creation steps
+			PCIS.the_child_registration_response_should_store_child_id();
+			PCIS.i_send_a_post_request_to_parent_endpoint(); // This might just link child to parent, not create a new one
+			PCIS.the_response_should_contain_the_parent_id();
+			PCIS.i_send_a_post_request_to_emergency_contact_endpoint();
+			PCIS.i_send_a_post_request_to_pickup_contact_endpoint();
+			PCIS.i_send_a_Post_request_to_health_document_delete_endpoint();
+			PCIS.i_send_a_post_request_to_health_info_endpoint();
+			PCIS.i_send_a_post_request_to_consent_endpoint();
+			PCIS.i_send_a_put_request_to_final_submission_endpoint();
+		}
 
-	    if (!allChildIds.isEmpty()) {
-	        ConfigReader.writeMultipleProperties(allChildIds);
-	    }
+		if (!allChildIds.isEmpty()) {
+			ConfigReader.writeMultipleProperties(allChildIds);
+		}
 	}
 
-	
-	@When("the parent enrolls {int} children for regular care in the classroom")
-	public void the_parent_enrolls_children_for_regular_care_in_the_classroom(Integer numberOfChildren) 
+	@When("the parent enrolls children for regular care in the classroom")
+	public void the_parent_enrolls_children_for_regular_care_in_the_classroom()
 	{
 		ConfigReader.waitAndReloadConfig(3000);
 		enroll_Regular_Dropin regular = new enroll_Regular_Dropin();
 	    String childrenToEnroll = ConfigReader.getProperty("Enroll_Children");
 	    
 	    List<String> selectedChildKeys = Arrays.asList(childrenToEnroll.split(","));
-	    for (int i = 0; i < numberOfChildren && i <= selectedChildKeys.size(); i++)
+	    for (int i = 0; i < selectedChildKeys.size(); i++)
 	    {
 	    	String Today = LocalDate.now().toString();
 	        String childKey = selectedChildKeys.get(i).trim();
@@ -98,15 +94,14 @@ public class Happy_Path_Flow
 	    }
 	}
 
-
-	@When("Approve the Enrolled {int} child.")
-	public void approve_the_enrolled_child(Integer count) 
+	@When("Approve the Enrolled  child.")
+	public void approve_the_enrolled_child()
 	{
 		 ConfigReader.waitAndReloadConfig(3000);
 		  Put_Enrollment_Status statusUpdater = new Put_Enrollment_Status();
 		  String enrollChildrenStr = ConfigReader.getProperty("Approve_EnrollmentId");
 		  String[] childKeys = enrollChildrenStr.split(",");
-		   for (int i = 0; i < count; i++)
+		   for (int i = 0; i < childKeys.length; i++)
 			 {
 				String childKey = childKeys[i].trim();  // e.g., "ChildId4"
 			    String childId = ConfigReader.getProperty(childKey); // e.g., "2009"
@@ -119,8 +114,8 @@ public class Happy_Path_Flow
 		 }
 	}
 
-	@When("the provider marks {int} enrolled child as absent for today and tomorrow using the enrollment ID")
-	public void the_provider_marks_enrolled_child_as_absent_for_today_and_tomorrow_using_the_enrollment_id(Integer numberOfChildren)
+	@When("the provider marks  enrolled child as absent for today and tomorrow using the enrollment ID")
+	public void the_provider_marks_enrolled_child_as_absent_for_today_and_tomorrow_using_the_enrollment_id()
 	{
 	    // Construct the property key based on the index (e.g., ChildId1, ChildId2, etc.)
 		 String absentKeys = ConfigReader.getProperty("Absent");
@@ -132,7 +127,7 @@ public class Happy_Path_Flow
 		    // 🧹 Clean and split the keys (e.g., EnrollmentId_ChildId1,EnrollmentId_ChildId2)
 		    List<String> enrollmentKeys = Arrays.asList(absentKeys.split(","));
 
-		    for (int i = 0; i < numberOfChildren && i < enrollmentKeys.size(); i++) 
+		    for (int i = 0; i < enrollmentKeys.size(); i++)
 		    {
 		        String key = enrollmentKeys.get(i).trim();
 		        String idStr = ConfigReader.getProperty(key);
@@ -150,15 +145,15 @@ public class Happy_Path_Flow
 		    }
 	}
 
-	@When("the parent attempts to drop-in {int} child on the same dates another child is absent")
-	public void the_parent_attempts_to_enroll_a_drop_in_child_on_the_same_dates_another_child_is_absent(Integer numberOfChildren)
+	@When("the parent attempts to drop-in  child on the same dates another child is absent")
+	public void the_parent_attempts_to_enroll_a_drop_in_child_on_the_same_dates_another_child_is_absent()
 	{
 		 ConfigReader.waitAndReloadConfig(3000);
 		enroll_Regular_Dropin regular = new enroll_Regular_Dropin();
 	    String childrenToDrop = ConfigReader.getProperty("DropIn_Children");
 	    List<String> selectedChildKeys = Arrays.asList(childrenToDrop.split(","));
 	
-	    for (int i = 0; i < numberOfChildren && i < selectedChildKeys.size(); i++)
+	    for (int i = 0; i < selectedChildKeys.size(); i++)
 	    {
         String childKey = selectedChildKeys.get(i).trim();
         System.out.println("📌 Enrolling child with key: " + childKey);
@@ -166,14 +161,14 @@ public class Happy_Path_Flow
 	    }
 	}
 	
-	@When("Approve the Enrolled drop in {int} child")
-	public void approve_the_enrolled__drop_in_child(Integer count) 
+	@When("Approve the Enrolled drop in  child")
+	public void approve_the_enrolled__drop_in_child()
 	{
 		  ConfigReader.waitAndReloadConfig(3000);
 		  Put_Enrollment_Status statusUpdater = new Put_Enrollment_Status();
 		  String enrollChildrenStr = ConfigReader.getProperty("After_DropIn_Approve_EnrollmentId");
 		  String[] childKeys = enrollChildrenStr.split(",");
-		   for (int i = 0; i < count; i++)
+		   for (int i = 0; i < childKeys.length; i++)
 			 {
 				String childKey = childKeys[i].trim();  // e.g., "ChildId4"
 			    String childId = ConfigReader.getProperty(childKey); // e.g., "2009"
@@ -186,8 +181,8 @@ public class Happy_Path_Flow
 		 }
 	}
 
-	@When("the provider graduates {int} enrolled child effective from today's date")
-	public void the_provider_graduates_enrolled_child_effective_from_today_s_date(Integer numberOfChildren)
+	@When("the provider graduates enrolled child effective from today's date")
+	public void the_provider_graduates_enrolled_child_effective_from_today_s_date()
 	{
 		 String GraduateKeys = ConfigReader.getProperty("Graduate");
 		 if (GraduateKeys == null || GraduateKeys.isEmpty()) 
@@ -198,7 +193,7 @@ public class Happy_Path_Flow
 		    // 🧹 Clean and split the keys (e.g., EnrollmentId_ChildId1,EnrollmentId_ChildId2)
 		    List<String> enrollmentKeys = Arrays.asList(GraduateKeys.split(","));
 
-		    for (int i = 0; i < numberOfChildren && i < enrollmentKeys.size(); i++) 
+		    for (int i = 0; i < enrollmentKeys.size(); i++)
 		    {
 		        String key = enrollmentKeys.get(i).trim();
 		        String idStr = ConfigReader.getProperty(key);
@@ -215,8 +210,8 @@ public class Happy_Path_Flow
 		    }
 	}
 
-	@When("the parent enrolls the {int} child starting from the day after the graduation date")
-	public void the_parent_enrolls_the_child_starting_from_the_day_after_the_graduation_date(Integer numberOfChildren)
+	@When("the parent enrolls the  child starting from the day after the graduation date")
+	public void the_parent_enrolls_the_child_starting_from_the_day_after_the_graduation_date()
 	{
 		    ConfigReader.waitAndReloadConfig(3000);
 			enroll_Regular_Dropin regular = new enroll_Regular_Dropin();
@@ -224,7 +219,7 @@ public class Happy_Path_Flow
 		   
 		    List<String> selectedChildKeys = Arrays.asList(childrenToEnroll.split(","));
 
-		    for (int i = 0; i < numberOfChildren && i < selectedChildKeys.size(); i++)
+		    for (int i = 0; i < selectedChildKeys.size(); i++)
 		    {
 		    	 LocalDate today = LocalDate.now();
 		    	 LocalDate tomorrow = today.plusDays(1);
@@ -235,14 +230,14 @@ public class Happy_Path_Flow
 		    }
 	}
 
-	@When("Approve the Enrolled {int} child after the Graduation of Another Child.")
-	public void approve_the_enrolled_child_after_the_graduation_of_another_child(Integer count) 
+	@When("Approve the Enrolled  child after the Graduation of Another Child.")
+	public void approve_the_enrolled_child_after_the_graduation_of_another_child()
 	{
 		  ConfigReader.waitAndReloadConfig(3000);
 		  Put_Enrollment_Status statusUpdater = new Put_Enrollment_Status();
 		  String enrollChildrenStr = ConfigReader.getProperty("Graduate_Approve");
 		  String[] childKeys = enrollChildrenStr.split(",");
-		   for (int i = 0; i < count; i++)
+		   for (int i = 0; i < childKeys.length; i++)
 			 {
 				String childKey = childKeys[i].trim();  // e.g., "ChildId4"
 			    String childId = ConfigReader.getProperty(childKey); // e.g., "2009"
@@ -254,17 +249,6 @@ public class Happy_Path_Flow
 				   }
 		 }
 	}
-	
-	
-	@Then("the updated classroom capacity should be accurately reflected by the system")
-	public void the_updated_classroom_capacity_should_be_accurately_reflected_by_the_system() 
-	{
-	    
-	}
-
-
-
-
 
 }
 
